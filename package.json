@@ -1,0 +1,22 @@
+{
+  "name": "octane-chrome-extension",
+  "version": "0.0.1",
+  "description": "ALM Octane Chrome Extension.",
+  "scripts": {
+    "postinstall": "copyfiles -u 3 node_modules/artemis-core/dist/*.* chrome/artemis/lib/ && copyfiles -u 3 node_modules/jquery/dist/jquery.min.js chrome/main/lib/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeerixLabs/octane-chrome-extension.git"
+  },
+  "keywords": [
+    "ALM", "Octane"
+  ],
+  "author": "Hewlett Packard Enterprise",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "latest",
+    "artemis-core": "latest",
+    "copyfiles": "^0.2.1"
+  }
+}

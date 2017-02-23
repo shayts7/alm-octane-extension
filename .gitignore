@@ -1,0 +1,6 @@
+.idea/
+*.iml
+node_modules/
+chrome/main/lib/
+chrome/artemis/lib/
+chrome/prism/lib/
