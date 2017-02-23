@@ -8,11 +8,6 @@
     "default_popup": "main/main-popup.html",
     "default_title": "Octane Chrome Extension"
   },
-  "background": {
-    "scripts": [
-        "main/main-popup.js"
-    ]
-  },
   "permissions": [
     "activeTab",
     "http://*/*",
