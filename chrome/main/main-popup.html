@@ -1,3 +1,4 @@
+
 <html ng-app="mainApp">
   <head>
     <title>ALM Octane Extension</title>
@@ -8,10 +9,22 @@
 	<script src="main-ctrl.js"></script>
   </head>
   <body ng-controller="mainCtrl">
-  	<div class="main">
-    	<div class="header">
-    		<img src="main-icon.png" class="header__image"/>
-    		<span class="header__title">{{model.title}}</span>
+  	<div class="height--100 flex flex-direction--column">
+    	<div class="header flex--0 flex">
+    		<img src="main-icon.png" class="header__image flex--0"/>
+    		<span class="header__title flex--1">{{model.title}}</span>
+    	</div>
+    	<div class="flex--1 margin-t--md relative">
+    		<div class="absolute-stretch">
+    			<div class="height--100 flex">
+    				<div class="flex--0 height--100 border-r padding-r--md">tabs</div>
+    				<div class="flex--1 height--100 margin-l--md relative">
+    					<div class="absolute-stretch">
+    						views
+    					</div>
+    				</div>
+    			</div>
+    		</div>
     	</div>
 	</div>
   </body>
