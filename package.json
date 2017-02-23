@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "ALM Octane Chrome Extension.",
   "scripts": {
-    "postinstall": "copyfiles -u 3 node_modules/artemis-core/dist/*.* chrome/artemis/lib/ && copyfiles -u 3 node_modules/jquery/dist/jquery.min.js chrome/main/lib/"
+    "postinstall": "copyfiles -u 1 node_modules/angular/angular.min.js chrome/main/lib/ && copyfiles -u 3 node_modules/artemis-core/dist/*.* chrome/artemis/lib/artemis-core/"
   },
   "repository": {
     "type": "git",
@@ -15,8 +15,8 @@
   "author": "Hewlett Packard Enterprise",
   "license": "ISC",
   "dependencies": {
-    "jquery": "latest",
-    "artemis-core": "latest",
-    "copyfiles": "^0.2.1"
+    "copyfiles": "^0.2.1",
+    "angular": "^1.5.6",    
+    "artemis-core": "latest"
   }
 }
