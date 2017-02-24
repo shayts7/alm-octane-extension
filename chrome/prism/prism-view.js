@@ -52,12 +52,14 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 			name: $scope.model.addJobName,
 			url: $scope.model.addJobUrl
 		});
+		saveToLocalStorage();
 		$scope.model.addJobName = '';
 		$scope.model.addJobUrl = '';
 	};
 
 	$scope.onDeleteClick = function onDeleteClick(index) {
 		$scope.model.jobs.splice(index, 1);
+		saveToLocalStorage();
 	};
 
 	$scope.canShow = function canShow() {
