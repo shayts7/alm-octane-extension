@@ -45,6 +45,8 @@
 
 .prism__add-panel__button.disabled {
 	border: none;
+	background-color: #fff;
+	color: #ddd;
 }
 
 .prism__job-line {
@@ -73,8 +75,12 @@
 	color: #c00;
 }
 
+.prism__job-line__delete:focus {
+	border: none;
+	color: #900;		
+}
+
 .prism__job-line__delete:hover,
-.prism__job-line__delete:focus,
 .prism__job-line__delete:active {
 	border: none;
 	background-color: #c00;
