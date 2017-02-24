@@ -1,7 +1,7 @@
 var mainApp = angular.module('mainApp', [], function() {
 });
 
-angular.module('mainApp').controller('mainCtrl', function mainCtrl($scope, $document, $timeout, mainServ) {
+angular.module('mainApp').controller('mainCtrl', function mainCtrl($scope) {
 
 	$scope.model = {
 		title: 'ALM Octane Extension',
