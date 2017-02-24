@@ -183,6 +183,7 @@ button.disabled {
 	margin-bottom: 10px;
 	color: #aaa;
 	cursor: pointer;
+	transition: 0.3s linear all;
 }
 
 .tabs__item.active {
