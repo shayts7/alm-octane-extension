@@ -9,6 +9,9 @@ angular.module('mainApp').directive('generalView', function () {
 angular.module('mainApp').controller('generalCtrl', function generalCtrl($scope) {
 
 	$scope.model = {
-		title: 'GENERAL'
+		uiStrings: {
+			titlePrimary: 'General',
+			titleSecondary: 'Plugin Configuration'
+		}
 	}
 });

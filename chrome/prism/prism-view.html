@@ -1,6 +1,9 @@
 <div ng-controller="prismCtrl" class="view">
 	<div class="view__header">
-		<div class="view__header__title">{{::model.uiStrings.title}}</div>
+		<div class="view__header__title">
+			<span class="view__header__title--primary">{{::model.uiStrings.titlePrimary}}</span>
+			<span class="view__header__title--secondary">{{::model.uiStrings.titleSecondary}}</span>
+		</div>
 	</div>
 	<div class="prism__add-panel">
 		<div class="prism__add-panel__line">

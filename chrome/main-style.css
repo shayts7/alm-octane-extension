@@ -217,8 +217,14 @@ button.disabled {
 	display: flex;
 }
 
-.view__header__title {
+.view__header__title--primary {
 	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.view__header__title--secondary {
+	font-size: 16px;
+	color: #999;
 }
 
 .view__content {

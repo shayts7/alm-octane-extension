@@ -30,7 +30,8 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 		addJobName: '',
 		addJobUrl: '',
 		uiStrings: {
-			title: 'PRISM',
+			titlePrimary: 'Prism',
+			titleSecondary: 'Code Coverage',
 			nameLabel: 'Name:',
 			nameInputHint: 'Enter job nickname/alias...',
 			urlLabel: 'URL:',
