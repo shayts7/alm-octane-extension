@@ -32,3 +32,27 @@
 	height: 21px;
 	width: 21px;	
 }
+
+.prism__job-line {
+	display: flex;
+	align-items: center;
+	height: 25px;
+}
+
+.prism__job-line__active {
+	flex: 0 0 auto;
+	display: inline-block;
+    margin-top: 5px;
+}
+
+.prism__job-line__name {
+	margin-left: 5px;
+	flex: 1 1 auto;	
+}
+
+.prism__job-line__delete {
+	flex: 0 0 auto;
+	margin-left: 5px;
+	height: 21px;
+	width: 21px;	
+}

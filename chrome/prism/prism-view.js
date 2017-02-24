@@ -19,6 +19,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 			urlLabel: 'URL:',
 			urlInputHint: 'Enter job console log URL...',
 			addButton: '+',
+			deleteButton: '-',
 			showButton: 'Show',
 			hideButton: 'Hide'
 		}
@@ -36,6 +37,10 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 		});
 		$scope.model.addJobName = '';
 		$scope.model.addJobUrl = '';
+	};
+
+	$scope.onDeleteClick = function onDeleteClick(index) {
+		$scope.model.jobs.splice(index, 1);
 	};
 
 	$scope.canShow = function canShow() {
