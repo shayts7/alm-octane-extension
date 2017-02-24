@@ -1,3 +1,34 @@
-.prism__title {
-	font-size: 20PX;
+.prism__add-panel {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.prism__add-panel__line {
+	display: flex;
+	height: 25px;
+	line-height: 21px;
+}
+
+.prism__add-panel__label {
+	display: inline-block;
+	flex: 0 0 auto;
+	width: 50px;
+	height: 21px;
+	font-size: 14px;
+	color: #666;
+}
+
+.prism__add-panel__input {
+	flex: 1 1 auto;
+	margin-left: 5px;
+	height: 21px;
+}
+
+.prism__add-panel__button {
+	flex: 0 0 auto;
+	margin-left: 5px;
+	height: 21px;
+	width: 21px;	
 }

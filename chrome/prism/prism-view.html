@@ -1,6 +1,17 @@
 <div ng-controller="prismCtrl" class="view">
 	<div class="view__header">
-		<div class="view__header__title">{{::model.title}}</div>
+		<div class="view__header__title">{{::model.uiStrings.title}}</div>
+	</div>
+	<div class="prism__add-panel">
+		<div class="prism__add-panel__line">
+			<label class="prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
+			<input class="prism__add-panel__input" type="text" ng-model="model.addJobName" placeholder="{{model.uiStrings.nameInputHint}}"/>
+		</div>
+		<div class="prism__add-panel__line">
+			<label class="prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
+			<input class="prism__add-panel__input" type="text" ng-model="model.addJobUrl" placeholder="{{model.uiStrings.urlInputHint}}"/>
+			<button class="prism__add-panel__button" ng-class="{disabled: !canAdd()}">{{::model.uiStrings.addButton}}</button>
+		</div>	
 	</div>
 	<div class="view__content">
 		<div class="view__content__scroll-container">
@@ -10,7 +21,7 @@
 		</div>
 	</div>
 	<div class="view__footer">
-		<button ng-class="{disabled: !model.canShow}">{{::model.showButtonTitle}}</button>
-		<button ng-class="{disabled: !model.canHide}">{{::model.hideButtonTitle}}</button>		
+		<button ng-class="{disabled: !canShow()}">{{::model.uiStrings.showButton}}</button>
+		<button class="margin-r--md" ng-class="{disabled: !canHide()}">{{::model.uiStrings.hideButton}}</button>		
 	</div>
 </div>

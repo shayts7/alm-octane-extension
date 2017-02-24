@@ -20,11 +20,14 @@ body {
 button {
 	height: 25px;
 	width: 80px;
-	margin-right: 5px;
 	color: #444;
 	border: 1px solid #999;
 	background-color: #fff;
 	outline: none !important;
+}
+
+button.small {
+	width: 50px;
 }
 
 button:hover,
