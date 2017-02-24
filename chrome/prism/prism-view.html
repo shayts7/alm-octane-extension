@@ -18,7 +18,7 @@
 			<div ng-repeat="job in model.jobs track by $index">
 				<div class="prism__job-line">
 					<input class="prism__job-line__active" type="checkbox" ng-model="job.active"/>
-					<div class="prism__job-line__name">{{job.name}}</div>
+					<div class="prism__job-line__name" title="{{job.url}}">{{job.name}}</div>
 					<button ng-click="onDeleteClick($index)" class="prism__job-line__delete">{{::model.uiStrings.deleteButton}}</button>
 				</div>
 			</div>
