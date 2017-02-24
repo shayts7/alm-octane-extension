@@ -9,6 +9,6 @@ angular.module('mainApp').directive('prismView', function () {
 angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 
 	$scope.model = {
-		title: 'PRISM VIEW'
+		title: 'PRISM'
 	}
 });

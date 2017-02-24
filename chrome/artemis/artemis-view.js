@@ -9,6 +9,6 @@ angular.module('mainApp').directive('artemisView', function () {
 angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope) {
 
 	$scope.model = {
-		title: 'ARTEMIS VIEW'
+		title: 'ARTEMIS'
 	}
 });
