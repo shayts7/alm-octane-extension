@@ -3,9 +3,15 @@
   <head>
     <title>ALM Octane Extension</title>
     <link rel="stylesheet" type="text/css" href="main-style.css">
+    <link rel="stylesheet" type="text/css" href="../general/general-view.css">
+    <link rel="stylesheet" type="text/css" href="../artemis/artemis-view.css">
+    <link rel="stylesheet" type="text/css" href="../prism/prism-view.css">
     <script src="lib/angular/angular.min.js"></script>
     <script src="main-ctrl.js"></script>
-	<script src="main-serv.js"></script>	
+	<script src="main-serv.js"></script>
+	<script src="../general/general-view.js"></script>
+	<script src="../artemis/artemis-view.js"></script>
+	<script src="../prism/prism-view.js"></script>	
   </head>
   <body ng-controller="mainCtrl">
   	<div class="height--100 flex flex-direction--column">
@@ -22,9 +28,18 @@
     					</div>
     				</div>
     				<div class="flex--1 height--100 margin-l--md relative">
-    					<div class="absolute-stretch">    						
+    					<div class="absolute-stretch">
+    						<div ng-if="model.activeTabId === 'general'" class="height--100">
+    							<general-view/>
+    						</div>
+    						<div ng-if="model.activeTabId === 'artemis'" class="height--100">
+    							<artemis-view/>
+    						</div>
+    						<div ng-if="model.activeTabId === 'prism'" class="height--100">
+    							<prism-view/>
+    						</div>
     					</div>
-    				</div>
+    				</div>    				
     			</div>
     		</div>
     	</div>
