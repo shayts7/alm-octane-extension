@@ -159,11 +159,22 @@ button.disabled {
 	font-size: 16px;	
 }
 
-.header__close-image {
-	margin-right: 5px;
-	width: 16px;
-	height: 16px;
+.header__close-button {
+	width: 34px;
+	height: 100%;
+	color: #fff;
+	border: none;
+	background-color: transparent;
+	color: #fff;
 	cursor: pointer;
+}
+
+.header__close-button:hover,
+.header__close-button:focus,
+.header__close-button:active {
+	border: none;
+	background-color: #c00;	
+	color: #fff;
 }
 
 .tabs__item {

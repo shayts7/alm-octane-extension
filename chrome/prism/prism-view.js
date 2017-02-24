@@ -35,8 +35,6 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 			nameInputHint: 'Enter job nickname/alias...',
 			urlLabel: 'URL:',
 			urlInputHint: 'Enter job console log URL...',
-			addButton: '+',
-			deleteButton: 'x',
 			showButton: 'Show',
 			hideButton: 'Hide'
 		}
