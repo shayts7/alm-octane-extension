@@ -35,13 +35,14 @@ button:focus,
 button:active {
 	color: #000;
 	border: 1px solid #666;
-	cursor: pointer;	
+	cursor: pointer;
 }
 
 button.disabled {
 	color: #ddd;
 	border: 1px solid #ddd;
-	cursor: default;	
+	cursor: default;
+	pointer-events: none;	
 }
 
 .height--100 {

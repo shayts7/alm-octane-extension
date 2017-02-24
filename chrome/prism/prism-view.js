@@ -22,24 +22,28 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 			showButton: 'Show',
 			hideButton: 'Hide'
 		}
-	}
-
-	$scope.model.jobs.push({active: true, name: 'Job 1', url: 'http://server:port/build/log'});
-	$scope.model.jobs.push({active: true, name: 'Job 2', url: 'http://server:port/build/log'});
-	$scope.model.jobs.push({active: true, name: 'Job 3', url: 'http://server:port/build/log'});
-	$scope.model.jobs.push({active: true, name: 'Job 4', url: 'http://server:port/build/log'});
-	$scope.model.jobs.push({active: true, name: 'Job 5', url: 'http://server:port/build/log'});
+	};
 
 	$scope.canAdd = function canAdd() {
 		return $scope.model.addJobName && $scope.model.addJobUrl;
-	}
+	};
+
+	$scope.onAddClick = function onAddClick() {
+		$scope.model.jobs.push({
+			active: true,
+			name: $scope.model.addJobName,
+			url: $scope.model.addJobUrl
+		});
+		$scope.model.addJobName = '';
+		$scope.model.addJobUrl = '';
+	};
 
 	$scope.canShow = function canShow() {
 		return $scope.model.jobs.length > 0;
-	}
+	};
 
 	$scope.canHide = function canHide() {
 		return false;
-	}
+	};
 
 });

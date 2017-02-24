@@ -10,7 +10,7 @@
 		<div class="prism__add-panel__line">
 			<label class="prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
 			<input class="prism__add-panel__input" type="text" ng-model="model.addJobUrl" placeholder="{{model.uiStrings.urlInputHint}}"/>
-			<button class="prism__add-panel__button" ng-class="{disabled: !canAdd()}">{{::model.uiStrings.addButton}}</button>
+			<button class="prism__add-panel__button" ng-click="onAddClick()" ng-class="{disabled: !canAdd()}">{{::model.uiStrings.addButton}}</button>
 		</div>	
 	</div>
 	<div class="view__content">
