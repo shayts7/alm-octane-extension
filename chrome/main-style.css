@@ -10,8 +10,8 @@ html {
 body {
     background-color: #fff;
     color: #000;
-    width: 400px;
-    max-width: 400px;
+    width: 500px;
+    max-width: 500px;
     height: 400px;
     max-height: 400px;
     overflow: hidden;
@@ -189,11 +189,6 @@ button.disabled {
 .view__header {
 	flex: 0 0 auto;
 	display: flex;
-	height: 30px;
-	line-height: 30px;
-	padding-bottom: 5px;
-	border-bottom: 1px solid #ddd;
-	margin-bottom: 5px;
 }
 
 .view__header__title {
@@ -203,9 +198,12 @@ button.disabled {
 .view__content {
 	flex: 1 1 auto;
 	position: relative;
+	margin-top: 10px;
+	border-top: 1px solid #ddd;
 }
 
 .view__content__scroll-container {
+	margin-top: 10px;
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -216,7 +214,7 @@ button.disabled {
 
 .view__footer {
 	flex: 0 0 auto;
-	padding-top: 5px;
+	padding-top: 10px;
 	border-top: 1px solid #ddd;
-	margin-top: 5px;
+	margin-top: 10px;
 }

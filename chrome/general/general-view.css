@@ -1,3 +1,5 @@
-.general__title {
-	font-size: 20PX;
+.general__logo-panel {
+	height: 100%;
+	text-align: center;
+	padding-top: 80px;
 }
