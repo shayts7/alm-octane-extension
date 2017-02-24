@@ -30,7 +30,21 @@
 	flex: 0 0 auto;
 	margin-left: 5px;
 	height: 21px;
-	width: 21px;	
+	width: 34px;
+	border: none;
+	color: #0a0;
+}
+
+.prism__add-panel__button:hover,
+.prism__add-panel__button:focus,
+.prism__add-panel__button:active {
+	border: none;
+	background-color: #0a0;
+	color: #fff;
+}
+
+.prism__add-panel__button.disabled {
+	border: none;
 }
 
 .prism__job-line {
@@ -54,5 +68,15 @@
 	flex: 0 0 auto;
 	margin-left: 5px;
 	height: 21px;
-	width: 21px;	
+	width: 34px;
+	border: none;
+	color: #c00;
+}
+
+.prism__job-line__delete:hover,
+.prism__job-line__delete:focus,
+.prism__job-line__delete:active {
+	border: none;
+	background-color: #c00;
+	color: #fff;
 }
