@@ -12,15 +12,18 @@
   	<div class="height--100 flex flex-direction--column">
     	<div class="header flex--0 flex">
     		<img src="main-icon.png" class="header__image flex--0"/>
-    		<span class="header__title flex--1">{{model.title}}</span>
+    		<span class="header__title flex--1">{{::model.title}}</span>
     	</div>
     	<div class="flex--1 margin-t--md relative">
     		<div class="absolute-stretch">
     			<div class="height--100 flex">
-    				<div class="flex--0 height--100 border-r padding-r--md">tabs</div>
+    				<div class="flex--0 height--100 border-r padding-r--md">
+    					<div ng-repeat="tab in model.tabs" class="tabs__item" ng-class="{'tabs__item--active': tab.isActive}">
+    						{{::tab.name}}
+    					</div>
+    				</div>
     				<div class="flex--1 height--100 margin-l--md relative">
-    					<div class="absolute-stretch">
-    						views
+    					<div class="absolute-stretch">    						
     					</div>
     				</div>
     			</div>
