@@ -15,9 +15,10 @@
   </head>
   <body ng-controller="mainCtrl">
   	<div class="height--100 flex flex-direction--column">
-    	<div class="header flex--0 flex">
-    		<img src="main-icon.png" class="header__image flex--0"/>
+    	<div class="header flex--0 flex align-items--center">
+    		<img src="img/octane.png" class="header__logo-image flex--0"/>
     		<span class="header__title flex--1">{{::model.title}}</span>
+            <img src="img/close.png" ng-click="onCloseClick()" class="header__close-image flex--0"/>
     	</div>
     	<div class="flex--1 margin-t--md relative">
     		<div class="absolute-stretch">

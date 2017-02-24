@@ -17,4 +17,8 @@ angular.module('mainApp').controller('mainCtrl', function mainCtrl($scope, $docu
 		$scope.model.activeTabId = id;	
 	}
 
+	$scope.onCloseClick = function onCloseClick() {
+		window.close();
+	}
+
 });
