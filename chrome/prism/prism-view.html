@@ -10,7 +10,7 @@
 		<div class="prism__add-panel__line">
 			<label class="prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
 			<input class="prism__add-panel__input" type="text" ng-model="model.addJobUrl" placeholder="{{model.uiStrings.urlInputHint}}"/>
-			<button class="prism__add-panel__button" ng-click="onAddClick()" ng-class="{disabled: !canAdd()}">+</button>
+			<button class="prism__add-panel__add-button" ng-click="onAddClick()" ng-class="{disabled: !canAdd()}">+</button>
 		</div>	
 	</div>
 	<div class="view__content">
@@ -19,7 +19,7 @@
 				<div class="prism__job-line">
 					<input class="prism__job-line__active" type="checkbox" ng-model="job.active"/>
 					<div class="prism__job-line__name" title="{{job.url}}">{{job.name}}</div>
-					<button ng-click="onDeleteClick($index)" class="prism__job-line__delete">X</button>
+					<button ng-click="onDeleteClick($index)" class="prism__job-line__delete-button">X</button>
 				</div>
 			</div>
 		</div>
