@@ -6,9 +6,15 @@ angular.module('mainApp').controller('mainCtrl', function mainCtrl($scope, $docu
 	$scope.model = {
 		title: 'ALM Octane Extension',
 		tabs: [
-			{name: 'General', index: 0, isActive: false},
-			{name: 'Artemis', index: 1, isActive: true},
-			{name: 'Prism', index: 2, isActive: false}
+			{title: 'General', id: 'general'},
+			{title: 'Artemis', id: 'artemis'},
+			{title: 'Prism', id: 'prism'}
 		]
 	};
+	$scope.model.activeTabId = $scope.model.tabs[0].id;
+
+	$scope.onTabClick = function onTabClick(id) {
+		$scope.model.activeTabId = id;	
+	}
+
 });
