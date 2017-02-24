@@ -2,6 +2,6 @@
 *.iml
 node_modules/
 npm-debug.log
-chrome/main/lib/
+chrome/lib/
 chrome/artemis/lib/
 chrome/prism/lib/

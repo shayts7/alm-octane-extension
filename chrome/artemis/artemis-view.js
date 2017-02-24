@@ -2,7 +2,7 @@ angular.module('mainApp').directive('artemisView', function () {
     return {
         scope: {},
         restrict: 'E',
-        templateUrl: '../artemis/artemis-view.html'
+        templateUrl: 'artemis/artemis-view.html'
     };
 });
 

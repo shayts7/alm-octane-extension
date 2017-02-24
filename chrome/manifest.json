@@ -4,8 +4,8 @@
   "description": "ALM Octane Chrome Extension",
   "version": "0.0.1",
   "browser_action": {
-    "default_icon": "main/main-icon.png",
-    "default_popup": "main/main-popup.html",
+    "default_icon": "main-icon.png",
+    "default_popup": "main-popup.html",
     "default_title": "Octane Chrome Extension"
   },
   "permissions": [

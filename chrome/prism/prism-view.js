@@ -2,7 +2,7 @@ angular.module('mainApp').directive('prismView', function () {
     return {
         scope: {},
         restrict: 'E',
-        templateUrl: '../prism/prism-view.html'
+        templateUrl: 'prism/prism-view.html'
     };
 });
 

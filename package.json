@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "ALM Octane Chrome Extension.",
   "scripts": {
-    "postinstall": "copyfiles -u 1 node_modules/angular/angular.min.js chrome/main/lib/ && copyfiles -u 3 node_modules/artemis-core/dist/*.* chrome/artemis/lib/artemis-core/"
+    "postinstall": "copyfiles -u 1 node_modules/angular/angular.min.js chrome/lib/ && copyfiles -u 3 node_modules/artemis-core/dist/*.* chrome/artemis/lib/artemis-core/"
   },
   "repository": {
     "type": "git",

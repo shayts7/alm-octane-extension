@@ -2,7 +2,7 @@ angular.module('mainApp').directive('generalView', function () {
     return {
         scope: {},
         restrict: 'E',
-        templateUrl: '../general/general-view.html'
+        templateUrl: 'general/general-view.html'
     };
 });
 
