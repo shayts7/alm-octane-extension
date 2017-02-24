@@ -8,6 +8,23 @@ angular.module('mainApp').directive('prismView', function () {
 
 angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 
+	function loadFromLocalStorage() {
+		let str = localStorage.getItem('almOctanePrism');
+		if (str) {
+			let data = JSON.parse(str);
+			if (data.jobs) {
+				$scope.model.jobs = data.jobs;	
+			}
+		}
+	}
+
+	function saveToLocalStorage() {
+		let data = {
+			jobs: $scope.model.jobs
+		};
+		localStorage.setItem('almOctanePrism', JSON.stringify(data));
+	}
+
 	$scope.model = {
 		jobs: [],
 		addJobName: '',
@@ -50,5 +67,14 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 	$scope.canHide = function canHide() {
 		return false;
 	};
+
+	$scope.onShowClick = function onShowClick() {
+		saveToLocalStorage();
+	};
+
+	$scope.onHideClick = function onHideClick() {
+	};
+
+	loadFromLocalStorage();
 
 });
