@@ -1,3 +1,6 @@
+var mainApp = angular.module('mainApp', [], function() {
+});
+
 angular.module('mainApp').controller('mainCtrl', function mainCtrl($scope, $document, $timeout, mainServ) {
 
 	$scope.model = {
