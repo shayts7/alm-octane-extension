@@ -11,7 +11,34 @@ body {
     background-color: #fff;
     color: #000;
     width: 400px;
+    max-width: 400px;
     height: 400px;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+button {
+	height: 25px;
+	width: 80px;
+	margin-right: 5px;
+	color: #444;
+	border: 1px solid #999;
+	background-color: #fff;
+	outline: none !important;
+}
+
+button:hover,
+button:focus,
+button:active {
+	color: #000;
+	border: 1px solid #666;
+	cursor: pointer;	
+}
+
+button.disabled {
+	color: #ddd;
+	border: 1px solid #ddd;
+	cursor: default;	
 }
 
 .height--100 {
@@ -48,6 +75,18 @@ body {
 	right: 0;
 	top: 0;
 	bottom: 0;
+}
+
+.overflow--auto {
+	overflow: auto;
+}
+
+.overflow--scroll {
+	overflow: scroll;
+}
+
+.overflow--hidden {
+	overflow: hidden;
 }
 
 .margin--sm {
@@ -96,7 +135,7 @@ body {
 }
 
 .border-r {
-	border-right: 1px solid #ccc;
+	border-right: 1px solid #999;
 }
 
 .header {
@@ -135,4 +174,46 @@ body {
 	border-left: 6px solid #444;
 	color: #000;
 	cursor: default;	
+}
+
+.view {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	font-size: 16px;
+}
+
+.view__header {
+	flex: 0 0 auto;
+	display: flex;
+	height: 30px;
+	line-height: 30px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 5px;
+}
+
+.view__header__title {
+	font-size: 20px;
+}
+
+.view__content {
+	flex: 1 1 auto;
+	position: relative;
+}
+
+.view__content__scroll-container {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	overflow: auto;
+}
+
+.view__footer {
+	flex: 0 0 auto;
+	padding-top: 5px;
+	border-top: 1px solid #ddd;
+	margin-top: 5px;
 }

@@ -1,3 +1,16 @@
-<div ng-controller="prismCtrl" class="prism__title height--100">
-	{{::model.title}}
+<div ng-controller="prismCtrl" class="view">
+	<div class="view__header">
+		<div class="view__header__title">{{::model.title}}</div>
+	</div>
+	<div class="view__content">
+		<div class="view__content__scroll-container">
+			<div ng-repeat="job in model.jobs">
+				{{job.name}}
+			</div>
+		</div>
+	</div>
+	<div class="view__footer">
+		<button ng-class="{disabled: !model.canShow}">{{::model.showButtonTitle}}</button>
+		<button ng-class="{disabled: !model.canHide}">{{::model.hideButtonTitle}}</button>		
+	</div>
 </div>
