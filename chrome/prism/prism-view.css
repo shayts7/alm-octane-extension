@@ -15,16 +15,25 @@
 	display: inline-block;
 	flex: 0 0 auto;
 	align-self: baseline;
-	width: 50px;
+	width: 40px;
 	height: 21px;
 	font-size: 14px;
 	color: #666;
 }
 
-.prism__add-panel__input {
+.prism__add-panel__name-input {
+	flex: 0 0 auto;
+	width: 160px;
+	margin-left: 5px;
+	height: 21px;	
+	font-size: 12px;
+}
+
+.prism__add-panel__url-input {
 	flex: 1 1 auto;
 	margin-left: 5px;
 	height: 21px;
+	font-size: 12px;
 }
 
 .prism__add-panel__add-button {

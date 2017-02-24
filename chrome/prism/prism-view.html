@@ -8,11 +8,11 @@
 	<div class="prism__add-panel">
 		<div class="prism__add-panel__line">
 			<label class="prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
-			<input class="prism__add-panel__input" type="text" ng-model="model.addJobName" placeholder="{{model.uiStrings.nameInputHint}}"/>
+			<input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName" placeholder="{{model.uiStrings.nameInputHint}}"/>
 		</div>
 		<div class="prism__add-panel__line">
 			<label class="prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
-			<input class="prism__add-panel__input" type="text" ng-model="model.addJobUrl" placeholder="{{model.uiStrings.urlInputHint}}"/>
+			<input class="prism__add-panel__url-input" type="text" ng-model="model.addJobUrl" placeholder="{{model.uiStrings.urlInputHint}}"/>
 			<button class="prism__add-panel__add-button" ng-click="onAddClick()" ng-class="{disabled: !canAdd()}">+</button>
 		</div>	
 	</div>
