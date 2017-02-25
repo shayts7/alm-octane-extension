@@ -1,3 +1,4 @@
+//Match to this content script should be changed to Octane domain.
 (function(){
     var hiddenElement = document.createElement("SPAN");
     hiddenElement.id = "OctaneArtemisChannel"
@@ -8,9 +9,9 @@
             console.log("msg has been sent");
         });
     });
-    //Fire event as Example
+    //HOWTO: send event to artemis:
     // var event = new CustomEvent('send',
-    //     {'detail': "works!"});
+    //     {'detail': "<command goes here>"});
     // document.getElementById("OctaneArtemisChannel")
     //     .dispatchEvent(event);
 

@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener(
             tabsToInject.forEach(function(tab) {
                 console.log("sending to",tab.id);
                 chrome.tabs.sendMessage(tab.id, {"do":request.msg},function(res){
-                    console.log("sendMsg",res);
+                    //console.log("sendMsg",res);
                 });
 
             });

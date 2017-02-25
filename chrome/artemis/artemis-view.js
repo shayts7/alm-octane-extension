@@ -15,7 +15,6 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
 		}
 	};
 	$scope.inject = function(){
-		console.log("telling background to send stuff here")
 		var query = { active: true, currentWindow: true };
 		chrome.tabs.query(query,function(tabs){
 			if(tabs.length>0) {
@@ -25,7 +24,8 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
                         msg: {id: currentTab.id},
                         type: "inject"
                     }, function (response) {
-                        console.log("msg has been sent", currentWin.id, currentTab.id);
+                        //injected
+                    	//console.log("msg has been sent", currentWin.id, currentTab.id);
                     });
                 });
 			}
