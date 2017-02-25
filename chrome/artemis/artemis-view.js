@@ -27,6 +27,7 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
                     	//console.log("msg has been sent", currentWin.id, currentTab.id);
                     });
                 });
+				//TODO: add some indication to the AUT that it's artemis-enabled.
 			}
 		});
 
