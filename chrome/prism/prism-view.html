@@ -20,9 +20,9 @@
 		<div class="view__content__scroll-container">
 			<div ng-repeat="job in model.jobs track by $index">
 				<div class="prism__job-line">
-					<input class="prism__job-line__active" type="checkbox" ng-model="job.active"/>
+					<input class="prism__job-line__active" type="checkbox" ng-model="job.active" title="{{model.uiStrings.activateTooltip}}"/>
 					<div class="prism__job-line__name" title="{{job.url}}">{{job.name}}</div>
-					<button ng-click="onDeleteClick($index)" class="prism__job-line__delete-button">X</button>
+					<button ng-click="onDeleteClick($index)" class="prism__job-line__delete-button" title="{{model.uiStrings.deleteTooltip}} {{job.name}}">X</button>
 				</div>
 			</div>
 		</div>
