@@ -77,7 +77,7 @@
 	flex: 1 1 auto;	
 }
 
-.prism__job-line__delete-button {
+.prism__job-line__remove-button {
 	flex: 0 0 auto;
 	margin-left: 5px;
 	height: 21px;
@@ -86,13 +86,13 @@
 	color: #c00;
 }
 
-.prism__job-line__delete-button:focus {
+.prism__job-line__remove-button:focus {
 	border: none;
 	color: #900;		
 }
 
-.prism__job-line__delete-button:hover,
-.prism__job-line__delete-button:active {
+.prism__job-line__remove-button:hover,
+.prism__job-line__remove-button:active {
 	border: none;
 	background-color: #c00;
 	color: #fff;

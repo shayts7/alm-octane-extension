@@ -27,7 +27,15 @@ button {
 }
 
 button.small {
-	width: 50px;
+	width: 40px;
+}
+
+button.large {
+	width: 120px;
+}
+
+button.extra-large {
+	width: 160px;
 }
 
 button:hover,

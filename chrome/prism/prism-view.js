@@ -36,10 +36,10 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 			nameInputHint: 'Enter job nickname/alias...',
 			urlLabel: 'URL:',
 			urlInputHint: 'Enter job console log URL...',
-			activateTooltip: 'show/hide coverage',
-			deleteTooltip: 'remove',
-			showButton: 'Show',
-			hideButton: 'Hide'
+			activateCheckboxTooltip: 'show/hide coverage',
+			removeButtonTooltip: 'remove',
+			showButtonText: 'Show',
+			hideButtonText: 'Hide'
 		}
 	};
 
@@ -58,7 +58,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope) {
 		$scope.model.addJobUrl = '';
 	};
 
-	$scope.onDeleteClick = function onDeleteClick(index) {
+	$scope.onRemoveClick = function onRemoveClick(index) {
 		$scope.model.jobs.splice(index, 1);
 		saveToLocalStorage();
 	};

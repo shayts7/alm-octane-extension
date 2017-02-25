@@ -20,15 +20,15 @@
 		<div class="view__content__scroll-container">
 			<div ng-repeat="job in model.jobs track by $index">
 				<div class="prism__job-line">
-					<input class="prism__job-line__active" type="checkbox" ng-model="job.active" title="{{model.uiStrings.activateTooltip}}"/>
+					<input class="prism__job-line__active" type="checkbox" ng-model="job.active" title="{{model.uiStrings.activateCheckboxTooltip}}"/>
 					<div class="prism__job-line__name" title="{{job.url}}">{{job.name}}</div>
-					<button ng-click="onDeleteClick($index)" class="prism__job-line__delete-button" title="{{model.uiStrings.deleteTooltip}} {{job.name}}">X</button>
+					<button ng-click="onRemoveClick($index)" class="prism__job-line__remove-button" title="{{model.uiStrings.removeButtonTooltip}} {{job.name}}">X</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="view__footer">
-		<button ng-click="onShowClick()" ng-class="{disabled: !canShow()}">{{::model.uiStrings.showButton}}</button>
-		<button ng-click="onHideClick()" class="margin-r--md" ng-class="{disabled: !canHide()}">{{::model.uiStrings.hideButton}}</button>		
+		<button ng-click="onShowClick()" ng-class="{disabled: !canShow()}">{{::model.uiStrings.showButtonText}}</button>
+		<button ng-click="onHideClick()" class="margin-r--md" ng-class="{disabled: !canHide()}">{{::model.uiStrings.hideButtonText}}</button>		
 	</div>
 </div>
