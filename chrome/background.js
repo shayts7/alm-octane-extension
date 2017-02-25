@@ -1,5 +1,5 @@
 (function(){
-var tabsToInject = [];
+    var tabsToInject = [];
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         //TODO: remove
         console.log(sender.tab ?
@@ -9,6 +9,7 @@ var tabsToInject = [];
         if(request.type==="inject"){
             console.log("inject")
             tabsToInject.push(request.msg);
+            //TODO: handle the case when Tab is dead or the user would like to stop injecting
         }
         else if(request.type==="msg"){
             console.log("msg")
