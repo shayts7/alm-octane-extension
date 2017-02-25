@@ -9,8 +9,23 @@
     "default_title": "Octane Chrome Extension"
   },
   "permissions": [
+    "tabs",
     "activeTab",
     "http://*/*",
     "https://*/*"
-  ]
+  ],
+  "content_scripts": [{
+      "matches": ["http://localhost:3000/*"],
+      "js": ["octane/content.js"]
+  },{
+    "matches": [
+      "http://*/*",
+      "https://*/*"
+    ],
+    "js": ["content.js"]
+  }],
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
+
