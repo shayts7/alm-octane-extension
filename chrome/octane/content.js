@@ -1,4 +1,4 @@
-//Match to this content script should be changed to Octane domain.
+//TODO: modification to the manifest - Match this octane/content.js to Octane domain.
 (function(){
     var hiddenElement = document.createElement("SPAN");
     hiddenElement.id = "OctaneArtemisChannel"
@@ -9,7 +9,7 @@
             console.log("msg has been sent");
         });
     });
-    //HOWTO: send event to artemis:
+    //TODO: add in Octane -  send artemis command to AUT by utilizing:
     // var event = new CustomEvent('send',
     //     {'detail': "<command goes here>"});
     // document.getElementById("OctaneArtemisChannel")
