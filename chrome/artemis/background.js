@@ -11,7 +11,7 @@
             console.log('artemis-msg');
             tabsToInject.forEach(function(tab) {
                 console.log('Sending msg ' + request.msg + ' to tab ' + tab.id);
-                chrome.tabs.sendMessage(tab.id, {'artemis-msg': request.msg}, function(res){});
+                chrome.tabs.sendMessage(tab.id, {'type': 'artemis-msg', 'msg': request.msg}, function(res){});
             });
         }
     });
