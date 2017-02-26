@@ -14,18 +14,17 @@
     "http://*/*",
     "https://*/*"
   ],
-  "content_scripts": [{
-      "matches": ["http://localhost:3000/*"],
-      "js": ["octane/content.js"]
-  },{
-    "matches": [
-      "http://*/*",
-      "https://*/*"
-    ],
-    "js": ["content.js"]
-  }],
   "background": {
-    "scripts": ["background.js"]
-  }
+    "scripts": ["artemis/background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:8080/ui/*"],
+      "js": ["artemis/lib/artemis-core/artemis.core.min.js", "artemis/content-octane.js"]
+    },
+    {
+      "matches": ["http://www.ebay.com/*"],
+      "js": ["artemis/content-aut.js"]
+    }
+  ]
 }
-
