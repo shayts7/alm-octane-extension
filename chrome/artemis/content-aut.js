@@ -5,8 +5,8 @@
 		} else if (request.msg === 'clean') {
 			artemisCore.clean();
 		} else {
-            let command = JSON.parse(request.msg);
-			artemisCore.command(command);
+            let commands = JSON.parse(request.msg);
+            artemisCore.run(commands);
         }
     });
 })();
