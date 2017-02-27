@@ -98,7 +98,13 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
   };
 
   $scope.canShow = function canShow() {
-    return $scope.model.jobs.length > 0;
+    let activeJobs = 0;
+    for (let i = 0; i < $scope.model.jobs.length; i++) {
+      if ($scope.model.jobs[i].active === true) {
+        activeJobs++;
+      }
+    }
+    return ($scope.model.jobs.length > 0 && activeJobs > 0);
   };
 
   $scope.canHide = function canHide() {
@@ -112,6 +118,9 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
       if ($scope.model.jobs[i].active === true) {
         activeJobs.push($scope.model.jobs[i]);
       }
+    }
+    if (activeJobs.length == 0) {
+      !canShow();
     }
     prismParser.getAutomationLogs(activeJobs, getLogsDone);
   };
