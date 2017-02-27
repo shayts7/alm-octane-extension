@@ -25,12 +25,10 @@ angular.module('mainApp').factory('prismParser', function prismParser($http, $fi
   function returnedParsedOutput(fullLog) {
     var joinedFullLog = fullLog.join('\n');
     var lines = joinedFullLog.split('\n');
-    var arrayOfCSSElements = _.filter(lines, function(line) {
-      return line.includes("INFO: Executing Clicking");
-    });
-    arrayOfCSSElements = _.filter(arrayOfCSSElements, function(line) {
-      return !line.includes("By.xpath:");
-    });
+    var arrayOfCSSElementsIncludeXpath = lines.filter(function(line) {return line.includes('INFO: Executing Clicking')});
+    var arrayOfCSSElements = arrayOfCSSElementsIncludeXpath.filter(function(line) {
+      return !line.includes('By.xpath:');
+    })
     return countDuplications(arrayOfCSSElements);
   }
 

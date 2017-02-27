@@ -11,6 +11,7 @@ angular.module('mainApp').controller('mainCtrl', function mainCtrl($scope) {
 			{title: 'Prism', id: 'prism'}
 		]
 	};
+
 	
 	if(localStorage.getItem('activeTab') === ''){
 		$scope.model.activeTabId = $scope.model.tabs[0].id;
