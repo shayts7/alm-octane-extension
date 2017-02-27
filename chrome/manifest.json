@@ -24,10 +24,10 @@
     },
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["artemis/lib/artemis-core/artemis.core.min.js", "artemis/content-aut.js"]
+      "js": ["artemis/lib/artemis-core/artemis.core.js", "artemis/content-aut.js"]
     },
     {
-      "matches": ["http://myd-vm12623.hpeswlab.net:8081/*"],
+      "matches": ["http://localhost:8080/ui/*", "http://myd-vm12623.hpeswlab.net:8081/*"],
       "js": ["prism/content-aut.js"]
     }
   ]

@@ -13,34 +13,46 @@
 
 .prism__add-panel__label {
 	display: inline-block;
+	position: relative;
 	flex: 0 0 auto;
 	align-self: baseline;
-	width: 40px;
-	height: 21px;
-	font-size: 14px;
+	width: 45px;
+	height: 22px;
+	font-size: 16px;
 	color: #666;
+	margin-left: 15px;
+}
+
+.prism__add-panel__label::before {
+	content: "";
+	background-color: #CA2F2F;
+	position: absolute;
+	top: 10px;
+	left: -10px;
+	width: 5px;
+	height: 5px;
 }
 
 .prism__add-panel__name-input {
 	flex: 0 0 auto;
 	width: 160px;
 	margin-left: 5px;
-	height: 21px;	
-	font-size: 12px;
+	height: 22px;
+	font-size: 14px;
 }
 
 .prism__add-panel__url-input {
 	flex: 1 1 auto;
 	margin-left: 5px;
-	height: 21px;
-	font-size: 12px;
+	height: 22px;
+	font-size: 14px;
 }
 
 .prism__add-panel__add-button {
 	flex: 0 0 auto;
 	margin-left: 5px;
-	height: 21px;
-	width: 34px;
+	height: 22px;
+	width: 36px;
 	border: none;
 	color: #090;
 }
@@ -62,8 +74,8 @@
 .prism__job-line {
 	display: flex;
 	align-items: center;
-	height: 24px;
-	line-height: 24px;
+	height: 22px;
+	line-height: 22px;
 }
 
 .prism__job-line__active {
@@ -80,8 +92,8 @@
 .prism__job-line__remove-button {
 	flex: 0 0 auto;
 	margin-left: 5px;
-	height: 21px;
-	width: 34px;
+	height: 22px;
+	width: 36px;
 	border: none;
 	color: #c00;
 }
