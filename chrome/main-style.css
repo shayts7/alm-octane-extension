@@ -80,8 +80,8 @@ button:active {
 }
 
 button.disabled {
-	color: #ddd;
-	border: 1px solid #ddd;
+	color: #ccc;
+	border: 1px solid #ccc;
 	cursor: default;
 	pointer-events: none;
 }
