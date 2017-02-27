@@ -12,9 +12,9 @@ angular.module('mainApp').controller('mainCtrl', function mainCtrl($scope) {
     ]
   };
 
-  loadFromLocalStorage();
+  loadSettingsFromLocalStorage();
 
-  function loadFromLocalStorage() {
+  function loadSettingsFromLocalStorage() {
     let str = localStorage.getItem('almOctaneSettings');
     if (str) {
       let data = JSON.parse(str);
