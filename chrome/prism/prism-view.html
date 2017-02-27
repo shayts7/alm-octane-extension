@@ -1,34 +1,45 @@
 <div ng-controller="prismCtrl" class="view">
-	<div class="view__header">
-		<div class="view__header__title">
-			<span class="view__header__title--primary">{{::model.uiStrings.titlePrimary}}</span>
-			<span class="view__header__title--secondary">{{::model.uiStrings.titleSecondary}}</span>
-		</div>
-	</div>
-	<div class="prism__add-panel">
-		<div class="prism__add-panel__line">
-			<label class="prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
-			<input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName" placeholder="{{model.uiStrings.nameInputHint}}"/>
-		</div>
-		<div class="prism__add-panel__line">
-			<label class="prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
-			<input class="prism__add-panel__url-input" type="text" ng-model="model.addJobUrl" placeholder="{{model.uiStrings.urlInputHint}}"/>
-			<button class="prism__add-panel__add-button" ng-click="onAddClick()" ng-class="{disabled: !canAdd()}">+</button>
-		</div>	
-	</div>
-	<div class="view__content">
-		<div class="view__content__scroll-container">
-			<div ng-repeat="job in model.jobs track by $index">
-				<div class="prism__job-line">
-					<input class="prism__job-line__active" type="checkbox" ng-model="job.active" title="{{model.uiStrings.activateCheckboxTooltip}}"/>
-					<div class="prism__job-line__name" title="{{job.url}}">{{job.name}}</div>
-					<button ng-click="onRemoveClick($index)" class="prism__job-line__remove-button" title="{{model.uiStrings.removeButtonTooltip}} {{job.name}}">X</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="view__footer">
-		<button ng-click="onShowClick()" ng-class="{disabled: !canShow()}">{{::model.uiStrings.showButtonText}}</button>
-		<button ng-click="onHideClick()" class="margin-r--md" ng-class="{disabled: !canHide()}">{{::model.uiStrings.hideButtonText}}</button>		
-	</div>
+    <div class="view__header">
+        <div class="view__header__title">
+            <span class="view__header__title--primary">{{::model.uiStrings.titlePrimary}}</span>
+            <span class="view__header__title--secondary">{{::model.uiStrings.titleSecondary}}</span>
+        </div>
+    </div>
+    <div class="prism__add-panel">
+        <div class="prism__add-panel__line">
+            <label class="prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
+            <input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName"
+                   placeholder="{{model.uiStrings.nameInputHint}}"/>
+        </div>
+        <div class="prism__add-panel__line">
+            <label class="prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
+            <input class="prism__add-panel__url-input" type="text" ng-model="model.addJobUrl"
+                   placeholder="{{model.uiStrings.urlInputHint}}"/>
+            <button class="prism__add-panel__add-button" ng-click="onAddClick()" ng-class="{disabled: !canAdd()}">+
+            </button>
+        </div>
+    </div>
+    <div class="view__content">
+        <div class="view__content__scroll-container">
+            <div ng-show="model.jobs.length==0" class="prism__logo-panel">
+                <img src="prism/prism-logo.png" class="prism-logo"/>
+            </div>
+            <div ng-repeat="job in model.jobs track by $index">
+                <div class="prism__job-line">
+                    <input class="prism__job-line__active" type="checkbox" ng-model="job.active"
+                           title="{{model.uiStrings.activateCheckboxTooltip}}"/>
+                    <div class="prism__job-line__name" title="{{job.url}}">{{job.name}}</div>
+                    <button ng-click="onRemoveClick($index)" class="prism__job-line__remove-button"
+                            title="{{model.uiStrings.removeButtonTooltip}} {{job.name}}">X
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="view__footer">
+        <button ng-click="onShowClick()" ng-class="{disabled: !canShow()}">{{::model.uiStrings.showButtonText}}</button>
+        <button ng-click="onHideClick()" class="margin-r--md" ng-class="{disabled: !canHide()}">
+            {{::model.uiStrings.hideButtonText}}
+        </button>
+    </div>
 </div>
