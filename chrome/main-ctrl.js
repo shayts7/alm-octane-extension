@@ -11,9 +11,15 @@ angular.module('mainApp').controller('mainCtrl', function mainCtrl($scope) {
 			{title: 'Prism', id: 'prism'}
 		]
 	};
-	$scope.model.activeTabId = $scope.model.tabs[0].id;
+	
+	if(localStorage.getItem('activeTab') === ''){
+		$scope.model.activeTabId = $scope.model.tabs[0].id;
+	} else {
+		$scope.model.activeTabId = localStorage.getItem('activeTab');
+	}
 
 	$scope.onTabClick = function onTabClick(id) {
+		localStorage.setItem('activeTab', id);
 		$scope.model.activeTabId = id;	
 	}
 
