@@ -88,6 +88,9 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
   $scope.onRemoveClick = function onRemoveClick(index) {
     $scope.model.jobs.splice(index, 1);
     saveToLocalStorage();
+    if ($scope.model.jobs.length == 0) {
+      removeStyleFromHead();
+    }
   };
 
   $scope.canShow = function canShow() {
