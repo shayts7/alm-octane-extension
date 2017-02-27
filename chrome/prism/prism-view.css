@@ -97,3 +97,12 @@
 	background-color: #c00;
 	color: #fff;
 }
+
+.prism__logo-panel {
+	height: 100%;
+	text-align: center;
+}
+
+.prism-logo {
+	height: 190px;
+}
