@@ -12,19 +12,19 @@
 			}
 			if (!found) {
 				tabsToInject.push(tab);
+				//TODO: inject Artemis code
 			}
 			//TODO: handle the case when Tab is dead or the user would like to stop injecting
-			console.log('Sending message to tab ' + tab.id + '. type: artemis-msg, msg: init' + request.msg);
-			chrome.tabs.sendMessage(tab.id, {'type': 'artemis-msg', 'msg': 'init'}, function(res){});
+			tabsToInject.forEach(function(tab) {
+				console.log('Sending message to tab ' + tab.id + '. type: artemis-clr, msg: ' + request.msg);
+				chrome.tabs.sendMessage(tab.id, {'type': 'artemis-msg', 'msg': 'clear'}, function(res){});
+			});
         }
         else if (request.type === 'artemis-msg') {
             console.log('artemis-msg');
 			tabsToInject.forEach(function(tab) {
-				console.log('Sending message to tab ' + tab.id + '. type: artemis-msg, msg: init' + request.msg);
-				chrome.tabs.sendMessage(tab.id, {'type': 'artemis-msg', 'msg': 'init'}, function(res){
-					console.log('Sending message to tab ' + tab.id + '. type: artemis-msg, msg: ' + request.msg);
-					chrome.tabs.sendMessage(tab.id, {'type': 'artemis-msg', 'msg': request.msg}, function(res){});
-				});
+				console.log('Sending message to tab ' + tab.id + '. type: artemis-msg, msg: ' + request.msg);
+				chrome.tabs.sendMessage(tab.id, {'type': 'artemis-msg', 'msg': request.msg}, function(res){});
             });
         }
     });

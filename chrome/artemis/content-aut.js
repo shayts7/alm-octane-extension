@@ -1,12 +1,13 @@
 (function(){
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-        if (request.msg === 'init') {
-			artemisCore.init();
-		} else if (request.msg === 'clean') {
-			artemisCore.clean();
-		} else {
-            let commands = JSON.parse(request.msg);
-            artemisCore.run(commands);
-        }
+
+       	if (request['type'] === 'artemis-msg') {
+       		if (request.msg === 'clear') {
+				artemisCore.clearCommands();
+			} else {
+				let commands = JSON.parse(request.msg);
+				artemisCore.runCommands(commands);
+			}
+		}
     });
 })();

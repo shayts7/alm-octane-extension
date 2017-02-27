@@ -23,7 +23,7 @@
       "js": ["artemis/content-octane.js", "prism/content-aut.js"]
     },
     {
-      "matches": ["http://*/*", "https://*/*"],
+      "matches": ["https://github.com/*", "https://www.amazon.com/*"],
       "js": ["artemis/lib/artemis-core/artemis.core.min.js", "artemis/content-aut.js"]
     },
     {
