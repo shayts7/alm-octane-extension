@@ -9,7 +9,7 @@ angular.module('mainApp').directive('prismView', function() {
 angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, prismParser) {
 
   function loadFromLocalStorage() {
-    let str = localStorage.getItem('almOctanePrism');
+    let str = localStorage.getItem('almOctanePrismJobs');
     if (str) {
       let data = JSON.parse(str);
       if (data.jobs) {
@@ -22,24 +22,27 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
     let data = {
       jobs: $scope.model.jobs
     };
-    localStorage.setItem('almOctanePrism', JSON.stringify(data));
+    localStorage.setItem('almOctanePrismJobs', JSON.stringify(data));
   }
 
   function getLogsDone(logsArray) {
     var cssRulesInOneLine = logsArray.join('\n');
-    removeStyleFromHead();
     addStyleToHead(cssRulesInOneLine);
   }
 
   function removeStyleFromHead() {
-    sendMessage({actionType: 'remove style from header'});
+    var message = {
+      msgType: 'prism-msg',
+      actionType: 'remove style from header'
+    }
+    sendMessage(message);
   }
 
   function addStyleToHead(cssRules) {
     var message = {
+      msgType: 'prism-msg',
       cssStyleRules: cssRules,
-      actionType: 'add style to header',
-      styleID: 'prism-style'
+      actionType: 'add style to header'
     };
     sendMessage(message);
   }
@@ -67,7 +70,8 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
       removeButtonTooltip: 'remove',
       showButtonText: 'Show',
       hideButtonText: 'Hide'
-    }
+    },
+    parsedCSSRules: ''
   };
 
   $scope.canAdd = function canAdd() {
