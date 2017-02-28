@@ -17,6 +17,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       if (document.head.querySelector('[id="prism-style"]')) {
         document.head.querySelector('[id="prism-style"]').remove();
       }
+      localStorage.removeItem('almOctanePrismCSSRules');
     }
   }
   sendResponse({data: data, success: true});
