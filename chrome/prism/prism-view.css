@@ -74,8 +74,8 @@
 .prism__job-line {
 	display: flex;
 	align-items: center;
-	height: 22px;
-	line-height: 22px;
+	height: 23px;
+	line-height: 23px;
 }
 
 .prism__job-line__active {

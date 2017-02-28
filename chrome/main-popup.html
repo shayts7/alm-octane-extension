@@ -25,7 +25,9 @@
             <div class="height--100 flex">
                 <div class="flex--0 height--100 border-r padding-r--md">
                     <div ng-repeat="tab in model.tabs track by $index" ng-click="onTabClick(tab.id)" class="tabs__item"
-                         ng-class="{active: tab.id === model.activeTabId}">{{::tab.title}}
+                         ng-class="{active: tab.id === model.activeTabId}">
+                        <div>{{::tab.title1}}</div>
+                        <div>{{::tab.title2}}</div>
                     </div>
                 </div>
                 <div class="flex--1 height--100 margin-l--md relative">

@@ -262,12 +262,12 @@ input {
 }
 
 .view__header__title--primary {
-	font-size: 20px;
+	font-size: 18px;
 	text-transform: uppercase;
 }
 
 .view__header__title--secondary {
-	font-size: 16px;
+	font-size: 14px;
 	color: #999;
 }
 

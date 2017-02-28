@@ -9,8 +9,8 @@ angular.module('mainApp').directive('artemisView', function () {
 angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope) {
 	$scope.model = {
 		uiStrings: {
-			titlePrimary: 'Artemis',
-			titleSecondary: 'Object Locator',
+			titlePrimary: 'Natural Language Testing',
+			titleSecondary: 'Intuitive Object Locator',
 			injectButtonText: 'Inject',
 			injectButtonTooltip: 'Inject code to current tab'
 		}
