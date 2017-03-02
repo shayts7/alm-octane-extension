@@ -47,25 +47,10 @@ angular.module('mainApp').factory('prismParser', function prismParser($http, $fi
     sortedElementList.sort(function(sel1, sel2) {
       return sel2.count - sel1.count;
     });
-    return createCSSHierarchy(sortedElementList);
+    alert('before call');
+    return prismEngine.cssSelectorWithCalculatedRule(sortedElementList);
   }
-
-  function createCSSHierarchy(sortedElements) {
-    var cssHierarchy = [];
-    var maxValue = sortedElements[0].count;
-
-    for (var j = 0; j < sortedElements.length; j++) {
-      var selector = sortedElements[j].selector;
-      cssHierarchy[j] = selector.substring(selector.indexOf('({') + 2, selector.indexOf('})'));
-    }
-
-    for (var k = 0; k < cssHierarchy.length; k++) {
-      cssHierarchy[k] = cssHierarchy[k].replaceAll(['By.cssSelector:', ',', 'By.className: '], ['', '', " \."]);
-      cssHierarchy[k] = cssHierarchy[k].concat(" { background-color: #ff" + prismEngine.calculateElementColor(sortedElements[k].count, maxValue) + "00 !important; background-image: none !important; outline: 4px solid #ff" + prismEngine.calculateElementColor(sortedElements[k].count, maxValue) + "00 !important; }");
-    }
-
-    return cssHierarchy;
-  }
+  
 
   String.prototype.replaceAll = function replaceAll(search, replacement) {
     var target = this;

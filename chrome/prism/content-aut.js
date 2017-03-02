@@ -1,26 +1,25 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  let data = request.data;
-  if (data.msgType === 'prism-msg') {
-    if (data.actionType == 'add style to header') {
+  if (request.type === 'prism-msg') {
+    if (request.action == 'add style to header') {
       if (localStorage.getItem('almOctanePrismCSSRules')) {
-        if (!(data.cssStyleRules === localStorage.getItem('almOctanePrismCSSRules').parsedCSSRules)) {
+        if (!(request.cssStyleRules === localStorage.getItem('almOctanePrismCSSRules').parsedCSSRules)) {
           localStorage.removeItem('almOctanePrismCSSRules');
-          let cssRulesInLocalStorage = {parsedCSSRules: data.cssStyleRules};
+          let cssRulesInLocalStorage = {parsedCSSRules: request.cssStyleRules};
           localStorage.setItem('almOctanePrismCSSRules', JSON.stringify(cssRulesInLocalStorage));
         }
       } else {
-        let cssRulesInLocalStorage = {parsedCSSRules: data.cssStyleRules};
+        let cssRulesInLocalStorage = {parsedCSSRules: request.cssStyleRules};
         localStorage.setItem('almOctanePrismCSSRules', JSON.stringify(cssRulesInLocalStorage));
       }
       pageRefresh();
-    } else if (data.actionType == 'remove style from header') {
+    } else if (request.action == 'remove style from header') {
       if (document.head.querySelector('[id="prism-style"]')) {
         document.head.querySelector('[id="prism-style"]').remove();
       }
       localStorage.removeItem('almOctanePrismCSSRules');
     }
   }
-  sendResponse({data: data, success: true});
+  sendResponse({data: request, success: true});
 });
 
 function loadCssRulesFromLocalStorage() {

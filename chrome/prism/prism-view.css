@@ -70,7 +70,7 @@
 .prism__add-panel__add-job-svg:focus,
 .prism__add-panel__add-job-svg:active {
 	border: none;
-	fill: #000;
+	fill: #333;
 }
 
 .prism__add-panel__add-job-svg.disabled {
@@ -96,7 +96,7 @@
 }
 
 .prism__job-line__remove-button,
-.prism__job-line__remove-button:hover{
+.prism__job-line__remove-button:hover {
 	flex: 0 0 auto;
 	height: 22px;
 	width: 36px;

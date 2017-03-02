@@ -31,28 +31,23 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
   }
 
   function removeStyleFromHead() {
-    var message = {
-      msgType: 'prism-msg',
-      actionType: 'remove style from header'
-    }
-    sendMessage(message);
+    sendMessage({type: 'prism-msg', action: 'remove style from header'});
   }
 
   function addStyleToHead(cssRules) {
-    var message = {
-      msgType: 'prism-msg',
+    sendMessage({
+      type: 'prism-msg',
       cssStyleRules: cssRules,
-      actionType: 'add style to header'
-    };
-    sendMessage(message);
+      action: 'add style to header'
+    });
   }
 
   function sendMessage(message) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {data: message}, function(response) {
+      chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
       });
     });
-
+  
   }
 
   $scope.model = {
@@ -104,7 +99,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
         activeJobs++;
       }
     }
-    return ($scope.model.jobs.length > 0 && activeJobs > 0);
+    return (activeJobs > 0);
   };
 
   $scope.canHide = function canHide() {
