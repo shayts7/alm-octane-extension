@@ -1,13 +1,8 @@
 (function(){
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-
        	if (request['type'] === 'artemis-msg') {
-       		if (request.msg === 'clear') {
-				artemisCore.clearCommands();
-			} else {
-				let commands = JSON.parse(request.msg);
-				artemisCore.runCommands(commands);
-			}
+			console.log('|ARTEMIS| AUT content page - Message received. type: ' + request['type'] + ', msg: ' + request.msg);
+			artemisCore.execute(JSON.parse(request.msg));
 		}
     });
 })();

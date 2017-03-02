@@ -3,9 +3,9 @@
 	octaneArtemisChannelElement.id = 'octane-artemis-channel';
     document.body.appendChild(octaneArtemisChannelElement);
 	octaneArtemisChannelElement.addEventListener('send', function(e) {
-	    console.log('Octane-Artemis Content Page: Sending message to Artemis');
-	    chrome.runtime.sendMessage({msg: e.detail, type: 'artemis-msg'}, function(response) {
-            console.log('Octane-Artemis Content Page: Message sent to Artemis');
+	    console.log('|ARTEMIS| Octane content page - Sending message: ' + e.detail);
+	    chrome.runtime.sendMessage({type: 'artemis-msg', msg: e.detail}, function(response) {
+           	console.log('|ARTEMIS| Octane content page - Message sent');
         });
     });
 

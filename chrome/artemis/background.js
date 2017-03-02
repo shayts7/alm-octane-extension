@@ -1,31 +1,38 @@
 (function(){
-    let tabsToInject = [];
+    let artemisEnabledTabs = [];
+
+    function sendMessageToAllArtemisEnabledTabs(msg) {
+		artemisEnabledTabs.forEach(function(tab) {
+			console.log('|ARTEMIS| Extension background page - Sending message. tab: ' + tab.id + ', type: artemis-msg, msg: ' + msg);
+			chrome.tabs.sendMessage(tab.id, {'type': 'artemis-msg', 'msg': msg}, function(res){});
+		});
+	}
+
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         if (request.type === 'artemis-inject') {
-            console.log('artemis-inject');
+            console.log('|ARTEMIS| Extension background page - Message received. type: artemis-inject');
             let tab = request.msg;
-            let found = false;
-            for (let i = 0; i < tabsToInject.length; i++) {
-				if (tabsToInject[i].id === tab.id) {
-					found = true;
-				}
-			}
-			if (!found) {
-				tabsToInject.push(tab);
+            let filtered = artemisEnabledTabs.filter(function(t) {
+            	return t.id === tab.id;
+			});
+            if (filtered.length === 0) {
+				console.log('injecting artemis into tab ' + tab.id);
+				artemisEnabledTabs.push(tab);
 				//TODO: inject Artemis code
 			}
+
 			//TODO: handle the case when Tab is dead or the user would like to stop injecting
-			tabsToInject.forEach(function(tab) {
-				console.log('Sending message to tab ' + tab.id + '. type: artemis-clr, msg: ' + request.msg);
-				chrome.tabs.sendMessage(tab.id, {'type': 'artemis-msg', 'msg': 'clear'}, function(res){});
-			});
+
+			sendMessageToAllArtemisEnabledTabs(
+				JSON.stringify([{
+					command: 'reset',
+					data: null
+				}])
+			);
         }
         else if (request.type === 'artemis-msg') {
-            console.log('artemis-msg');
-			tabsToInject.forEach(function(tab) {
-				console.log('Sending message to tab ' + tab.id + '. type: artemis-msg, msg: ' + request.msg);
-				chrome.tabs.sendMessage(tab.id, {'type': 'artemis-msg', 'msg': request.msg}, function(res){});
-            });
+			console.log('|ARTEMIS| Extension background page - Message received. type: artemis-msg, msg: ' + request.msg);
+			sendMessageToAllArtemisEnabledTabs(request.msg);
         }
     });
 })();

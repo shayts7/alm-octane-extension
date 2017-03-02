@@ -22,8 +22,8 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
 				var currentTab = tabs[0];
 				chrome.windows.getCurrent(function(currentWin) {
                     chrome.runtime.sendMessage({
-                        msg: {id: currentTab.id},
-                        type: 'artemis-inject'
+						type: 'artemis-inject',
+                    	msg: {id: currentTab.id}
                     }, function (response) {
                         //injected
                     	//console.log("msg has been sent", currentWin.id, currentTab.id);
