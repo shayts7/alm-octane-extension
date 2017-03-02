@@ -54,21 +54,27 @@
 	height: 22px;
 	width: 36px;
 	border: none;
-	color: #090;
 }
 
 .prism__add-panel__add-button:hover,
 .prism__add-panel__add-button:focus,
 .prism__add-panel__add-button:active {
 	border: none;
-	background-color: #090;
 	color: #fff;
 }
 
-.prism__add-panel__add-button.disabled {
+.prism__add-panel__add-job-svg {
+}
+
+.prism__add-panel__add-job-svg:hover,
+.prism__add-panel__add-job-svg:focus,
+.prism__add-panel__add-job-svg:active {
 	border: none;
-	background-color: #fff;
-	color: #ccc;
+	fill: #000;
+}
+
+.prism__add-panel__add-job-svg.disabled {
+	fill: #ccc;
 }
 
 .prism__job-line {
@@ -89,23 +95,20 @@
 	flex: 1 1 auto;	
 }
 
-.prism__job-line__remove-button {
+.prism__job-line__remove-button,
+.prism__job-line__remove-button:hover{
 	flex: 0 0 auto;
-	margin-left: 5px;
 	height: 22px;
 	width: 36px;
 	border: none;
-	color: #c00;
 }
 
-.prism__job-line__remove-button:focus {
-	border: none;
-	color: #900;		
+.prism__job-line__remove-svg {
+	fill: #333;
 }
 
-.prism__job-line__remove-button:hover,
-.prism__job-line__remove-button:active {
-	border: none;
-	background-color: #c00;
-	color: #fff;
+.prism__job-line__remove-svg:focus,
+.prism__job-line__remove-svg:hover,
+.prism__job-line__remove-svg:active {
+	fill: #900;
 }
