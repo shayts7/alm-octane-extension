@@ -15,16 +15,16 @@
     "https://*/*"
   ],
   "background": {
-    "scripts": ["artemis/background.js"]
+    "scripts": ["artemis/artemis-background.js"]
   },
   "content_scripts": [
     {
       "matches": ["http://localhost:8080/ui/*"],
-      "js": ["artemis/content-octane.js", "prism/content-aut.js"]
+      "js": ["artemis/artemis-content-octane.js", "prism/content-aut.js"]
     },
     {
       "matches": ["https://github.com/*", "https://www.linkedin.com/*", "https://www.amazon.com/*"],
-      "js": ["artemis/lib/artemis-core/artemis.core.js", "artemis/content-aut.js"]
+      "js": ["artemis/lib/artemis-core/artemis.core.min.js", "artemis/artemis-content-aut.js"]
     },
     {
       "matches": ["http://myd-vm12624.hpeswlab.net:8081/*", "http://myd-vm12623.hpeswlab.net:8081/*", "http://localhost:8080/ui/*"],
