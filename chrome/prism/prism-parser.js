@@ -47,7 +47,6 @@ angular.module('mainApp').factory('prismParser', function prismParser($http, $fi
     sortedElementList.sort(function(sel1, sel2) {
       return sel2.count - sel1.count;
     });
-    alert('before call');
     return prismEngine.cssSelectorWithCalculatedRule(sortedElementList);
   }
   
