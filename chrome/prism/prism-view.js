@@ -117,7 +117,9 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
     if (activeJobs.length == 0) {
       !canShow();
     }
-    prismParser.getAutomationLogs(activeJobs, getLogsDone);
+    // prismParser.getAutomationLogs(activeJobs, getLogsDone);
+    getLogsDone(prismParser.returnedParsedOutput());
+    //prismParser.getAutomationLogs(activeJobs, getLogsDone);
   };
 
   $scope.onHideClick = function onHideClick() {
