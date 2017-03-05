@@ -11,8 +11,7 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
 	$scope.model = {
 		messageJson: JSON.stringify([
 			{
-				command: 'reset',
-				data: null
+				command: 'reset'
 			},
 			{
 				command: 'run',
@@ -33,7 +32,7 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
 			injectButtonText: 'Inject',
 			injectButtonTooltip: 'Inject code to current tab',
 			runButtonText: 'Run',
-			runButtonTooltip: 'Run Artemis commands code'
+			runButtonTooltip: 'Run Artemis commands'
 		}
 	};
 
