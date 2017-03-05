@@ -7,12 +7,16 @@
 	</div>
 	<div class="view__content">
 		<div class="view__content__scroll-container">
-			<div class="artemis__logo-panel">
-				<img src="artemis/artemis-logo.png" class="artemis-logo"/>
+			<div height--100>
+				<textarea ng-model="model.messageJson" class="height--100 width--100"></textarea>
 			</div>
+			<!--<div class="artemis__logo-panel">-->
+				<!--<img src="artemis/artemis-logo.png" class="artemis-logo"/>-->
+			<!--</div>-->
 		</div>
 	</div>
 	<div class="view__footer">
 		<button ng-click="inject()" title="{{::model.uiStrings.injectButtonTooltip}}">{{::model.uiStrings.injectButtonText}}</button>
+		<button ng-click="run()" title="{{::model.uiStrings.runButtonTooltip}}">{{::model.uiStrings.runButtonText}}</button>
 	</div>
 </div>
