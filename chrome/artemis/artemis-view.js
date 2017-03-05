@@ -9,7 +9,24 @@ angular.module('mainApp').directive('artemisView', function () {
 angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope) {
 
 	$scope.model = {
-		messageJson: JSON.stringify([{command: 'reset', data: null}], null, 2),
+		messageJson: JSON.stringify([
+			{
+				command: 'reset',
+				data: null
+			},
+			{
+				command: 'run',
+				data: 'click your dashboard link'
+			},
+			{
+				command: 'run',
+				data: 'click view profile'
+			},
+			{
+				command: 'run',
+				data: 'click your profile'
+			}
+		], null, 2),
 		uiStrings: {
 			titlePrimary: 'Natural Language Testing',
 			titleSecondary: 'Intuitive Object Locator',
