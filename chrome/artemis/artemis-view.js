@@ -9,6 +9,7 @@ angular.module('mainApp').directive('artemisView', function () {
 angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope) {
 
 	$scope.model = {
+		debugMode: false,
 		messageJson: JSON.stringify([
 			{
 				command: 'reset'
@@ -36,7 +37,7 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
 		}
 	};
 
-	$scope.inject = function(){
+	$scope.inject = function inject(){
 		let query = { active: true, currentWindow: true };
 		chrome.tabs.query(query,function(tabs){
 			if(tabs.length>0) {
@@ -55,7 +56,7 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
 		});
 	};
 
-	$scope.execute = function(){
+	$scope.execute = function execute(){
 		let query = { active: true, currentWindow: true };
 		chrome.tabs.query(query,function(tabs){
 			if(tabs.length>0) {
@@ -71,6 +72,10 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
 				});
 			}
 		});
+	};
+
+	$scope.showDebugUI = function showDebugUI() {
+		$scope.model.debugMode = true;
 	};
 
 });
