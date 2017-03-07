@@ -31,8 +31,8 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
 			titleSecondary: 'Intuitive Object Locator',
 			injectButtonText: 'Inject',
 			injectButtonTooltip: 'Inject code to current tab',
-			runButtonText: 'Run',
-			runButtonTooltip: 'Run Artemis commands'
+			executeButtonText: 'Execute',
+			executeButtonTooltip: 'Execute Artemis commands'
 		}
 	};
 
@@ -55,7 +55,7 @@ angular.module('mainApp').controller('artemisCtrl', function artemisCtrl($scope)
 		});
 	};
 
-	$scope.run = function(){
+	$scope.execute = function(){
 		let query = { active: true, currentWindow: true };
 		chrome.tabs.query(query,function(tabs){
 			if(tabs.length>0) {
