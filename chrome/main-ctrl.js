@@ -6,7 +6,7 @@ angular.module('mainApp').controller('mainCtrl', function mainCtrl($scope) {
   $scope.model = {
     title: 'ALM Octane Extension',
     tabs: [
-      {title1: 'General', title2: 'Configuration', id: 'general'},
+      {title1: 'General', title2: 'Settings', id: 'general'},
       {title1: 'Natural Language', title2: 'Testing', id: 'artemis'},
       {title1: 'Exploratory', title2: 'Testing', id: 'prism'}
     ]

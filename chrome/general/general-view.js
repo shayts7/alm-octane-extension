@@ -10,7 +10,7 @@ angular.module('mainApp').controller('generalCtrl', function generalCtrl($scope)
 
 	$scope.model = {
 		uiStrings: {
-			titlePrimary: 'General',
+			titlePrimary: 'General Settings',
 			titleSecondary: 'Plugin Configuration'
 		}
 	}
