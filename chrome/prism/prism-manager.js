@@ -1,12 +1,14 @@
-angular.module('mainApp').factory('prismManager', function prismManager(prismLogRetrieval, prismParser, prismColor, prismInject) {
+angular.module('mainApp').factory('prismManager', function prismManager(prismLogRetrieval, prismParser, prismColor, prismCount, prismInject) {
 
   function _getDataAndColorAUT(jobsList) {
-	  prismLogRetrieval.retrieveAutomationLogs(jobsList, onGetAutomationLogsDone);
-      function onGetAutomationLogsDone(jobsLog) {
-		  let cssHierarchyWithoutRules = prismParser.returnParsedLog(jobsLog);
-		  let cssHierarchyWithRules = (prismColor.getCSSSelectorsWithCalculatedRules(cssHierarchyWithoutRules)).join('\n');
-		  prismInject.addColoringToAUT(cssHierarchyWithRules);
-	  }
+    prismLogRetrieval.retrieveAutomationLogs(jobsList, onGetAutomationLogsDone);
+  }
+
+  function onGetAutomationLogsDone(jobsLog) {
+    let cssHierarchyWithoutRulesWithDuplications = prismParser.returnParsedLog(jobsLog);
+    let cssHierarchyWithoutRulesWithoutDuplications = (prismCount.getCSSSelectors(cssHierarchyWithoutRulesWithDuplications));
+    let cssHierarchyWithRules = (prismColor.getCSSSelectorsWithCalculatedRules(cssHierarchyWithoutRulesWithoutDuplications)).join('');
+    prismInject.addColoringToAUT(cssHierarchyWithRules);
   }
 
   function _removeColoringFromAUT() {
