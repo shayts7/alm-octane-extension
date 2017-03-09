@@ -6,7 +6,7 @@ angular.module('mainApp').directive('prismView', function() {
   };
 });
 
-angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, prismParser) {
+angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, prismManager) {
 
   function loadFromLocalStorage() {
     let str = localStorage.getItem('almOctanePrismJobs');
@@ -23,31 +23,6 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
       jobs: $scope.model.jobs
     };
     localStorage.setItem('almOctanePrismJobs', JSON.stringify(data));
-  }
-
-  function getLogsDone(logsArray) {
-    var cssRulesInOneLine = logsArray.join('\n');
-    addStyleToHead(cssRulesInOneLine);
-  }
-
-  function removeStyleFromHead() {
-    sendMessage({type: 'prism-msg', action: 'remove style from header'});
-  }
-
-  function addStyleToHead(cssRules) {
-    sendMessage({
-      type: 'prism-msg',
-      cssStyleRules: cssRules,
-      action: 'add style to header'
-    });
-  }
-
-  function sendMessage(message) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
-      });
-    });
-  
   }
 
   $scope.model = {
@@ -88,7 +63,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
     $scope.model.jobs.splice(index, 1);
     saveToLocalStorage();
     if ($scope.model.jobs.length == 0) {
-      removeStyleFromHead();
+      prismManager.removeStyleFromHead();
     }
   };
 
@@ -117,11 +92,11 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
     if (activeJobs.length == 0) {
       !canShow();
     }
-    prismParser.getAutomationLogs(activeJobs, getLogsDone);
+    prismManager.getAutomationLogs(activeJobs);
   };
 
   $scope.onHideClick = function onHideClick() {
-    removeStyleFromHead();
+    prismManager.removeStyleFromHead();
   };
 
   loadFromLocalStorage();
