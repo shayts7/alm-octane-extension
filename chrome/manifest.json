@@ -28,7 +28,7 @@
     },
     {
       "matches": ["http://myd-vm12624.hpeswlab.net:8081/*", "http://myd-vm12623.hpeswlab.net:8081/*", "http://localhost:8080/ui/*"],
-      "js": ["prism/content-aut.js"]
+      "js": ["prism/prism-content-aut.js"]
     }
   ]
 }
