@@ -63,7 +63,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
     $scope.model.jobs.splice(index, 1);
     saveToLocalStorage();
     if ($scope.model.jobs.length == 0) {
-      prismManager.removeStyleFromHead();
+      prismManager.removeColoringFromAUT();
     }
   };
 
@@ -92,11 +92,11 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
     if (activeJobs.length == 0) {
       !canShow();
     }
-    prismManager.getAutomationLogs(activeJobs);
+    prismManager.getDataAndColorAUT(activeJobs);
   };
 
   $scope.onHideClick = function onHideClick() {
-    prismManager.removeStyleFromHead();
+    prismManager.removeColoringFromAUT();
   };
 
   loadFromLocalStorage();

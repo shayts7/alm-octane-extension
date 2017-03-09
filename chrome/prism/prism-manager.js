@@ -1,21 +1,21 @@
 angular.module('mainApp').factory('prismManager', function prismManager(prismLogRetrieval, prismParser, prismColor, prismInject) {
 
-  function getAutomationLogs(jobsList) {
-    prismLogRetrieval.retrieveAutomationLogs(jobsList, showUIAutomationCoverage);
+  function _getDataAndColorAUT(jobsList) {
+	  prismLogRetrieval.retrieveAutomationLogs(jobsList, onGetAutomationLogsDone);
+      function onGetAutomationLogsDone(jobsLog) {
+		  let cssHierarchyWithoutRules = prismParser.returnParsedLog(jobsLog);
+		  let cssHierarchyWithRules = (prismColor.getCSSSelectorsWithCalculatedRules(cssHierarchyWithoutRules)).join('\n');
+		  prismInject.addColoringToAUT(cssHierarchyWithRules);
+	  }
   }
 
-  function showUIAutomationCoverage(jobsLog) {
-    var cssHierarchyWithoutRules =  prismParser.returnParsedLog(jobsLog);
-    var cssHierarchyWithRules = (prismColor.getCSSSelectorsWithCalculatedRules(cssHierarchyWithoutRules)).join('\n');
-    prismInject.addStyleToHead(cssHierarchyWithRules);
+  function _removeColoringFromAUT() {
+    prismInject.removeColoringFromAUT();
   }
-  
-  function removeStyleFromHead() {
-    prismInject.removeStyleFromHead();
-  }
-  
+
   return {
-    getAutomationLogs: getAutomationLogs,
-    removeStyleFromHead: removeStyleFromHead
+    getDataAndColorAUT: _getDataAndColorAUT,
+    removeColoringFromAUT: _removeColoringFromAUT
   };
+
 });
