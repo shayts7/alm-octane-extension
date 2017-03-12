@@ -1,22 +1,23 @@
 angular.module('mainApp').factory('prismLogRetriever', function prismLogRetriever($http) {
 
 	function retrieveAutomationLogs(jobList, cb) {
-		let counter = 0;
 		let jobsLogAggregator = [];
-
-		function afterHttpDone() {
+		let counter = 0;
+		function afterHttpDone(data) {
 			counter++;
+			if (data) {
+				jobsLogAggregator.push(data);
+			}
 			if (counter === jobList.length) {
 				cb(jobsLogAggregator);
 			}
         }
 		jobList.forEach(function(j) {
 			$http.get(j.url).then(function onHttpSuccess(response) {
-				jobsLogAggregator.push(response.data);
-				afterHttpDone();
+				afterHttpDone(response.data);
 			}, function onHttpFailure(/*response*/) {
-			    alert('Unable to retrieve data from url: ' + j.url);
-				afterHttpDone();
+			    console.log('Unable to retrieve data from url: ' + j.url);
+				afterHttpDone(null);
 			});
         });
 	}
