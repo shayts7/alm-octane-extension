@@ -8,12 +8,12 @@ angular.module('mainApp').directive('prismView', function() {
 
 angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, prismManager) {
 
-  function loadFromLocalStorage() {
+  function loadFromStorage() {
     let data = prismManager.loadFromStorage();
     $scope.model.jobs = data.jobs || [];
   }
 
-  function saveToLocalStorage() {
+  function saveToStorage() {
     let data = {
       jobs: $scope.model.jobs
     };
@@ -49,14 +49,14 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
       name: $scope.model.addJobName,
       url: $scope.model.addJobUrl
     });
-    saveToLocalStorage();
+    saveToStorage();
     $scope.model.addJobName = '';
     $scope.model.addJobUrl = '';
   };
 
   $scope.onRemoveClick = function onRemoveClick(index) {
     $scope.model.jobs.splice(index, 1);
-    saveToLocalStorage();
+    saveToStorage();
     if ($scope.model.jobs.length == 0) {
       prismManager.removeColoringFromAUT();
     }
@@ -72,12 +72,8 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
     return (activeJobs > 0);
   };
 
-  $scope.canHide = function canHide() {
-    return $scope.model.jobs.length > 0;
-  };
-
   $scope.onShowClick = function onShowClick() {
-    saveToLocalStorage();
+    saveToStorage();
     let activeJobs = [];
     for (let i = 0; i < $scope.model.jobs.length; i++) {
       if ($scope.model.jobs[i].active === true) {
@@ -90,10 +86,14 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
     prismManager.getDataAndColorAUT(activeJobs);
   };
 
+  $scope.canHide = function canHide() {
+    return $scope.model.jobs.length > 0;
+  };
+
   $scope.onHideClick = function onHideClick() {
     prismManager.removeColoringFromAUT();
   };
 
-  loadFromLocalStorage();
+  loadFromStorage();
 
 });
