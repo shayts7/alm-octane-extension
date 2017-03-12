@@ -15,7 +15,7 @@
             <label class="prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
             <input class="prism__add-panel__url-input" type="text" ng-model="model.addJobUrl"
                    placeholder="{{model.uiStrings.urlInputHint}}"/>
-            <button class="prism__add-panel__add-button" ng-class="{'disabled': !canAdd()}" ng-include="'./img/job-add.svg'" ng-click="onAddClick()"></button>
+            <button class="prism__add-panel__add-button" ng-class="{'disabled': !canAdd()}" ng-click="onAddClick()" ng-include="'./img/job-add.svg'"></button>
         </div>
     </div>
     <div class="view__content">
@@ -25,8 +25,7 @@
                     <input class="prism__job-line__active" type="checkbox" ng-model="job.active"
                            title="{{model.uiStrings.activateCheckboxTooltip}}"/>
                     <div class="prism__job-line__name" title="{{job.url}}">{{job.name}}</div>
-                    <button ng-include="'./img/job-delete.svg'" ng-click="onRemoveClick($index)" class="prism__job-line__remove-button"
-                            title="{{model.uiStrings.removeButtonTooltip}} {{job.name}}">
+                    <button ng-click="onRemoveClick($index)" class="prism__job-line__remove-button" title="{{model.uiStrings.removeButtonTooltip}} {{job.name}}" ng-include="'./img/job-delete.svg'">
                     </button>
                 </div>
             </div>

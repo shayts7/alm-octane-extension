@@ -64,6 +64,7 @@
 .prism__add-panel__add-button:active {
 	border: none;
 }
+
 .prism__add-panel__add-button:hover > svg,
 .prism__add-panel__add-button:focus > svg,
 .prism__add-panel__add-button:active > svg {
@@ -73,6 +74,7 @@
 .prism__add-panel__add-button.disabled {
 	border: none;
 }
+
 .prism__add-panel__add-button.disabled > svg {
 	fill: #ccc;
 }
@@ -95,20 +97,25 @@
 	flex: 1 1 auto;	
 }
 
-.prism__job-line__remove-button,
-.prism__job-line__remove-button:hover {
+.prism__job-line__remove-button {
 	flex: 0 0 auto;
 	height: 22px;
 	width: 36px;
 	border: none;
 }
 
-.prism__job-line__remove-svg {
+.prism__job-line__remove-button > svg {
 	fill: #444;
 }
 
-.prism__job-line__remove-svg:focus,
-.prism__job-line__remove-svg:hover,
-.prism__job-line__remove-svg:active {
+.prism__job-line__remove-button:hover,
+.prism__job-line__remove-button:focus,
+.prism__job-line__remove-button:active {
+	border: none;
+}
+
+.prism__job-line__remove-button:hover > svg,
+.prism__job-line__remove-button:focus > svg,
+.prism__job-line__remove-button:active > svg {
 	fill: #900;
 }
