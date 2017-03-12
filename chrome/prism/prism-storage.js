@@ -1,4 +1,4 @@
-angular.module('mainApp').factory('prismStorage', function prismColor() {
+angular.module('mainApp').factory('prismStorage', function prismStorage() {
 
 	function load() {
 		let data = {};

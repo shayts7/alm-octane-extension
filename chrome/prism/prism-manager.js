@@ -1,4 +1,4 @@
-angular.module('mainApp').factory('prismManager', function prismManager(prismLogRetrieval, prismParser, prismColor, prismCount, prismInject) {
+angular.module('mainApp').factory('prismManager', function prismManager(prismStorage, prismLogRetrieval, prismParser, prismColor, prismCount, prismInject) {
 
 	function loadFromStorage() {
 		return prismStorage.load();
