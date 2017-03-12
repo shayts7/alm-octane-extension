@@ -8,7 +8,7 @@ angular.module('mainApp').factory('prismAggregator', function prismAggregator() 
 			ld.lines.forEach(function(l) {
 				if (map[l]) {
 					map[l] = {
-						sources: map[l].sources.indexOf(ld.source) === -1 ? map[l].sources.push(ld.source) : map[l].sources,
+						sources: map[l].sources.indexOf(ld.source) === -1 ? map[l].sources.push(ld.source) && map[l].sources : map[l].sources,
 						count: map[l].count + 1
 					}
 				} else {
