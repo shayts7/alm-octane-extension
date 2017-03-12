@@ -1,42 +1,40 @@
 angular.module('mainApp').factory('prismAggregator', function prismAggregator() {
 
-  function aggregate(linesData) {
-    let sortedElements = countAndRemoveDuplications(linesData);
-    let selectorsData = [];
-    let selectorsCount = 0;
+	function aggregate(linesData) {
+		let selectorsData = [];
 
-    for (let i = 0; i < sortedElements.length; i++) {
-      if(sortedElements[i].selector.includes(' .')) {
-        selectorsCount++;
-      }
-      selectorsCount += (sortedElements[i].selector.match(/\[/g) || []).length;
-      selectorsData.push({selector: sortedElements[i].selector, count: sortedElements[i].count, hasXpath: false, selectorLength: selectorsCount});
-      selectorsCount = 0;
-    }
-    return selectorsData;
-  }
-
-  function countAndRemoveDuplications(linesData) {
-    let mapOfElements = {};
-    let sortedElementsListIncludeCount = [];
-    for (let i = 0; i < linesData.length; i++) {
-		for (let j = 0; j < linesData[i].lines.length; j++) {
-			let selector = linesData[i].lines[j];
-			mapOfElements[selector] = mapOfElements[selector] ? mapOfElements[selector] + 1 : 1;
+		let map = {};
+		linesData.forEach(function(ld) {
+			ld.lines.forEach(function(l) {
+				if (map[l]) {
+					map[l] = {
+						sources: map[l].sources.indexOf(ld.source) === -1 ? map[l].sources.push(ld.source) : map[l].sources,
+						count: map[l].count + 1
+					}
+				} else {
+					map[l] = {
+						sources: [ld.source],
+						count: 1
+					}
+				}
+			});
+		});
+		for (let sel in map) {
+			selectorsData.push({
+				selector: sel,
+				selectorsCount: (sel.match(/\[/g) || []).length,
+				hasXpath: false,
+				count: map[sel].count,
+				sources: map[sel].sources
+			});
 		}
+		selectorsData.sort(function(sel1, sel2) {
+			return sel2.count - sel1.count;
+		});
+		return selectorsData;
 	}
 
-    for (let sel in mapOfElements) {
-      sortedElementsListIncludeCount.push({selector: sel, count: mapOfElements[sel]});
-    }
-
-    sortedElementsListIncludeCount.sort(function(sel1, sel2) {
-      return sel2.count - sel1.count;
-    });
-    return sortedElementsListIncludeCount;
-  }
-
-  return {
-    aggregate: aggregate
-  };
+	return {
+		aggregate: aggregate
+	};
 });
