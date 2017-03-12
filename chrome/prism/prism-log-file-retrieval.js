@@ -1,29 +1,28 @@
 angular.module('mainApp').factory('prismLogRetrieval', function prismLogRetrieval($http) {
 
-  function retrieveAutomationLogs(jobsList, cb) {
-    let counter = 0;
-    let jobsLogAggregator = [];
+	function retrieveAutomationLogs(jobList, cb) {
+		let counter = 0;
+		let jobsLogAggregator = [];
 
-    for (let j = 0; j < jobsList.length; j++) {
-      if (jobsList[j].active === true) {
-        $http.get(jobsList[j].url).then(function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-          jobsLogAggregator.push(response.data);
-          counter++;
-          if (counter === jobsList.length) {
-            cb(jobsLogAggregator);
-          }
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
+		function afterHttpDone() {
+			counter++;
+			if (counter === jobList.length) {
+				cb(jobsLogAggregator);
+			}
+        }
+		jobList.forEach(function(j) {
+			$http.get(j.url).then(function onHttpSuccess(response) {
+				jobsLogAggregator.push(response.data);
+				afterHttpDone();
+			}, function onHttpFailure(response) {
+			    alert('Unable to retrieve data from url: ' + j.url);
+				afterHttpDone();
+			});
         });
-      }
-    }
-  }
+	}
 
-  return {
-    retrieveAutomationLogs: retrieveAutomationLogs
-  };
-  
+	return {
+		retrieveAutomationLogs: retrieveAutomationLogs
+	};
+
 });

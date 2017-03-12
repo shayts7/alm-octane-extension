@@ -20,6 +20,12 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
 	prismManager.saveToStorage(data);
   }
 
+  function getActiveJobs() {
+	  return $scope.model.jobs.filter(function(j) {
+		  return j.active;
+	  });
+  }
+
   $scope.model = {
     jobs: [],
     addJobName: '',
@@ -64,18 +70,14 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
   };
 
   $scope.canShow = function canShow() {
-    let activeJobs = $scope.model.jobs.filter(function(j) {
-      return j.active;
-	});
+    let activeJobs = getActiveJobs();
     return activeJobs.length > 0 && !$scope.model.isInProgress;
   };
 
   $scope.onShowClick = function onShowClick() {
 	$scope.model.isInProgress = true;
     saveToStorage();
-    let activeJobs = $scope.model.jobs.filter(function(j) {
-        return j.active;
-    });
+    let activeJobs = getActiveJobs();
     prismManager.getDataAndColorAUT(activeJobs, getDataAndColorAUTDone);
     function getDataAndColorAUTDone() {
 		$scope.model.isInProgress = false;

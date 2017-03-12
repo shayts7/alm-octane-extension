@@ -8,14 +8,14 @@ angular.module('mainApp').factory('prismManager', function prismManager(prismSto
 		prismStorage.save(data);
 	}
 
-  function getDataAndColorAUT(jobsList, onGetDataAndColorAUTDone) {
-    prismLogRetrieval.retrieveAutomationLogs(jobsList, onGetAutomationLogsDone);
+  function getDataAndColorAUT(jobList, cb) {
+    prismLogRetrieval.retrieveAutomationLogs(jobList, onGetAutomationLogsDone);
   	function onGetAutomationLogsDone(jobsLog) {
 		let cssHierarchyWithoutRulesWithDuplications = prismParser.returnParsedLog(jobsLog);
 		let cssHierarchyWithoutRulesWithoutDuplications = (prismCount.getCSSSelectors(cssHierarchyWithoutRulesWithDuplications));
 		let cssHierarchyWithRules = (prismColor.getCSSSelectorsWithCalculatedRules(cssHierarchyWithoutRulesWithoutDuplications)).join('');
 		prismInject.addColoringToAUT(cssHierarchyWithRules);
-		onGetDataAndColorAUTDone();
+		cb();
 	}
   }
 
