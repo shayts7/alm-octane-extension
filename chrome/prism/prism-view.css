@@ -55,25 +55,25 @@
 	width: 36px;
 	border: none;
 }
+.prism__add-panel__add-button > svg {
+	fill: #444;
+}
 
 .prism__add-panel__add-button:hover,
 .prism__add-panel__add-button:focus,
 .prism__add-panel__add-button:active {
 	border: none;
-	color: #fff;
+}
+.prism__add-panel__add-button:hover > svg,
+.prism__add-panel__add-button:focus > svg,
+.prism__add-panel__add-button:active > svg {
+	fill: #000;
 }
 
-.prism__add-panel__add-job-svg {
-}
-
-.prism__add-panel__add-job-svg:hover,
-.prism__add-panel__add-job-svg:focus,
-.prism__add-panel__add-job-svg:active {
+.prism__add-panel__add-button.disabled {
 	border: none;
-	fill: #333;
 }
-
-.prism__add-panel__add-job-svg.disabled {
+.prism__add-panel__add-button.disabled > svg {
 	fill: #ccc;
 }
 
@@ -104,7 +104,7 @@
 }
 
 .prism__job-line__remove-svg {
-	fill: #333;
+	fill: #444;
 }
 
 .prism__job-line__remove-svg:focus,
