@@ -1,4 +1,4 @@
-angular.module('mainApp').factory('prismLogRetrieval', function prismLogRetrieval($http) {
+angular.module('mainApp').factory('prismLogRetriever', function prismLogRetriever($http) {
 
 	function retrieveAutomationLogs(jobList, cb) {
 		let counter = 0;
@@ -14,7 +14,7 @@ angular.module('mainApp').factory('prismLogRetrieval', function prismLogRetrieva
 			$http.get(j.url).then(function onHttpSuccess(response) {
 				jobsLogAggregator.push(response.data);
 				afterHttpDone();
-			}, function onHttpFailure(response) {
+			}, function onHttpFailure(/*response*/) {
 			    alert('Unable to retrieve data from url: ' + j.url);
 				afterHttpDone();
 			});
