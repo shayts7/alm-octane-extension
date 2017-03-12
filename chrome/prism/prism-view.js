@@ -36,7 +36,8 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
       showButtonText: 'Show',
       hideButtonText: 'Hide'
     },
-    parsedCSSRules: ''
+    parsedCSSRules: '',
+    isInProgress: false
   };
 
   $scope.canAdd = function canAdd() {
@@ -66,19 +67,23 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
     let activeJobs = $scope.model.jobs.filter(function(j) {
       return j.active;
 	});
-    return activeJobs.length > 0;
+    return activeJobs.length > 0 && !$scope.model.isInProgress;
   };
 
   $scope.onShowClick = function onShowClick() {
+	$scope.model.isInProgress = true;
     saveToStorage();
     let activeJobs = $scope.model.jobs.filter(function(j) {
         return j.active;
     });
-    prismManager.getDataAndColorAUT(activeJobs);
+    prismManager.getDataAndColorAUT(activeJobs, getDataAndColorAUTDone);
+    function getDataAndColorAUTDone() {
+		$scope.model.isInProgress = false;
+    }
   };
 
   $scope.canHide = function canHide() {
-    return $scope.model.jobs.length > 0;
+    return $scope.model.jobs.length > 0 && !$scope.model.isInProgress;
   };
 
   $scope.onHideClick = function onHideClick() {
