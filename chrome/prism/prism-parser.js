@@ -21,9 +21,9 @@ angular.module('mainApp').factory('prismParser', function prismParser() {
 	}
 
 	function parseLog(job, log) {
-	  //TODO:parse based on job info
-      return parseOctaneLog(log);
-    }
+		//TODO:parse based on job info
+		return parseOctaneLog(log);
+	}
 
 	function parseLogs(jobList, jobLogs) {
 		let linesData = [];
@@ -31,8 +31,8 @@ angular.module('mainApp').factory('prismParser', function prismParser() {
 			if (jobLogs[i]) {
 				linesData.push({
 					source: jobList[i].name,
-                    lines: parseLog(jobList[i], jobLogs[i])
-			    });
+					lines: parseLog(jobList[i], jobLogs[i])
+				});
 			}
 		}
 		return linesData;

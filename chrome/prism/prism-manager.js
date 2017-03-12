@@ -8,26 +8,26 @@ angular.module('mainApp').factory('prismManager', function prismManager(prismSto
 		prismStorage.save(data);
 	}
 
-  function getDataAndColorAUT(jobList, cb) {
-    prismRetriever.retrieve(jobList, onRetrieveLogsDone);
-  	function onRetrieveLogsDone(jobLogs) {
-		let linesData = prismParser.parseLogs(jobList, jobLogs);
-		let selectorsData = prismAggregator.aggregate(linesData);
-		let cssRules = prismColors.getCSSRules(selectorsData);
-		prismInjector.addColoringToAUT(cssRules);
-		cb();
+	function getDataAndColorAUT(jobList, cb) {
+		prismRetriever.retrieve(jobList, onRetrieveLogsDone);
+		function onRetrieveLogsDone(jobLogs) {
+			let linesData = prismParser.parseLogs(jobList, jobLogs);
+			let selectorsData = prismAggregator.aggregate(linesData);
+			let cssRules = prismColors.getCSSRules(selectorsData);
+			prismInjector.addColoringToAUT(cssRules);
+			cb();
+		}
 	}
-  }
 
-  function removeColoringFromAUT() {
-    prismInjector.removeColoringFromAUT();
-  }
+	function removeColoringFromAUT() {
+		prismInjector.removeColoringFromAUT();
+	}
 
-  return {
-	loadFromStorage: loadFromStorage,
-	saveToStorage: saveToStorage,
-    getDataAndColorAUT: getDataAndColorAUT,
-    removeColoringFromAUT: removeColoringFromAUT
-  };
+	return {
+		loadFromStorage: loadFromStorage,
+		saveToStorage: saveToStorage,
+		getDataAndColorAUT: getDataAndColorAUT,
+		removeColoringFromAUT: removeColoringFromAUT
+	};
 
 });

@@ -9,15 +9,15 @@ angular.module('mainApp').factory('prismRetriever', function prismRetriever($htt
 			if (counter === jobList.length) {
 				cb(jobLogs);
 			}
-        }
+		}
 		jobList.forEach(function(j) {
 			$http.get(j.url).then(function onHttpSuccess(response) {
 				afterHttpDone(response.data);
 			}, function onHttpFailure(/*response*/) {
-			    console.log('Unable to retrieve data from url: ' + j.url);
+				console.log('Unable to retrieve data from url: ' + j.url);
 				afterHttpDone(null);
 			});
-        });
+		});
 	}
 
 	return {
