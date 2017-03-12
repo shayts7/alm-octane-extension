@@ -57,32 +57,23 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, pri
   $scope.onRemoveClick = function onRemoveClick(index) {
     $scope.model.jobs.splice(index, 1);
     saveToStorage();
-    if ($scope.model.jobs.length == 0) {
+    if ($scope.model.jobs.length === 0) {
       prismManager.removeColoringFromAUT();
     }
   };
 
   $scope.canShow = function canShow() {
-    let activeJobs = 0;
-    for (let i = 0; i < $scope.model.jobs.length; i++) {
-      if ($scope.model.jobs[i].active === true) {
-        activeJobs++;
-      }
-    }
-    return (activeJobs > 0);
+    let activeJobs = $scope.model.jobs.filter(function(j) {
+      return j.active;
+	});
+    return activeJobs.length > 0;
   };
 
   $scope.onShowClick = function onShowClick() {
     saveToStorage();
-    let activeJobs = [];
-    for (let i = 0; i < $scope.model.jobs.length; i++) {
-      if ($scope.model.jobs[i].active === true) {
-        activeJobs.push($scope.model.jobs[i]);
-      }
-    }
-    if (activeJobs.length == 0) {
-      !canShow();
-    }
+    let activeJobs = $scope.model.jobs.filter(function(j) {
+        return j.active;
+    });
     prismManager.getDataAndColorAUT(activeJobs);
   };
 
