@@ -1,15 +1,13 @@
 angular.module('mainApp').factory('prismLogRetriever', function prismLogRetriever($http) {
 
 	function retrieveAutomationLogs(jobList, cb) {
-		let jobsLogAggregator = [];
+		let jobLogs = [];
 		let counter = 0;
 		function afterHttpDone(data) {
 			counter++;
-			if (data) {
-				jobsLogAggregator.push(data);
-			}
+			jobLogs.push(data);
 			if (counter === jobList.length) {
-				cb(jobsLogAggregator);
+				cb(jobLogs);
 			}
         }
 		jobList.forEach(function(j) {
