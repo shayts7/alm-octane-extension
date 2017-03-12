@@ -1,4 +1,4 @@
-angular.module('mainApp').factory('prismManager', function prismManager(prismStorage, prismRetriever, prismParser, prismAggregator, prismColor, prismInject) {
+angular.module('mainApp').factory('prismManager', function prismManager(prismStorage, prismRetriever, prismParser, prismAggregator, prismColors, prismInjector) {
 
 	function loadFromStorage() {
 		return prismStorage.load();
@@ -12,9 +12,9 @@ angular.module('mainApp').factory('prismManager', function prismManager(prismSto
     prismRetriever.retrieve(jobList, onGetAutomationLogsDone);
   	function onGetAutomationLogsDone(jobLogs) {
 		let linesData = prismParser.parseLogs(jobList, jobLogs);
-		let cssHierarchyWithoutRulesWithoutDuplications = (prismAggregator.aggregate(linesData));
-		let cssHierarchyWithRules = (prismColor.getCSSSelectorsWithCalculatedRules(cssHierarchyWithoutRulesWithoutDuplications)).join('');
-		prismInject.addColoringToAUT(cssHierarchyWithRules);
+		let selectorsData = prismAggregator.aggregate(linesData);
+		let cssRules = prismColors.getCSSRules(selectorsData);
+		prismInjector.addColoringToAUT(cssRules);
 		cb();
 	}
   }

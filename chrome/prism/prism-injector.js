@@ -1,9 +1,9 @@
-angular.module('mainApp').factory('prismInject', function prismInject() {
+angular.module('mainApp').factory('prismInjector', function prismInjector() {
 
-  function addStyleToHead(cssHierarchyWithRules) {
+  function addStyleToHead(cssRules) {
     let message = {
       type: 'prism-msg',
-      cssStyleRules: cssHierarchyWithRules,
+      cssStyleRules: cssRules.join(''),
       action: 'add style to header'
     };
     sendMessage(message);
