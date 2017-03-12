@@ -9,8 +9,8 @@ angular.module('mainApp').factory('prismManager', function prismManager(prismSto
 	}
 
   function getDataAndColorAUT(jobList, cb) {
-    prismRetriever.retrieve(jobList, onGetAutomationLogsDone);
-  	function onGetAutomationLogsDone(jobLogs) {
+    prismRetriever.retrieve(jobList, onRetrieveLogsDone);
+  	function onRetrieveLogsDone(jobLogs) {
 		let linesData = prismParser.parseLogs(jobList, jobLogs);
 		let selectorsData = prismAggregator.aggregate(linesData);
 		let cssRules = prismColors.getCSSRules(selectorsData);
@@ -20,7 +20,7 @@ angular.module('mainApp').factory('prismManager', function prismManager(prismSto
   }
 
   function removeColoringFromAUT() {
-    prismInject.removeColoringFromAUT();
+    prismInjector.removeColoringFromAUT();
   }
 
   return {
