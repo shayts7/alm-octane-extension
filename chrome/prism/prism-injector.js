@@ -1,20 +1,18 @@
 angular.module('mainApp').factory('prismInjector', function prismInjector() {
 
 	function addStyleToHead(cssRules) {
-		let message = {
+		sendMessage({
 			type: 'prism-msg',
 			cssStyleRules: cssRules.join(''),
 			action: 'add-colors-to-aut'
-		};
-		sendMessage(message);
+		});
 	}
 
 	function removeStyleFromHead() {
-		let message = {
+		sendMessage({
 			type: 'prism-msg',
 			action: 'remove-colors-from-aut'
-		};
-		sendMessage(message);
+		});
 	}
 
 	function sendMessage(message) {
