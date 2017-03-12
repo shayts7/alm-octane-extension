@@ -1,4 +1,4 @@
-angular.module('mainApp').factory('prismManager', function prismManager(prismStorage, prismLogRetriever, prismParser, prismColor, prismCount, prismInject) {
+angular.module('mainApp').factory('prismManager', function prismManager(prismStorage, prismRetriever, prismParser, prismAggregator, prismColor, prismInject) {
 
 	function loadFromStorage() {
 		return prismStorage.load();
@@ -9,10 +9,10 @@ angular.module('mainApp').factory('prismManager', function prismManager(prismSto
 	}
 
   function getDataAndColorAUT(jobList, cb) {
-    prismLogRetriever.retrieveAutomationLogs(jobList, onGetAutomationLogsDone);
+    prismRetriever.retrieve(jobList, onGetAutomationLogsDone);
   	function onGetAutomationLogsDone(jobLogs) {
-		let cssHierarchyWithoutRulesWithDuplications = prismParser.parseLogs(jobList, jobLogs);
-		let cssHierarchyWithoutRulesWithoutDuplications = (prismCount.getCSSSelectors(cssHierarchyWithoutRulesWithDuplications));
+		let linesData = prismParser.parseLogs(jobList, jobLogs);
+		let cssHierarchyWithoutRulesWithoutDuplications = (prismAggregator.aggregate(linesData));
 		let cssHierarchyWithRules = (prismColor.getCSSSelectorsWithCalculatedRules(cssHierarchyWithoutRulesWithoutDuplications)).join('');
 		prismInject.addColoringToAUT(cssHierarchyWithRules);
 		cb();

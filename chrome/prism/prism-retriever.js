@@ -1,6 +1,6 @@
-angular.module('mainApp').factory('prismLogRetriever', function prismLogRetriever($http) {
+angular.module('mainApp').factory('prismRetriever', function prismRetriever($http) {
 
-	function retrieveAutomationLogs(jobList, cb) {
+	function retrieve(jobList, cb) {
 		let jobLogs = [];
 		let counter = 0;
 		function afterHttpDone(data) {
@@ -21,7 +21,7 @@ angular.module('mainApp').factory('prismLogRetriever', function prismLogRetrieve
 	}
 
 	return {
-		retrieveAutomationLogs: retrieveAutomationLogs
+		retrieve: retrieve
 	};
 
 });

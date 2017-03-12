@@ -20,14 +20,22 @@ angular.module('mainApp').factory('prismParser', function prismParser() {
 		return rules;
 	}
 
+	function parseLog(job, log) {
+	  //TODO:parse based on job info
+      return parseOctaneLog(log);
+    }
+
 	function parseLogs(jobList, jobLogs) {
-		let rules = [];
+		let linesData = [];
 		for (let i = 0; i < jobList.length; i++) {
 			if (jobLogs[i]) {
-				rules.push.apply(rules, parseOctaneLog(jobLogs[i]));
+				linesData.push({
+					source: jobList[i].name,
+                    lines: parseLog(jobList[i], jobLogs[i])
+			    });
 			}
 		}
-		return rules;
+		return linesData;
 	}
 
 	return {

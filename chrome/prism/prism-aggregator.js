@@ -1,7 +1,7 @@
-angular.module('mainApp').factory('prismCount', function prismCount() {
+angular.module('mainApp').factory('prismAggregator', function prismAggregator() {
 
-  function getCSSSelectors(cssHierarchyWithoutRule) {
-    let sortedElements = countAndRemoveDuplications(cssHierarchyWithoutRule);
+  function aggregate(linesData) {
+    let sortedElements = countAndRemoveDuplications(linesData);
     let selectorsData = [];
     let selectorsCount = 0;
 
@@ -16,13 +16,15 @@ angular.module('mainApp').factory('prismCount', function prismCount() {
     return selectorsData;
   }
 
-  function countAndRemoveDuplications(elementsArray) {
+  function countAndRemoveDuplications(linesData) {
     let mapOfElements = {};
     let sortedElementsListIncludeCount = [];
-    for (let i = 0; i < elementsArray.length; i++) {
-      let selector = elementsArray[i];
-      mapOfElements[selector] = mapOfElements[selector] ? mapOfElements[selector] + 1 : 1;
-    }
+    for (let i = 0; i < linesData.length; i++) {
+		for (let j = 0; j < linesData[i].lines.length; j++) {
+			let selector = linesData[i].lines[j];
+			mapOfElements[selector] = mapOfElements[selector] ? mapOfElements[selector] + 1 : 1;
+		}
+	}
 
     for (let sel in mapOfElements) {
       sortedElementsListIncludeCount.push({selector: sel, count: mapOfElements[sel]});
@@ -35,6 +37,6 @@ angular.module('mainApp').factory('prismCount', function prismCount() {
   }
 
   return {
-    getCSSSelectors: getCSSSelectors
+    aggregate: aggregate
   };
 });
