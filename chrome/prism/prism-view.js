@@ -9,20 +9,15 @@ angular.module('mainApp').directive('prismView', function() {
 angular.module('mainApp').controller('prismCtrl', function prismCtrl($scope, prismManager) {
 
   function loadFromLocalStorage() {
-    let str = localStorage.getItem('almOctanePrismJobs');
-    if (str) {
-      let data = JSON.parse(str);
-      if (data.jobs) {
-        $scope.model.jobs = data.jobs;
-      }
-    }
+    let data = prismManager.loadFromStorage();
+    $scope.model.jobs = data.jobs || [];
   }
 
   function saveToLocalStorage() {
     let data = {
       jobs: $scope.model.jobs
     };
-    localStorage.setItem('almOctanePrismJobs', JSON.stringify(data));
+	prismManager.saveToStorage(data);
   }
 
   $scope.model = {

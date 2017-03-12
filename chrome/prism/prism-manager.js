@@ -1,6 +1,14 @@
 angular.module('mainApp').factory('prismManager', function prismManager(prismLogRetrieval, prismParser, prismColor, prismCount, prismInject) {
 
-  function _getDataAndColorAUT(jobsList) {
+	function loadFromStorage() {
+		return prismStorage.load();
+	}
+
+	function saveToStorage(data) {
+		prismStorage.save(data);
+	}
+
+  function getDataAndColorAUT(jobsList) {
     prismLogRetrieval.retrieveAutomationLogs(jobsList, onGetAutomationLogsDone);
   }
 
@@ -11,13 +19,15 @@ angular.module('mainApp').factory('prismManager', function prismManager(prismLog
     prismInject.addColoringToAUT(cssHierarchyWithRules);
   }
 
-  function _removeColoringFromAUT() {
+  function removeColoringFromAUT() {
     prismInject.removeColoringFromAUT();
   }
 
   return {
-    getDataAndColorAUT: _getDataAndColorAUT,
-    removeColoringFromAUT: _removeColoringFromAUT
+	loadFromStorage: loadFromStorage,
+	saveToStorage: saveToStorage,
+    getDataAndColorAUT: getDataAndColorAUT,
+    removeColoringFromAUT: removeColoringFromAUT
   };
 
 });
