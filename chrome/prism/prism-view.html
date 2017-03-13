@@ -7,15 +7,38 @@
     </div>
     <div class="prism__add-panel">
         <div class="prism__add-panel__line">
-            <label class="prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
+            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
             <input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName"
                    placeholder="{{model.uiStrings.nameInputHint}}"/>
         </div>
         <div class="prism__add-panel__line">
-            <label class="prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
+            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
             <input class="prism__add-panel__url-input" type="text" ng-model="model.addJobUrl"
                    placeholder="{{model.uiStrings.urlInputHint}}"/>
-            <button class="prism__add-panel__add-button" ng-class="{'disabled': !canAdd()}" ng-click="onAddClick()" ng-include="'./img/job-add.svg'"></button>
+            <button class="prism__add-panel__add-button" ng-class="{'disabled': !canAdd()}" ng-click="onAddClick()"
+                    ng-include="'./img/job-add.svg'"></button>
+        </div>
+        <div class="prism__add-panel__log-selection-line">
+            <div class="prism__add-panel__radio">
+                <input name="logTypeSelection" type="radio" checked="true"/>
+                <label class="prism__add-panel__radio-label">{{model.uiStrings.seleniumDefaultLog}}</label>
+            </div>
+        </div>
+        <div class="prism__add-panel__log-selection-line">
+            <div class="prism__add-panel__radio">
+                <input name="logTypeSelection" type="radio"/>
+                <label class="prism__add-panel__radio-label">{{model.uiStrings.parsedLog}}</label>
+            </div>
+            <input class="prism__add-panel__log-url-input" type="text" ng-model="model.addLogUrl"
+                   placeholder="{{model.uiStrings.cssSelectorsInputHint}}"/>
+        </div>
+        <div class="prism__add-panel__log-selection-line">
+            <div class="prism__add-panel__radio">
+                <input name="logTypeSelection" type="radio"/>
+                <label class="prism__add-panel__radio-label">{{model.uiStrings.customLog}}</label>
+            </div>
+            <input class="prism__add-panel__log-url-input" type="text" ng-model="model.addLogUrl"
+                   placeholder="{{model.uiStrings.customParserInputHint}}"/>
         </div>
     </div>
     <div class="view__content">
@@ -25,7 +48,9 @@
                     <input class="prism__job-line__active" type="checkbox" ng-model="job.active"
                            title="{{model.uiStrings.activateCheckboxTooltip}}"/>
                     <div class="prism__job-line__name" title="{{job.url}}">{{job.name}}</div>
-                    <button ng-click="onRemoveClick($index)" class="prism__job-line__remove-button" title="{{model.uiStrings.removeButtonTooltip}} {{job.name}}" ng-include="'./img/job-delete.svg'">
+                    <button ng-click="onRemoveClick($index)" class="prism__job-line__remove-button"
+                            title="{{model.uiStrings.removeButtonTooltip}} {{job.name}}"
+                            ng-include="'./img/job-delete.svg'">
                     </button>
                 </div>
             </div>
@@ -38,3 +63,4 @@
         </button>
     </div>
 </div>
+
