@@ -20,25 +20,28 @@
         </div>
         <div class="prism__add-panel__log-selection-line">
             <div class="prism__add-panel__radio">
-                <input name="logTypeSelection" type="radio" checked="true"/>
-                <label class="prism__add-panel__radio-label">{{model.uiStrings.seleniumDefaultLog}}</label>
+                <label class="prism__add-panel__radio-label">
+                    <input name="logType" type="radio" value="selenium" ng-model="model.logType" ng-click="onRadioClick()" checked="checked"/>
+                    Selenium</label>
             </div>
         </div>
         <div class="prism__add-panel__log-selection-line">
             <div class="prism__add-panel__radio">
-                <input name="logTypeSelection" type="radio"/>
-                <label class="prism__add-panel__radio-label">{{model.uiStrings.parsedLog}}</label>
+                <label class="prism__add-panel__radio-label">
+                    <input name="logType" type="radio" value="css" ng-model="model.logType" ng-click="onRadioClick()"/>
+                    CSS Selectors</label>
             </div>
-            <input class="prism__add-panel__log-url-input" type="text" ng-model="model.addLogUrl"
-                   placeholder="{{model.uiStrings.cssSelectorsInputHint}}"/>
+            <input class="prism__add-panel__log-url-input" type="text" ng-model="model.addCSSSelectorsLog"
+                   placeholder="{{::model.uiStrings.cssSelectorsInputHint}}"/>
         </div>
         <div class="prism__add-panel__log-selection-line">
             <div class="prism__add-panel__radio">
-                <input name="logTypeSelection" type="radio"/>
-                <label class="prism__add-panel__radio-label">{{model.uiStrings.customLog}}</label>
+                <label class="prism__add-panel__radio-label">
+                    <input name="logType" type="radio" value="custom" ng-model="model.logType" ng-click="onRadioClick()"/>
+                    Custom JS Parser</label>
             </div>
-            <input class="prism__add-panel__log-url-input" type="text" ng-model="model.addLogUrl"
-                   placeholder="{{model.uiStrings.customParserInputHint}}"/>
+            <input class="prism__add-panel__log-url-input" type="text" ng-model="model.addCustomLog"
+                   placeholder="{{::model.uiStrings.customParserInputHint}}"/>
         </div>
     </div>
     <div class="view__content">
@@ -63,4 +66,3 @@
         </button>
     </div>
 </div>
-
