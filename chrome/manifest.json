@@ -27,7 +27,7 @@
       "js": ["artemis/lib/artemis-core/artemis.core.min.js", "artemis/artemis-content-aut.js"]
     },
     {
-      "matches": ["http://myd-vm12624.hpeswlab.net:8081/*", "http://myd-vm12623.hpeswlab.net:8081/*", "http://localhost:8080/ui/*"],
+      "matches": ["http://myd-vm12624.hpeswlab.net:8081/*", "http://myd-vm12623.hpeswlab.net:8081/*", "http://localhost:8080/ui/*", "https://www.youtube.com/*"],
       "js": ["prism/prism-content-aut.js"]
     }
   ]
