@@ -15,7 +15,8 @@ angular.module('mainApp').factory('prismParser', function prismParser() {
       return line.includes('INFO: Executing Clicking') && !line.includes('By.xpath:')
     });
     relevantLines.forEach(function(line) {
-      rules.push(line.substring(line.indexOf('({') + 2, line.indexOf('})')).replaceAll(['By.cssSelector:', ',', 'By.className: '], ['', '', " \."]));
+      line = line.substring(line.indexOf('({') + 2, line.indexOf('})')).replaceAll(['By.cssSelector:', ',', 'By.className: '], ['', '', " \."]);
+      rules.push(line.trim());
     });
     return rules;
   }
