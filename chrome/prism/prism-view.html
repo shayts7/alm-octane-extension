@@ -7,50 +7,84 @@
     </div>
     <div class="prism__add-panel">
         <div class="prism__add-panel__line">
-            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
-            <input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName"
-                   placeholder="{{model.uiStrings.nameInputHint}}"/>
+            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.octaneUrlLabel}}</label>
+            <input class="prism__add-panel__url-input" type="text" ng-model="model.addOctaneUrl"
+                   placeholder="{{model.uiStrings.octaneUrlInputHint}}"/>
+            <button ng-class="{'disabled': !canRetrieve()}" ng-click="onRetrieveClick()">Click</button>
         </div>
         <div class="prism__add-panel__line">
-            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>
-            <input class="prism__add-panel__url-input" type="text" ng-model="model.addJobUrl"
-                   placeholder="{{model.uiStrings.urlInputHint}}"/>
+            <div>
+                <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
+                <input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName"
+                       placeholder="{{model.uiStrings.nameInputHint}}"/>
+            </div>
+            <div>
+                <select class="prism__add-panel__jobs-dropDown" ng-class="{'disabled': !canSelectJobs()}">
+                    <option ng-repeat="jobName in model.jobs[0].jobList track by $index" ng-model-options="model.jobList">{{jobName}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="prism__add-panel__line">
+            <div class="prism__add-panel__radio">
+                <label class="prism__add-panel__radio-label">
+                    <input name="logType" type="radio" value="selenium" ng-model="model.logType" checked="checked"/>
+                    Selenium</label>
+            </div>
+            <div class="prism__add-panel__radio">
+                <label class="prism__add-panel__radio-label">
+                    <input name="logType" type="radio" value="leanFT" ng-model="model.logType"/>
+                    Lean FT</label>
+            </div>
             <button class="prism__add-panel__add-button" ng-class="{'disabled': !canAdd()}" ng-click="onAddClick()"
                     ng-include="'./img/job-add.svg'"></button>
         </div>
-        <div class="prism__add-panel__log-selection-line">
-            <div class="prism__add-panel__radio">
-                <label class="prism__add-panel__radio-label">
-                    <input name="logType" type="radio" value="selenium" ng-model="model.logType" ng-click="onRadioClick()" checked="checked"/>
-                    Selenium</label>
-            </div>
-        </div>
-        <div class="prism__add-panel__log-selection-line">
-            <div class="prism__add-panel__radio">
-                <label class="prism__add-panel__radio-label">
-                    <input name="logType" type="radio" value="css" ng-model="model.logType" ng-click="onRadioClick()"/>
-                    CSS Selectors</label>
-            </div>
-            <input class="prism__add-panel__log-url-input" type="text" ng-model="model.addCSSSelectorsLog"
-                   placeholder="{{::model.uiStrings.cssSelectorsInputHint}}"/>
-        </div>
-        <div class="prism__add-panel__log-selection-line">
-            <div class="prism__add-panel__radio">
-                <label class="prism__add-panel__radio-label">
-                    <input name="logType" type="radio" value="custom" ng-model="model.logType" ng-click="onRadioClick()"/>
-                    Custom JS Parser</label>
-            </div>
-            <input class="prism__add-panel__log-url-input" type="text" ng-model="model.addCustomLog"
-                   placeholder="{{::model.uiStrings.customParserInputHint}}"/>
-        </div>
+
+
+        <!--<div class="prism__add-panel__line">-->
+        <!--<label class="prism__required-field prism__add-panel__label">{{model.uiStrings.urlLabel}}</label>-->
+        <!--<input class="prism__add-panel__url-input" type="text" ng-model="model.addJobUrl"-->
+        <!--placeholder="{{model.uiStrings.urlInputHint}}"/>-->
+        <!--<button class="prism__add-panel__add-button" ng-class="{'disabled': !canAdd()}" ng-click="onAddClick()"-->
+        <!--ng-include="'./img/job-add.svg'"></button>-->
+        <!--</div>-->
+        <!--<div class="prism__add-panel__line">-->
+        <!--<select>-->
+        <!--<option ng-repeat="jobName in model.UIJobs track by $index">{{jobName}}</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--<div class="prism__add-panel__log-selection-line">-->
+        <!--<div class="prism__add-panel__radio">-->
+        <!--<label class="prism__add-panel__radio-label">-->
+        <!--<input name="logType" type="radio" value="selenium" ng-model="model.logType" ng-click="onRadioClick()" checked="checked"/>-->
+        <!--Selenium</label>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="prism__add-panel__log-selection-line">-->
+        <!--<div class="prism__add-panel__radio">-->
+        <!--<label class="prism__add-panel__radio-label">-->
+        <!--<input name="logType" type="radio" value="css" ng-model="model.logType" ng-click="onRadioClick()"/>-->
+        <!--CSS Selectors</label>-->
+        <!--</div>-->
+        <!--<input class="prism__add-panel__log-url-input" type="text" ng-model="model.addCSSSelectorsLog"-->
+        <!--placeholder="{{::model.uiStrings.cssSelectorsInputHint}}"/>-->
+        <!--</div>-->
+        <!--<div class="prism__add-panel__log-selection-line">-->
+        <!--<div class="prism__add-panel__radio">-->
+        <!--<label class="prism__add-panel__radio-label">-->
+        <!--<input name="logType" type="radio" value="custom" ng-model="model.logType" ng-click="onRadioClick()"/>-->
+        <!--Custom JS Parser</label>-->
+        <!--</div>-->
+        <!--<input class="prism__add-panel__log-url-input" type="text" ng-model="model.addCustomLog"-->
+        <!--placeholder="{{::model.uiStrings.customParserInputHint}}"/>-->
+        <!--</div>-->
     </div>
     <div class="view__content">
         <div class="view__content__scroll-container">
-            <div ng-repeat="job in model.jobs track by $index">
+            <div ng-repeat="job in model.uiJobs track by $index">
                 <div class="prism__job-line">
                     <input class="prism__job-line__active" type="checkbox" ng-model="job.active"
                            title="{{model.uiStrings.activateCheckboxTooltip}}"/>
-                    <div class="prism__job-line__name" title="{{job.url}}">{{job.name}}</div>
+                    <div class="prism__job-line__name" title="{{job.jobName}}">{{job.alias}}</div>
                     <button ng-click="onRemoveClick($index)" class="prism__job-line__remove-button"
                             title="{{model.uiStrings.removeButtonTooltip}} {{job.name}}"
                             ng-include="'./img/job-delete.svg'">

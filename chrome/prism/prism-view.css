@@ -23,7 +23,7 @@
 	position: relative;
 	flex: 0 0 auto;
 	align-self: baseline;
-	width: 45px;
+	width: 80px;
 	height: 22px;
 	font-size: 16px;
 	color: #666;
@@ -41,7 +41,7 @@
 }
 
 .prism__add-panel__radio {
-	width: 135px;
+	margin-right: 10px;
 	flex: 0 0 auto;
 }
 
@@ -58,10 +58,21 @@
 
 .prism__add-panel__name-input {
 	flex: 0 0 auto;
-	width: 170px;
+	width: 100px;
 	margin-left: 5px;
 	height: 22px;
 	font-size: 14px;
+}
+
+.prism__add-panel__jobs-dropDown {
+	flex: 1 1 auto;
+	margin-left: 5px;
+	height: 22px;
+	font-size: 14px;
+}
+
+.prism__add-panel__jobs-dropDown.disabled {
+	pointer-events: none;
 }
 
 .prism__add-panel__url-input {
@@ -79,7 +90,7 @@
 }
 
 .prism__add-panel__add-button {
-	flex: 0 0 auto;
+	flex: 1 1 auto;
 	margin-left: 5px;
 	height: 22px;
 	width: 36px;
