@@ -1,162 +1,169 @@
 .prism__add-panel {
-	margin-top: 10px;
-	border-top: 1px solid #ddd;
-	padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
 }
 
 .prism__add-panel__line {
-	display: flex;
-	align-items: center;
-	height: 30px;
-	line-height: 30px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    line-height: 30px;
 }
 
 .prism__add-panel__log-selection-line {
-	display: flex;
-	align-items: center;
-	height: 25px;
-	line-height: 30px;
+    display: flex;
+    align-items: center;
+    height: 25px;
+    line-height: 30px;
 }
 
 .prism__add-panel__label {
-	display: inline-block;
-	position: relative;
-	flex: 0 0 auto;
-	align-self: baseline;
-	width: 80px;
-	height: 22px;
-	font-size: 16px;
-	color: #666;
-	margin-left: 15px;
+    display: inline-block;
+    position: relative;
+    flex: 0 0 auto;
+    align-self: baseline;
+    width: 80px;
+    height: 22px;
+    font-size: 16px;
+    color: #666;
+    margin-left: 15px;
 }
 
 .prism__required-field::before {
-	content: "";
-	background-color: #CA2F2F;
-	position: absolute;
-	top: 12px;
-	left: -10px;
-	width: 5px;
-	height: 5px;
+    content: "";
+    background-color: #CA2F2F;
+    position: absolute;
+    top: 12px;
+    left: -10px;
+    width: 5px;
+    height: 5px;
 }
 
 .prism__add-panel__radio {
-	margin-right: 10px;
-	flex: 0 0 auto;
+    margin-right: 10px;
+    flex: 0 0 auto;
 }
 
 .prism__add-panel__radio-label {
-	display: inline-block;
-	position: relative;
-	flex: 0 0 auto;
-	align-self: baseline;
-	height: 22px;
-	width: auto;
-	font-size: 16px;
-	color: #666;
+    display: inline-block;
+    position: relative;
+    flex: 0 0 auto;
+    align-self: baseline;
+    height: 22px;
+    width: auto;
+    font-size: 16px;
+    color: #666;
 }
 
 .prism__add-panel__name-input {
-	flex: 0 0 auto;
-	width: 100px;
-	margin-left: 5px;
-	height: 22px;
-	font-size: 14px;
+    flex: 0 0 auto;
+    width: 100px;
+    margin-left: 5px;
+    height: 22px;
+    font-size: 14px;
 }
 
 .prism__add-panel__jobs-dropDown {
-	flex: 1 1 auto;
-	margin-left: 5px;
-	height: 22px;
-	font-size: 14px;
+    flex: 1 1 auto;
+    margin-left: 5px;
+    height: 22px;
+    font-size: 14px;
 }
 
 .prism__add-panel__jobs-dropDown.disabled {
-	pointer-events: none;
+    pointer-events: none;
 }
 
 .prism__add-panel__url-input {
-	flex: 1 1 auto;
-	margin-left: 5px;
-	height: 22px;
-	font-size: 14px;
+    flex: 1 1 auto;
+    margin-left: 5px;
+    height: 22px;
+    font-size: 14px;
 }
 
 .prism__add-panel__log-url-input {
-	flex: 1 1 auto;
-	margin-left: 5px;
-	height: 22px;
-	font-size: 14px;
+    flex: 1 1 auto;
+    margin-left: 5px;
+    height: 22px;
+    font-size: 14px;
 }
 
 .prism__add-panel__add-button {
-	flex: 1 1 auto;
-	margin-left: 5px;
-	height: 22px;
-	width: 36px;
-	border: none;
+    flex: 0 0 auto;
+    align: center;
+    margin-left: 5px;
+    height: 22px;
 }
+
+/*.prism__add-panel__add-button {*/
+/*flex: 1 1 auto;*/
+/*margin-left: 5px;*/
+/*height: 22px;*/
+/*width: 36px;*/
+/*border: none;*/
+/*}*/
 .prism__add-panel__add-button > svg {
-	fill: #444;
+    fill: #444;
 }
 
 .prism__add-panel__add-button:hover,
 .prism__add-panel__add-button:focus,
 .prism__add-panel__add-button:active {
-	border: none;
+    border: none;
 }
 
 .prism__add-panel__add-button:hover > svg,
 .prism__add-panel__add-button:focus > svg,
 .prism__add-panel__add-button:active > svg {
-	fill: #000;
+    fill: #000;
 }
 
-.prism__add-panel__add-button.disabled {
-	border: none;
-}
+/*.prism__add-panel__add-button.disabled {*/
+/*border: none;*/
+/*}*/
 
-.prism__add-panel__add-button.disabled > svg {
-	fill: #ccc;
-}
+/*.prism__add-panel__add-button.disabled > svg {*/
+/*fill: #ccc;*/
+/*}*/
 
 .prism__job-line {
-	display: flex;
-	align-items: center;
-	height: 23px;
-	line-height: 23px;
+    display: flex;
+    align-items: center;
+    height: 23px;
+    line-height: 23px;
 }
 
 .prism__job-line__active {
-	flex: 0 0 auto;
-	display: inline-block;
+    flex: 0 0 auto;
+    display: inline-block;
     margin-top: 4px;
 }
 
 .prism__job-line__name {
-	margin-left: 5px;
-	flex: 1 1 auto;	
+    margin-left: 5px;
+    flex: 1 1 auto;
 }
 
 .prism__job-line__remove-button {
-	flex: 0 0 auto;
-	height: 22px;
-	width: 36px;
-	border: none;
+    flex: 0 0 auto;
+    height: 22px;
+    width: 36px;
+    border: none;
 }
 
 .prism__job-line__remove-button > svg {
-	fill: #444;
+    fill: #444;
 }
 
 .prism__job-line__remove-button:hover,
 .prism__job-line__remove-button:focus,
 .prism__job-line__remove-button:active {
-	border: none;
+    border: none;
 }
 
 .prism__job-line__remove-button:hover > svg,
 .prism__job-line__remove-button:focus > svg,
 .prism__job-line__remove-button:active > svg {
-	fill: #900;
+    fill: #900;
 }

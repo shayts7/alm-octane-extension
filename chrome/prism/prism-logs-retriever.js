@@ -1,4 +1,4 @@
-angular.module('mainApp').factory('prismRetriever', function prismRetriever($http) {
+angular.module('mainApp').factory('prismLogsRetriever', function prismLogsRetriever($http) {
 
 	function retrieve(jobList, cb) {
 		let jobLogs = [];

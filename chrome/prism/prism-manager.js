@@ -1,15 +1,30 @@
-angular.module('mainApp').factory('prismManager', function prismManager(prismStorage, prismRetriever, prismParser, prismAggregator, prismColors, prismInjector) {
+angular.module('mainApp').factory('prismManager', function prismManager(prismStorage, prismLogsRetriever, prismParser, prismAggregator, prismColors, prismInjector, prismAuthenticate, prismJobsRetriever) {
 
-	function loadFromStorage() {
-		return prismStorage.load();
+	function loadFromStorage(storageItem) {
+		return prismStorage.load(storageItem);
 	}
 
-	function saveToStorage(data) {
-		prismStorage.save(data);
+	function saveToStorage(storageItem, data) {
+		prismStorage.save(storageItem, data);
+	}
+	
+	function getCurrentUrl(cb) {
+		prismAuthenticate.getCurrentUrl(function(url) {
+			cb(url);
+		});
+	}
+	
+	function authenticateAndRetrieveJobs() {
+		prismAuthenticate.authenticate();
+		// prismJobsRetriever.retrieveJobs();
+	}
+
+	function retrieveJobs(cb) {
+		prismJobsRetriever.retrieveJobs(cb);
 	}
 
 	function getDataAndColorAUT(jobList, cb) {
-		prismRetriever.retrieve(jobList, onRetrieveLogsDone);
+		prismLogsRetriever.retrieve(jobList, onRetrieveLogsDone);
 		function onRetrieveLogsDone(jobLogs) {
 			let linesData = prismParser.parseLogs(jobList, jobLogs);
 			let selectorsData = prismAggregator.aggregate(linesData);
@@ -24,6 +39,9 @@ angular.module('mainApp').factory('prismManager', function prismManager(prismSto
 	}
 
 	return {
+		authenticateAndRetrieveJobs: authenticateAndRetrieveJobs,
+		retrieveJobs: retrieveJobs,
+		getCurrentUrl: getCurrentUrl,
 		loadFromStorage: loadFromStorage,
 		saveToStorage: saveToStorage,
 		getDataAndColorAUT: getDataAndColorAUT,
