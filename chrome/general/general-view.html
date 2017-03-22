@@ -35,13 +35,13 @@
                                     <tr class="control-group">
                                         <td class="controls button-control" colspan="2">
                                             <button class="btn btn-primary pull-right" ng-class="{disabled:!canAuthenticate()}" type="submit"
-                                                    data-aid="login-app-buttons-authenticate"> Login
+                                                    data-aid="login-app-buttons-authenticate" ng-click="onLoginClick()"> Login
                                             </button>
                                         </td>
                                     </tr>
                                     <tr class="error-container">
                                         <td colspan="4">
-                                            <div class="error controls">{{authenticationFailedMessage}}</div>
+                                            <div class="error controls" ng-bind-html="model.authenticationStatus"></div>
                                         </td>
                                     </tr>
                                     </tbody>

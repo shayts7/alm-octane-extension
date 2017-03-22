@@ -1,4 +1,4 @@
-angular.module('mainApp').factory('prismStorage', function prismStorage() {
+angular.module('mainApp').factory('generalStorage', function generalStorage() {
 
 	function load(storageItem) {
 		let data = {};

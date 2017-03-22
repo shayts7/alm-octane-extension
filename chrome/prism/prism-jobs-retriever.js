@@ -1,16 +1,16 @@
-angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetriever($http, prismStorage) {
+angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetriever($http, generalStorage) {
 
   function retrieveJobs(cb) {
-    let data = prismStorage.load('prismAuthentication');
+    let data = generalStorage.load('generalAuthentication');
     let retrievePipelinesQuery = 'pipelines?expand=$all{fields=name},author{fields=full_name}&inflate=true&query="(id=51001)"';
     let jobsList = [];
     let req = {
       method: 'GET',
-      url: data.octaneURL.substring(0, data.octaneURL.indexOf('/authentication')) + '/api/shared_spaces/' + data.sharedSpaceID + '/workspaces/' + data.workspaceID + '/' + retrievePipelinesQuery,
+      url: data.octaneData.authenticationUrl.substring(0, data.octaneData.authenticationUrl.indexOf('/authentication')) + '/api/shared_spaces/' + data.octaneData.sharedSpaceID + '/workspaces/' + data.octaneData.workspaceID + '/' + retrievePipelinesQuery,
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'HPECLIENTTYPE': 'HPE_MQM_UI',
-        'HPSSO-HEADER-CSRF': data.csrf_cookie
+        'HPSSO-HEADER-CSRF': data.authenticationData.cookies['HPSSO-HEADER-CSRF']
       },
     };
 
@@ -18,8 +18,6 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
       let res = response.data;
       let rootObject = res.data[0].current_model.structure.phasesInternal;
       getJobs(rootObject, jobsList);
-      let jobsData = {octaneUrl: data.octaneURL, jobList: jobsList};
-      prismStorage.save('almOctanePrismJobs', jobsData);
       cb();
     }
     );
@@ -37,6 +35,9 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
         }
       });
     });
+    let jobsData = generalStorage.load('almOctanePrismJobs');
+    jobsData.jobList = jobsArray;
+    generalStorage.save('almOctanePrismJobs', jobsData);
   }
 
   return {

@@ -7,37 +7,26 @@
     </div>
     <div class="prism__add-panel">
         <div class="prism__add-panel__line">
-            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.octaneUrlLabel}}</label>
-            <input class="prism__add-panel__url-input" type="text" ng-model="model.addOctaneUrl"
-                   placeholder="{{model.uiStrings.octaneUrlInputHint}}"/>
+            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
+            <input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName"
+                   placeholder="{{model.uiStrings.nameInputHint}}"/>
         </div>
         <div class="prism__add-panel__line">
-            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.userNameLabel}}</label>
-            <input class="prism__add-panel__name-input" type="text" ng-model="model.addUserName"
-                   placeholder="{{model.uiStrings.usernameInputHint}}"/>
+            <select class="prism__add-panel__jobs-dropDown" ng-init="loadPipelines()">
+                <option ng-repeat="pl in model.pipeLineList track by $index" ng-model-options="model.pipeLineList">
+                    {{pl}}
+                </option>
+            </select>
         </div>
         <div class="prism__add-panel__line">
-            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.passwordLabel}}</label>
-            <input class="prism__add-panel__name-input" type="password" ng-model="model.addPassword"
-                   placeholder="{{model.uiStrings.pwInputHint}}"/>
+            <select class="prism__add-panel__jobs-dropDown">
+                <option ng-repeat="jobName in model.jobList track by $index" ng-model-options="model.jobList">
+                    {{jobName}}
+                </option>
+            </select>
+            <button class="prism__add-panel__add-button" ng-click="onRetrieveClick()">Retrieve Jobs</button>
         </div>
         <div class="prism__add-panel__line">
-            <button class="prism__add-panel__add-button" ng-class="{'disabled': !canAuthenticate()}" ng-click="onAuthenticateClick()">Authenticate</button>
-        </div>
-        <div class="prism__add-panel__line" ng-hide="!canAuthenticate()">
-            <div>
-                <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
-                <input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName"
-                       placeholder="{{model.uiStrings.nameInputHint}}"/>
-            </div>
-            <div>
-                <select class="prism__add-panel__jobs-dropDown">
-                    <option ng-repeat="jobName in model.jobList track by $index" ng-model-options="model.jobList">{{jobName}}</option>
-                </select>
-                <button class="prism__add-panel__add-button" ng-class="{'disabled': !canAuthenticate()}" ng-click="onRetrieveClick()">Retrieve Jobs</button>
-            </div>
-        </div>
-        <div class="prism__add-panel__line" ng-hide="!canAuthenticate()">
             <div class="prism__add-panel__radio">
                 <label class="prism__add-panel__radio-label">
                     <input name="logType" type="radio" value="selenium" ng-model="model.logType" checked="checked"/>

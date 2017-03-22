@@ -1,24 +1,18 @@
-angular.module('mainApp').factory('prismManager', function prismManager(prismStorage, prismLogsRetriever, prismParser, prismAggregator, prismColors, prismInjector, prismAuthenticate, prismJobsRetriever) {
+angular.module('mainApp').factory('prismManager', function prismManager(generalStorage, prismLogsRetriever, prismParser, prismAggregator, prismColors, prismInjector, prismJobsRetriever) {
 
 	function loadFromStorage(storageItem) {
-		return prismStorage.load(storageItem);
+		return generalStorage.load(storageItem);
 	}
 
 	function saveToStorage(storageItem, data) {
-		prismStorage.save(storageItem, data);
+		generalStorage.save(storageItem, data);
 	}
 	
-	function getCurrentUrl(cb) {
-		prismAuthenticate.getCurrentUrl(function(url) {
-			cb(url);
-		});
+	function loadPipelines() {
+		let jobsData = generalStorage.load('almOctanePrismJobs');
+		return jobsData.pipelineList;
 	}
 	
-	function authenticateAndRetrieveJobs() {
-		prismAuthenticate.authenticate();
-		// prismJobsRetriever.retrieveJobs();
-	}
-
 	function retrieveJobs(cb) {
 		prismJobsRetriever.retrieveJobs(cb);
 	}
@@ -39,11 +33,10 @@ angular.module('mainApp').factory('prismManager', function prismManager(prismSto
 	}
 
 	return {
-		authenticateAndRetrieveJobs: authenticateAndRetrieveJobs,
-		retrieveJobs: retrieveJobs,
-		getCurrentUrl: getCurrentUrl,
 		loadFromStorage: loadFromStorage,
 		saveToStorage: saveToStorage,
+		loadPipelines: loadPipelines,
+		retrieveJobs: retrieveJobs,
 		getDataAndColorAUT: getDataAndColorAUT,
 		removeColoringFromAUT: removeColoringFromAUT
 	};
