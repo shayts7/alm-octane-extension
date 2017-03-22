@@ -1,5 +1,351 @@
 .general__logo-panel {
-	height: 100%;
-	text-align: center;
-	padding-top: 120px;
+    height: 100%;
+    text-align: center;
+    padding-top: 120px;
 }
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-Black";*/
+    /*src: url('chrome/fonts/MetricWeb-Black.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-BlackItalic";*/
+    /*src: url('chrome/fonts/MetricWeb-BlackItalic.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-Bold";*/
+    /*src: url('chrome/fonts/MetricWeb-Bold.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-BoldItalic";*/
+    /*src: url('chrome/fonts/MetricWeb-BoldItalic.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-Semibold";*/
+    /*src: url('chrome/fonts/MetricWeb-Semibold.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-SemiboldItalic";*/
+    /*src: url('chrome/fonts/MetricWeb-SemiboldItalic.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-Medium";*/
+    /*src: url('chrome/fonts/MetricWeb-Medium.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-MediumItalic";*/
+    /*src: url('chrome/fonts/MetricWeb-MediumItalic.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-Regular";*/
+    /*src: url('chrome/fonts/MetricWeb-Regular.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-RegularItalic";*/
+    /*src: url('chrome/fonts/MetricWeb-RegularItalic.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-Light";*/
+    /*src: url('/chrome/fonts/MetricWeb-Light.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-LightItalic";*/
+    /*src: url('chrome/fonts/MetricWeb-LightItalic.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-Thin";*/
+    /*src: url('chrome/fonts/MetricWeb-Thin.woff') format('woff');*/
+/*}*/
+
+/*@font-face {*/
+    /*font-family: "MetricWeb-ThinItalic";*/
+    /*src: url('chrome/fonts/MetricWeb-ThinItalic.woff') format('woff');*/
+/*}*/
+
+.text--black {
+    font-family: "MetricWeb-Black", Calibri, sans-serif;
+}
+
+.text--blackItalic {
+    font-family: "MetricWeb-BlackItalic", Calibri, sans-serif;
+}
+
+.text--bold {
+    font-family: "MetricWeb-Bold", Calibri, sans-serif;
+}
+
+.text--boldItalic {
+    font-family: "MetricWeb-BoldItalic", Calibri, sans-serif;
+}
+
+.text--semibold {
+    font-family: "MetricWeb-Semibold", Calibri, sans-serif;
+}
+
+.text--semiboldItalic {
+    font-family: "MetricWeb-SemiboldItalic", Calibri, sans-serif;
+}
+
+.text--medium {
+    font-family: "MetricWeb-Medium", Calibri, sans-serif;
+}
+
+.text--mediumItalic {
+    font-family: "MetricWeb-MediumItalic", Calibri, sans-serif;
+}
+
+.text--regular {
+    font-family: "MetricWeb-Regular", Calibri, sans-serif;
+}
+
+.text--regularItalic {
+    font-family: "MetricWeb-RegularItalic", Calibri, sans-serif;
+}
+
+.text--light {
+    font-family: "MetricWeb-Light", Calibri, sans-serif;
+}
+
+.text--lightItalic {
+    font-family: "MetricWeb-LightItalic", Calibri, sans-serif;
+}
+
+.text--thin {
+    font-family: "MetricWeb-Thin", Calibri, sans-serif;
+}
+
+.text--thinItalic {
+    font-family: "MetricWeb-ThinItalic", Calibri, sans-serif;
+}
+
+html {
+    /*overflow: hidden;*/
+    height: 100%;
+    color: #777777;
+    font-family: "MetricWeb-Regular", Calibri, sans-serif;
+}
+
+.view__content__general,
+ng-include {
+    display: block;
+    margin-top: 10px;
+    background-color: #35444F;
+    height: 402px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+label,
+input,
+button,
+select,
+textarea {
+    font-size: 18px;
+}
+
+fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.form-horizontal .controls {
+    margin-left: 180px;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+input {
+    margin: 0;
+    font-size: 18px;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    display: inline-block;
+    padding: 0px 10px;
+    height: 30px;
+    vertical-align: middle;
+    text-align: left;
+    font-family: "MetricWeb-Light", Calibri, sans-serif;
+    font-weight: lighter;
+    opacity: 20;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0 0 10px 0;
+}
+
+.input-large {
+    width: 210px;
+}
+
+input:hover {
+    border-color: #777777;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #00A982;
+}
+
+fieldset {
+    border: 0;
+}
+
+table {
+    border-spacing: 0;
+}
+
+.pull-right {
+    float: right;
+}
+
+.alm-web-ui-login-container input.caps-lock-on {
+    border: 1px solid orangered;
+}
+
+.alm-web-ui-login-container .text-notification {
+    color: #000;
+    display: none;
+}
+
+.alm-web-ui-login-container .text-notification.caps-lock-on {
+    display: block;
+    color: orangered;
+}
+
+.alm-web-ui-login-container {
+    float: none;
+    position: relative;
+    color: white;
+}
+
+.alm-web-ui-login-container > .form-horizontal {
+    margin: 0;
+}
+
+.alm-web-ui-login-container .login-header {
+    font-family: "MetricWeb-Thin", Calibri, sans-serif;
+    font-weight: lighter;
+    font-size: 48px;
+    margin-bottom: 30px;
+    margin-left: 70px;
+    font-weight: normal;
+}
+
+.alm-web-ui-login-container h2 {
+    font-family: "MetricWeb-Regular", Calibri, sans-serif;
+    font-size: 18px;
+    line-height: 17px;
+    padding: 0;
+    margin: 0;
+}
+
+.alm-web-ui-login-container table {
+    margin-left: 70px;
+}
+
+.alm-web-ui-login-container .btn-primary {
+    font-family: "MetricWeb-Light", Calibri, sans-serif;
+    font-weight: lighter;
+    font-size: 15px;
+    color: white;
+    background-color: #00A982;
+    width: 111px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary.disabled {
+    color: #ccc;
+    background-color: cadetblue ;
+    border: 1px solid #ccc;
+    cursor: default;
+    pointer-events: none;
+}
+
+.alm-web-ui-login-container ul {
+    width: 100%;
+}
+
+.alm-web-ui-login-container .button-control {
+    position: relative;
+    margin-top: 4px;
+}
+
+.alm-web-ui-login-container .input-large.btn {
+    width: 178px;
+}
+
+.alm-web-ui-login-container .form-horizontal .control-label {
+    text-align: left;
+    width: inherit;
+    margin-right: 20px;
+    color: white;
+    font-family: "MetricWeb-Light", Calibri, sans-serif;
+    vertical-align: bottom;
+}
+
+.alm-web-ui-login-container .error {
+    font-size: 12px;
+    color: #FF454F;
+    margin-bottom: 5px;
+    margin-left: 7px;
+}
+
+.alm-web-ui-login-container .error-container {
+    height: auto;
+    margin-bottom: 4px;
+    line-height: 12px;
+    margin-left: 7px;
+}
+
+.alm-web-ui-login-container .control-group {
+    margin-bottom: 0;
+}
+
+.alm-web-ui-login-container input:focus:invalid:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #00A982;
+}
+
+.html-overflow {
+    overflow: auto;
+}
+
+input {
+    box-shadow: none;
+}
+
+:-ms-input-placeholder {
+    color: #aaa;
+}
+
+/*# sourceMappingURL=login.css.map */

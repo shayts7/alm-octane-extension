@@ -1,18 +1,63 @@
 <div ng-controller="generalCtrl" class="view">
-	<div class="view__header">
-		<div class="view__header__title">
-			<div class="view__header__title--primary">{{::model.uiStrings.titlePrimary}}</div>
-			<div class="view__header__title--secondary">{{::model.uiStrings.titleSecondary}}</div>
-		</div>
-	</div>
-	<div class="view__content">
-		<div class="view__content__scroll-container">
-			<div class="general__logo-panel">
-				<img src="../img/octane.png"/>
-			</div>
-		</div>
-	</div>
-	<!-- <div class="view__footer">
-	</div> -->
+    <div class="view__header">
+        <div class="view__header__title">
+            <div class="view__header__title--primary">{{::model.uiStrings.titlePrimary}}</div>
+            <div class="view__header__title--secondary">{{::model.uiStrings.titleSecondary}}</div>
+        </div>
+    </div>
+    <div class="view__content">
+        <div data-aid="login-app">
+            <div class="view__content__general">
+                <div class="alm-web-ui-login-container">
+                    <form class="form-horizontal">
+                        <div class="login-header" translate="lg:login-page-header">Welcome</div>
+                        <div>
+                            <fieldset><!-- username and password authentication form -->
+                                <table><!-- username field -->
+                                    <tbody>
+                                    <tr class="control-group">
+                                        <td><label class="control-label" for="inputUsername"> Name: </label></td>
+                                        <td class="controls"><input id="inputUsername" class="input-large"
+                                                                    maxlength="100"
+                                                                    required="" type="text" autofocus=""
+                                                                    data-aid="login-app-input-username" ng-model="model.usernameInput"/></td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <!-- password field -->
+                                    <tr class="control-group">
+                                        <td><label class="control-label" for="inputPassword"> Password: </label></td>
+                                        <td class="controls"><input id="inputPassword" class="input-large"
+                                                                    autocomplete="off" maxlength="100" type="password"
+                                                                    data-aid="login-app-input-password" ng-model="model.passwordInput"/></td>
+                                        <td><span class="text-notification"> Caps Lock is on </span></td>
+                                    </tr>
+                                    <!-- submit button -->
+                                    <tr class="control-group">
+                                        <td class="controls button-control" colspan="2">
+                                            <button class="btn btn-primary pull-right" ng-class="{disabled:!canAuthenticate()}" type="submit"
+                                                    data-aid="login-app-buttons-authenticate"> Login
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="error-container">
+                                        <td colspan="4">
+                                            <div class="error controls">{{authenticationFailedMessage}}</div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </fieldset>
+                        </div>
+                    </form>
+                    <!--<div class="view__content__scroll-container">-->
+                    <!--<div class="general__logo-panel">-->
+                    <!--<img src="../img/octane.png"/>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+        &nbsp;</div>
+    <!-- <div class="view__footer">
+    </div> -->
 </div>
-

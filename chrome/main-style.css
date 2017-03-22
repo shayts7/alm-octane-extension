@@ -49,14 +49,24 @@ body {
 }
 
 button {
-	height: 25px;
-	width: 80px;
-	color: #444;
-	border: 1px solid #999;
-	background-color: #fff;
+	/*height: 25px;*/
+	/*width: 80px;*/
+	/*color: #444;*/
+	/*border: 1px solid #999;*/
+	/*background-color: #fff;*/
 	outline: none !important;
-	font-family: MetricWeb-Regular, arial, sans-serif;
-	font-size: 13px;
+	/*font-family: MetricWeb-Regular, arial, sans-serif;*/
+	/*font-size: 13px;*/
+
+	font-family: "MetricWeb-Light", Calibri, sans-serif;
+	font-weight: lighter;
+	font-size: 15px;
+	color: white;
+	background-color: #00A982;
+	width: 111px;
+	height: 30px;
+	border: none;
+	cursor: pointer;
 }
 
 button.small {
@@ -81,6 +91,7 @@ button:active {
 
 button.disabled {
 	color: #ccc;
+	background-color: #777777;
 	border: 1px solid #ccc;
 	cursor: default;
 	pointer-events: none;

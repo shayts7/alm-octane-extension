@@ -58,12 +58,12 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     isInProgress: false
   };
 
-  $scope.canAuthenticate = function canAuthenticate() {
-    prismManager.getCurrentUrl(function(result) {
-      $scope.model.addOctaneUrl = result;
-    });
-    return $scope.model.addUserName && $scope.model.addPassword && $scope.model.addOctaneUrl;
-  }
+  // $scope.canAuthenticate = function canAuthenticate() {
+  //   prismManager.getCurrentUrl(function(result) {
+  //     $scope.model.addOctaneUrl = result;
+  //   });
+  //   return $scope.model.addUserName && $scope.model.addPassword && $scope.model.addOctaneUrl;
+  // }
 
   $scope.onAuthenticateClick = function onAuthenticateClick() {
     let octaneUrl = $scope.model.addOctaneUrl;
