@@ -6,7 +6,7 @@ angular.module('mainApp').directive('generalView', function() {
   };
 });
 
-angular.module('mainApp').controller('generalCtrl', function generalCtrl($scope, $sce, generalStorage, generalAuthenticate, prismManager) {
+angular.module('mainApp').controller('generalCtrl', function generalCtrl($scope, $sce, generalStorage, generalAuthenticate) {
 
   $scope.model = {
     uiStrings: {
@@ -65,12 +65,11 @@ angular.module('mainApp').controller('generalCtrl', function generalCtrl($scope,
       generalStorage.save('generalAuthentication', $scope.model.authenticationData);
       generalAuthenticate.authenticate(octaneUrl, $scope.authenticationSuccess, $scope.authenticationFailure);
     });
-  }
+  };
 
   $scope.authenticationSuccess = function authenticationSuccess() {
     $scope.model.authenticationStatus = $sce.trustAsHtml('Authentication Success');
-    prismManager.loa
-  }
+  };
 
   $scope.authenticationFailure = function authenticationFailure() {
     $scope.model.authenticationStatus = $sce.trustAsHtml('Authentication Failed');

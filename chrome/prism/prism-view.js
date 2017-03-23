@@ -6,12 +6,13 @@ angular.module('mainApp').directive('prismView', function() {
   };
 });
 
-angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $scope, prismManager) {
+angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $scope, prismManager, plList) {
 
   function loadFromStorage() {
     let data = prismManager.loadFromStorage('almOctanePrismJobs');
     $scope.model.uiJobs = data.uiJobs || [];
     $scope.model.jobList = data.jobList === undefined ? [] : data.jobList;
+    $scope.model.pipeLineList = data.pipeLineList === undefined ? [] : data.pipeLineList;
   }
 
   function saveToStorage() {
@@ -28,11 +29,20 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     });
   }
 
+  function loadPipelines(plList) {
+    $scope.model.pipeLineList = plList;
+    let data = prismManager.loadFromStorage('almOctanePrismJobs');
+    data.pipeLineList = plList;
+    prismManager.saveToStorage('almOctanePrismJobs', data);
+  }
+
   $scope.model = {
     jobs: [],
     addJobName: '',
     pipeLineList: [],
+    selectedPipeline: '',
     jobList: [],
+    selectedJob: '',
     logType: '',
     uiStrings: {
       titlePrimary: 'Exploratory Testing',
@@ -49,17 +59,13 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     isInProgress: false
   };
 
-  $scope.loadPipelines = function loadPipelines() {
-    $scope.model.pipeLineList = prismManager.loadPipelines();
-  }
-
   $scope.canRetrieve = function canRetrieve() {
     return $scope.model.addJobName;
-  }
+  };
 
   $scope.onRetrieveClick = function onRetrieveClick() {
-    prismManager.retrieveJobs(loadFromStorage);
-  }
+    prismManager.retrieveJobs($scope.model.loadFromStorage);
+  };
 
   // $scope.canSelectJobs = function canSelectJobs() {
   //   return $scope.model.jobs[0].jobList;
@@ -115,5 +121,8 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   };
 
   loadFromStorage();
+  if(!prismManager.loadFromStorage('almOctanePrismJobs').pipeLineList) {
+    prismManager.loadPipelines(loadPipelines);
+  }
 
 });

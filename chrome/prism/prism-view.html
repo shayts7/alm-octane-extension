@@ -12,9 +12,9 @@
                    placeholder="{{model.uiStrings.nameInputHint}}"/>
         </div>
         <div class="prism__add-panel__line">
-            <select class="prism__add-panel__jobs-dropDown" ng-init="loadPipelines()">
+            <select class="prism__add-panel__jobs-dropDown">
                 <option ng-repeat="pl in model.pipeLineList track by $index" ng-model-options="model.pipeLineList">
-                    {{pl}}
+                    {{pl.name}}
                 </option>
             </select>
         </div>

@@ -8,9 +8,10 @@ angular.module('mainApp').factory('prismManager', function prismManager(generalS
 		generalStorage.save(storageItem, data);
 	}
 	
-	function loadPipelines() {
-		let jobsData = generalStorage.load('almOctanePrismJobs');
-		return jobsData.pipelineList;
+	function loadPipelines(cb) {
+		prismJobsRetriever.retrievePipelines(function(plList) {
+			cb(plList);
+		});
 	}
 	
 	function retrieveJobs(cb) {

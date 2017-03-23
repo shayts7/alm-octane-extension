@@ -1,6 +1,6 @@
 angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetriever($http, generalStorage) {
 
-  function retrieveJobs(cb) {
+  function retrieveJobs(pipeline, cb) {
     let data = generalStorage.load('generalAuthentication');
     let retrievePipelinesQuery = 'pipelines?expand=$all{fields=name},author{fields=full_name}&inflate=true&query="(id=51001)"';
     let jobsList = [];
@@ -22,6 +22,25 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     }
     );
   }
+  
+  function retrievePipelines(cb) {
+    let plList = [];
+    let authenticationData = generalStorage.load('generalAuthentication');
+    let req = {
+      method: 'GET',
+      url: authenticationData.octaneData.authenticationUrl.substring(0, authenticationData.octaneData.authenticationUrl.indexOf('/authentication')) + '/api/shared_spaces/' + authenticationData.octaneData.sharedSpaceID + '/workspaces/' + authenticationData.octaneData.workspaceID + '/pipelines',
+    };
+    $http(req).then(function check(response) {
+      let res = response.data;
+      res.data.forEach((pl) => {
+        let pipeLineObject  = {id: '', name:''};
+        pipeLineObject.id = pl.id;
+        pipeLineObject.name = pl.name;
+        plList.push(pipeLineObject);
+      });
+      cb(plList);
+    });
+  }
 
   function getJobs(piObject, jobsArray) {
     piObject.forEach((pi) => {
@@ -41,7 +60,8 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
   }
 
   return {
-    retrieveJobs: retrieveJobs
+    retrieveJobs: retrieveJobs,
+    retrievePipelines: retrievePipelines
   };
 
 });
