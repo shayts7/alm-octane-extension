@@ -12,28 +12,38 @@
                    placeholder="{{model.uiStrings.nameInputHint}}"/>
         </div>
         <div class="prism__add-panel__line">
-            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedPipeline" ng-change="onPipelineChange(selectedPipeline)" ng-options="pl as pl.pl_name for pl in model.pipeLineList">
+            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedPipeline"
+                    ng-change="onPipelineChange(selectedPipeline)"
+                    ng-options="pl as pl.pl_name for pl in model.pipeLineList">
                 <option value="">--Select Pipeline--</option>
             </select>
         </div>
         <div class="prism__add-panel__line">
-            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedJob" ng-change="onJobChange(selectedJob)" ng-options="job as job for job in model.jobList" >
-                <!--<option ng-repeat="jobName in model.jobList track by $index" ng-model-options="model.jobList">-->
-                    <!--{{jobName}}-->
-                <!--</option>-->
+            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedJob" ng-change="onJobChange(selectedJob)"
+                    ng-options="job as job for job in model.jobList">
                 <option value="">--Select Job--</option>
             </select>
         </div>
         <div class="prism__add-panel__line">
-            <div class="prism__add-panel__radio">
-                <label class="prism__add-panel__radio-label">
-                    <input name="logType" type="radio" value="selenium" ng-model="model.logType" checked="checked"/>
-                    Selenium</label>
-            </div>
-            <div class="prism__add-panel__radio">
-                <label class="prism__add-panel__radio-label">
-                    <input name="logType" type="radio" value="leanFT" ng-model="model.logType"/>
-                    Lean FT</label>
+            <div class="prism__add-panel__radio-container">
+                <div class="prism__add-panel__radio">
+                    <label class="prism__add-panel__radio-label">
+                        <input class="prism__add-panel_radio-button" name="logType" type="radio" value="selenium"
+                               ng-model="model.logType" checked="checked"/>
+                        Selenium</label>
+                </div>
+                <div class="prism__add-panel__radio">
+                    <label class="prism__add-panel__radio-label">
+                        <input class="prism__add-panel_radio-button" name="logType" type="radio" value="leanFT"
+                               ng-model="model.logType"/>
+                        Lean FT</label>
+                </div>
+                <div class="prism__add-panel__radio">
+                    <label class="prism__add-panel__radio-label">
+                        <input class="prism__add-panel_radio-button" name="logType" type="radio" value="UFT"
+                               ng-model="model.logType"/>
+                        UFT</label>
+                </div>
             </div>
             <button class="prism__add-panel__add-button" ng-class="{'disabled': !canAdd()}" ng-click="onAddClick()"
                     ng-include="'./img/job-add.svg'"></button>
@@ -41,7 +51,7 @@
     </div>
     <div class="view__content">
         <div class="view__content__scroll-container">
-            <div ng-repeat="job in model.uiJobs track by $index">
+            <div ng-repeat="job in model.uiJobs[0].jobsData track by $index">
                 <div class="prism__job-line">
                     <input class="prism__job-line__active" type="checkbox" ng-model="job.active"
                            title="{{model.uiStrings.activateCheckboxTooltip}}"/>

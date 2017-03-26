@@ -23,7 +23,7 @@
     position: relative;
     flex: 0 0 auto;
     align-self: baseline;
-    width: 80px;
+    width: 40px;
     height: 22px;
     font-size: 16px;
     color: #666;
@@ -40,9 +40,15 @@
     height: 5px;
 }
 
+.prism__add-panel__radio-container {
+    display: flex;
+    margin-left: 5px;
+    flex: 1 1 auto;
+    margin-bottom: auto;
+}
+
 .prism__add-panel__radio {
     margin-right: 10px;
-    flex: 0 0 auto;
 }
 
 .prism__add-panel__radio-label {
@@ -56,12 +62,26 @@
     color: #666;
 }
 
+.prism__add-panel_radio-button {
+    margin: auto ;
+}
+
 .prism__add-panel__name-input {
     flex: 0 0 auto;
-    width: 100px;
-    margin-left: 5px;
+    width: 180px;
+    margin: 0 10px 0 5px;
     height: 22px;
-    font-size: 14px;
+    font-size: 16px;
+    color: #000;
+    border: 1px solid #000;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    padding: 0px 5px;
+    font-family: "MetricWeb-Light", Calibri, sans-serif;
+    font-weight: normal;
+    opacity: 20;
+    background-color: white;
 }
 
 .prism__add-panel__jobs-dropDown {
@@ -137,7 +157,7 @@
 .prism__job-line__active {
     flex: 0 0 auto;
     display: inline-block;
-    margin-top: 4px;
+    margin: 4px 0 0 0;
 }
 
 .prism__job-line__name {

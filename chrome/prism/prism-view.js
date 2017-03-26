@@ -31,7 +31,6 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
 
   function loadPipelines(plList) {
     $scope.model.pipeLineList = plList;
-    console.log($scope.model.pipeLineList);
   }
 
   $scope.model = {
@@ -42,6 +41,8 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     jobList: [],
     selectedJob: '',
     logType: '',
+    ciServerType: '',
+    ciServerUrl: '',
     uiStrings: {
       titlePrimary: 'Exploratory Testing',
       titleSecondary: 'UI Automation Coverage',
@@ -54,6 +55,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     },
     uiJobs: [],
     parsedCSSRules: '',
+    isFirstJobAdd: true,
     isInProgress: false
   };
 
@@ -62,32 +64,49 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     prismManager.retrieveJobs(selectedPipeline, function(pipelineList) {
       $scope.model.jobList = pipelineList.pl_jobs;
     });
-  }
+  };
 
   $scope.onJobChange = function(selectedJob) {
     $scope.model.selectedJob = selectedJob;
-    console.log(selectedJob);
-  }
+    $scope.model.ciServerType = $scope.model.selectedPipeline.pl_ciServerType;
+    $scope.model.ciServerUrl = $scope.model.selectedPipeline.pl_ciServerUrl;
+  };
 
   // $scope.canSelectJobs = function canSelectJobs() {
   //   return $scope.model.jobs[0].jobList;
   // }
 
   $scope.canAdd = function canAdd() {
-    return $scope.model.addJobName && $scope.model.logType;
+    return $scope.model.addJobName && $scope.model.selectedPipeline && $scope.model.selectedJob && $scope.model.logType;
   };
 
   $scope.onAddClick = function onAddClick() {
-    $scope.model.uiJobs.push({
-      active: true,
-      jobName: $scope.model.jobList,
-      alias: $scope.model.addJobName,
+    let uiJobData = {
+      pipeline_id: $scope.model.selectedPipeline.pl_id,
+      ciData: {serverType: $scope.model.ciServerType, serverUrl: $scope.model.ciServerUrl},
+      jobsData: [{
+        alias: $scope.model.addJobName,
+        jobName: $scope.model.selectedJob,
+        active: true
+      }],
       selectedLogType: $scope.model.logType
-    });
+    };
 
-    saveToStorage();
+    $scope.model.uiJobs = prismManager.loadFromStorage('almOctanePrismJobs');
+    if ($scope.model.isFirstJobAdd) {
+      $scope.model.isFirstJobAdd = false;
+      $scope.model.uiJobs.push(uiJobData);
+    } else {
+      for (let i = 0; i < $scope.model.uiJobs.length; i++) {
+        if ($scope.model.selectedPipeline.pl_id === $scope.model.uiJobs[i].pipeline_id) {
+          $scope.model.uiJobs[i].jobsData.push(uiJobData.jobsData);
+        } else {
+          $scope.model.uiJobs.push(uiJobData);
+        }
+      }
+    }
+    prismManager.saveToStorage('almOctanePrismJobs', $scope.model.uiJobs);
     $scope.model.addJobName = '';
-    $scope.model.jobList = '';
   };
 
   $scope.onRemoveClick = function onRemoveClick(index) {
