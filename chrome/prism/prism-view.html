@@ -12,19 +12,17 @@
                    placeholder="{{model.uiStrings.nameInputHint}}"/>
         </div>
         <div class="prism__add-panel__line">
-            <select class="prism__add-panel__jobs-dropDown">
-                <option ng-repeat="pl in model.pipeLineList track by $index" ng-model-options="model.pipeLineList">
-                    {{pl.name}}
-                </option>
+            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedPipeline" ng-change="onPipelineChange(selectedPipeline)" ng-options="pl as pl.pl_name for pl in model.pipeLineList">
+                <option value="">--Select Pipeline--</option>
             </select>
         </div>
         <div class="prism__add-panel__line">
-            <select class="prism__add-panel__jobs-dropDown">
-                <option ng-repeat="jobName in model.jobList track by $index" ng-model-options="model.jobList">
-                    {{jobName}}
-                </option>
+            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedJob" ng-change="onJobChange(selectedJob)" ng-options="job as job for job in model.jobList" >
+                <!--<option ng-repeat="jobName in model.jobList track by $index" ng-model-options="model.jobList">-->
+                    <!--{{jobName}}-->
+                <!--</option>-->
+                <option value="">--Select Job--</option>
             </select>
-            <button class="prism__add-panel__add-button" ng-click="onRetrieveClick()">Retrieve Jobs</button>
         </div>
         <div class="prism__add-panel__line">
             <div class="prism__add-panel__radio">

@@ -2,7 +2,7 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
 
   function retrieveJobs(pipeline, cb) {
     let data = generalStorage.load('generalAuthentication');
-    let retrievePipelinesQuery = 'pipelines?expand=$all{fields=name},author{fields=full_name}&inflate=true&query="(id=51001)"';
+    let retrievePipelinesQuery = 'pipelines?expand=$all{fields=name},author{fields=full_name}&inflate=true&query="(id=' + pipeline.pl_id + ')"';
     let jobsList = [];
     let req = {
       method: 'GET',
@@ -18,13 +18,17 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
       let res = response.data;
       let rootObject = res.data[0].current_model.structure.phasesInternal;
       getJobs(rootObject, jobsList);
-      cb();
+      pipeline.pl_jobs = jobsList;
+      pipeline.pl_ciServerType = res.data[0].ci_server.server_type;
+      pipeline.pl_ciServerUrl = res.data[0].ci_server.url;
+      cb(pipeline);
     }
     );
   }
-  
+
   function retrievePipelines(cb) {
     let plList = [];
+    generalStorage.save('almOctanePrismJobs', plList);
     let authenticationData = generalStorage.load('generalAuthentication');
     let req = {
       method: 'GET',
@@ -33,9 +37,9 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     $http(req).then(function check(response) {
       let res = response.data;
       res.data.forEach((pl) => {
-        let pipeLineObject  = {id: '', name:''};
-        pipeLineObject.id = pl.id;
-        pipeLineObject.name = pl.name;
+        let pipeLineObject = {pl_id: '', pl_name: '', pl_jobs: [], pl_ciServerType: '', pl_ciServerUrl: ''};
+        pipeLineObject.pl_id = pl.id;
+        pipeLineObject.pl_name = pl.name;
         plList.push(pipeLineObject);
       });
       cb(plList);
@@ -54,9 +58,6 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
         }
       });
     });
-    let jobsData = generalStorage.load('almOctanePrismJobs');
-    jobsData.jobList = jobsArray;
-    generalStorage.save('almOctanePrismJobs', jobsData);
   }
 
   return {

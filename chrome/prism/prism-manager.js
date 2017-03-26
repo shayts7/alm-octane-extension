@@ -14,8 +14,8 @@ angular.module('mainApp').factory('prismManager', function prismManager(generalS
 		});
 	}
 	
-	function retrieveJobs(cb) {
-		prismJobsRetriever.retrieveJobs(cb);
+	function retrieveJobs(pipeline, cb) {
+		prismJobsRetriever.retrieveJobs(pipeline, cb);
 	}
 
 	function getDataAndColorAUT(jobList, cb) {

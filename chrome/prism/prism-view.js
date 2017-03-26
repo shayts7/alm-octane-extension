@@ -6,7 +6,7 @@ angular.module('mainApp').directive('prismView', function() {
   };
 });
 
-angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $scope, prismManager, plList) {
+angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $scope, prismManager) {
 
   function loadFromStorage() {
     let data = prismManager.loadFromStorage('almOctanePrismJobs');
@@ -31,9 +31,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
 
   function loadPipelines(plList) {
     $scope.model.pipeLineList = plList;
-    let data = prismManager.loadFromStorage('almOctanePrismJobs');
-    data.pipeLineList = plList;
-    prismManager.saveToStorage('almOctanePrismJobs', data);
+    console.log($scope.model.pipeLineList);
   }
 
   $scope.model = {
@@ -59,13 +57,17 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     isInProgress: false
   };
 
-  $scope.canRetrieve = function canRetrieve() {
-    return $scope.model.addJobName;
-  };
+  $scope.onPipelineChange = function(selectedPipeline) {
+    $scope.model.selectedPipeline = selectedPipeline;
+    prismManager.retrieveJobs(selectedPipeline, function(pipelineList) {
+      $scope.model.jobList = pipelineList.pl_jobs;
+    });
+  }
 
-  $scope.onRetrieveClick = function onRetrieveClick() {
-    prismManager.retrieveJobs($scope.model.loadFromStorage);
-  };
+  $scope.onJobChange = function(selectedJob) {
+    $scope.model.selectedJob = selectedJob;
+    console.log(selectedJob);
+  }
 
   // $scope.canSelectJobs = function canSelectJobs() {
   //   return $scope.model.jobs[0].jobList;
@@ -121,8 +123,6 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   };
 
   loadFromStorage();
-  if(!prismManager.loadFromStorage('almOctanePrismJobs').pipeLineList) {
-    prismManager.loadPipelines(loadPipelines);
-  }
+  prismManager.loadPipelines(loadPipelines);
 
 });
