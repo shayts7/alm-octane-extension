@@ -113,8 +113,12 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     $scope.model.addJobName = '';
   };
 
-  $scope.onRemoveClick = function onRemoveClick(index) {
-    $scope.model.uiJobs.splice(index, 1);
+  $scope.onRemoveClick = function onRemoveClick(jobsArrayItem, index) {
+    for (let i = 0; i < $scope.model.uiJobs.length; i++) {
+      if ($scope.model.uiJobs[i].pipeline_id === jobsArrayItem.pipeline_id) {
+        $scope.model.uiJobs[i].jobs.splice(index, 1);
+      }
+    }
     saveToStorage();
     if ($scope.model.uiJobs.length === 0) {
       prismManager.removeColoringFromAUT();
