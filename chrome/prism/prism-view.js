@@ -10,17 +10,17 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
 
   function loadFromStorage() {
     let data = prismManager.loadFromStorage('almOctanePrismJobs');
-    $scope.model.uiJobs = data.uiJobs || [];
-    $scope.model.jobList = data.jobList === undefined ? [] : data.jobList;
-    $scope.model.pipeLineList = data.pipeLineList === undefined ? [] : data.pipeLineList;
+    $scope.model.uiJobs = data.ui || [];
+    // $scope.model.uiJobs = data.ui || [];
+    // $scope.model.jobList = data.jobList === undefined ? [] : data.jobList;
+    // $scope.model.pipeLineList = data.pipeLineList === undefined ? [] : data.pipeLineList;
   }
 
   function saveToStorage() {
     let data = {
-      jobs: $scope.model.jobs,
-      uiJobs: $scope.model.uiJobs
+      ui: $scope.model.uiJobs
     };
-    prismManager.saveToStorage(data);
+    prismManager.saveToStorage('almOctanePrismJobs', data);
   }
 
   function getActiveJobs() {
@@ -53,9 +53,8 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
       showButtonText: 'Show',
       hideButtonText: 'Hide'
     },
-    uiJobs: [],
+    uiJobs: [{}],
     parsedCSSRules: '',
-    isFirstJobAdd: true,
     isInProgress: false
   };
 
@@ -83,29 +82,34 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   $scope.onAddClick = function onAddClick() {
     let uiJobData = {
       pipeline_id: $scope.model.selectedPipeline.pl_id,
+      pipeline_name: $scope.model.selectedPipeline.pl_name,
       ciData: {serverType: $scope.model.ciServerType, serverUrl: $scope.model.ciServerUrl},
-      jobsData: [{
-        alias: $scope.model.addJobName,
-        jobName: $scope.model.selectedJob,
-        active: true
+      jobs: [{
+        data: {
+          alias: $scope.model.addJobName,
+          jobName: $scope.model.selectedJob,
+          active: true
+        }
       }],
       selectedLogType: $scope.model.logType
     };
 
-    $scope.model.uiJobs = prismManager.loadFromStorage('almOctanePrismJobs');
-    if ($scope.model.isFirstJobAdd) {
-      $scope.model.isFirstJobAdd = false;
+    if ($scope.model.uiJobs.length === 0) {
       $scope.model.uiJobs.push(uiJobData);
     } else {
       for (let i = 0; i < $scope.model.uiJobs.length; i++) {
         if ($scope.model.selectedPipeline.pl_id === $scope.model.uiJobs[i].pipeline_id) {
-          $scope.model.uiJobs[i].jobsData.push(uiJobData.jobsData);
+          $scope.model.uiJobs[i].jobs.push(uiJobData.jobs[0]);
         } else {
-          $scope.model.uiJobs.push(uiJobData);
+          if (i === $scope.model.uiJobs.length - 1) {
+            $scope.model.uiJobs.push(uiJobData);
+            i = $scope.model.uiJobs.length;
+          }
         }
       }
     }
-    prismManager.saveToStorage('almOctanePrismJobs', $scope.model.uiJobs);
+    saveToStorage();
+    loadFromStorage();
     $scope.model.addJobName = '';
   };
 

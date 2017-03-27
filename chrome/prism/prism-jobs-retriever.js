@@ -28,7 +28,6 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
 
   function retrievePipelines(cb) {
     let plList = [];
-    generalStorage.save('almOctanePrismJobs', plList);
     let authenticationData = generalStorage.load('generalAuthentication');
     let req = {
       method: 'GET',
