@@ -9,25 +9,28 @@ angular.module('mainApp').directive('prismView', function() {
 angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $scope, prismManager) {
 
   function loadFromStorage() {
-    let data = prismManager.loadFromStorage('almOctanePrismJobs');
-    $scope.model.uiJobs = data.ui || [];
+    let uiJobsData = prismManager.loadFromStorage('almOctanePrismJobs');
+    let pipelinesData = prismManager.loadFromStorage('almOctanePrismPipelines');
+    $scope.model.uiJobs = uiJobsData.ui || [];
+    $scope.model.pipelines = pipelinesData.pipeline || [];
   }
 
   function saveToStorage() {
-    let data = {
+    let jobsData = {
       ui: $scope.model.uiJobs
     };
-    prismManager.saveToStorage('almOctanePrismJobs', data);
+
+    let pipelinesData = {
+      pipeline: $scope.model.pipelines
+    }
+    prismManager.saveToStorage('almOctanePrismJobs', jobsData);
+    prismManager.saveToStorage('almOctanePrismPipelines', pipelinesData);
   }
 
   function getActiveJobs() {
-    let activeJobs = $scope.model.uiJobs.filter(function(pipelineObject) {
-      let activeJobsInPlObject = pipelineObject.jobs.filter(function(singleJob) {
-        return singleJob.active;
-      });
-      return activeJobsInPlObject.length > 0;
+    return $scope.model.uiJobs.filter(function(job) {
+      return job.active;
     });
-    return activeJobs;
   }
 
   function loadPipelines(plList) {
@@ -41,7 +44,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     selectedPipeline: '',
     jobList: [],
     selectedJob: '',
-    logType: '',
+    logType: 'selenium',
     ciServerType: '',
     ciServerUrl: '',
     uiStrings: {
@@ -54,6 +57,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
       showButtonText: 'Show',
       hideButtonText: 'Hide'
     },
+    pipelines: [],
     uiJobs: [],
     parsedCSSRules: '',
     isInProgress: false
@@ -81,30 +85,45 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   };
 
   $scope.onAddClick = function onAddClick() {
-    let uiJobData = {
-      pipeline_id: $scope.model.selectedPipeline.pl_id,
-      pipeline_name: $scope.model.selectedPipeline.pl_name,
-      ciData: {serverType: $scope.model.ciServerType, serverUrl: $scope.model.ciServerUrl},
-      jobs: [{
-        alias: $scope.model.addJobName,
-        jobName: $scope.model.selectedJob,
-        active: true
-      }],
-      selectedLogType: $scope.model.logType
+    let isJobExist = false;
+    let pipelineData = {
+      id: $scope.model.selectedPipeline.pl_id,
+      name: $scope.model.selectedPipeline.pl_name,
+      ciData: {serverType: $scope.model.ciServerType, serverUrl: $scope.model.ciServerUrl}
     };
 
+    //First Pipeline Add
+    if ($scope.model.pipelines.length === 0) {
+      $scope.model.pipelines.push(pipelineData);
+    } else {
+      $scope.model.pipelines.forEach((pipeline) => {
+        if ($scope.model.selectedPipeline.pl_id !== pipeline.id) {
+          $scope.model.pipelines.push(pipelineData);
+        }
+      });
+    }
+
+    let uiJobData = {
+      parentPipelineId: $scope.model.selectedPipeline.pl_id,
+      alias: $scope.model.addJobName,
+      name: $scope.model.selectedJob,
+      selectedLogType: $scope.model.logType,
+      active: true
+    };
+
+    //First Job Add
     if ($scope.model.uiJobs.length === 0) {
       $scope.model.uiJobs.push(uiJobData);
     } else {
-      for (let i = 0; i < $scope.model.uiJobs.length; i++) {
-        if ($scope.model.selectedPipeline.pl_id === $scope.model.uiJobs[i].pipeline_id) {
-          $scope.model.uiJobs[i].jobs.push(uiJobData.jobs[0]);
-        } else {
-          if (i === $scope.model.uiJobs.length - 1) {
-            $scope.model.uiJobs.push(uiJobData);
-            i = $scope.model.uiJobs.length;
+      $scope.model.uiJobs.forEach((job) => {
+        if ($scope.model.selectedPipeline.pl_id === job.parentPipelineId) {
+          if (job.name === $scope.model.selectedJob) {
+            isJobExist = true;
           }
         }
+      });
+      if (!isJobExist) {
+        $scope.model.uiJobs.push(uiJobData);
       }
     }
     saveToStorage();
@@ -112,15 +131,8 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     $scope.model.addJobName = '';
   };
 
-  $scope.onRemoveClick = function onRemoveClick(jobsArrayItem, index) {
-    for (let i = 0; i < $scope.model.uiJobs.length; i++) {
-      if ($scope.model.uiJobs[i].pipeline_id === jobsArrayItem.pipeline_id) {
-        $scope.model.uiJobs[i].jobs.splice(index, 1);
-        if ($scope.model.uiJobs[i].jobs.length === 0) {
-          $scope.model.uiJobs.splice(i, 1);
-        }
-      }
-    }
+  $scope.onRemoveClick = function onRemoveClick(index) {
+    $scope.model.uiJobs.splice(index, 1);
     saveToStorage();
     if ($scope.model.uiJobs.length === 0) {
       prismManager.removeColoringFromAUT();
@@ -144,7 +156,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   };
 
   $scope.canHide = function canHide() {
-    return $scope.model.jobs.length > 0 && !$scope.model.isInProgress;
+    return $scope.model.uiJobs.length > 0 && !$scope.model.isInProgress;
   };
 
   $scope.onHideClick = function onHideClick() {
