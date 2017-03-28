@@ -12,7 +12,7 @@
                    placeholder="{{model.uiStrings.nameInputHint}}"/>
         </div>
         <div class="prism__add-panel__line">
-            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedPipeline"
+            <select style='width:300px' class="prism__add-panel__jobs-dropDown" ng-model="selectedPipeline"
                     ng-change="onPipelineChange(selectedPipeline)"
                     ng-options="pl as pl.pl_name for pl in model.pipeLineList">
                 <option value="">--Select Pipeline--</option>
@@ -52,13 +52,13 @@
     <div class="view__content">
         <div class="view__content__scroll-container">
             <div ng-repeat="jobsArrayItem in model.uiJobs track by $index">
-                <div ng-repeat="singleJobItem in jobsArrayItem.jobs">
+                <div ng-repeat="singleJobItem in jobsArrayItem.jobs track by $index">
                     <div class="prism__job-line">
-                        <input class="prism__job-line__active" type="checkbox" ng-model="singleJobItem.data.active"
+                        <input class="prism__job-line__active" type="checkbox" ng-model="singleJobItem.active"
                                title="{{model.uiStrings.activateCheckboxTooltip}}"/>
-                        <div class="prism__job-line__name" title="{{jobsArrayItem.pipeline_name + '/' + singleJobItem.data.jobName}}">{{singleJobItem.data.alias}}</div>
-                        <button ng-click="onRemoveClick(jobsArrayItem, $index)" class="prism__job-line__remove-button"
-                                title="{{model.uiStrings.removeButtonTooltip}} {{singleJobItem.data.jobName}}"
+                        <div class="prism__job-line__name" title="{{jobsArrayItem.pipeline_name + '/' + singleJobItem.jobName}}">{{singleJobItem.alias}}</div>
+                        <button class="prism__job-line__remove-button" ng-click="onRemoveClick(jobsArrayItem, $index)"
+                                title="{{model.uiStrings.removeButtonTooltip}} {{singleJobItem.jobName}}"
                                 ng-include="'./img/job-delete.svg'">
                         </button>
                     </div>

@@ -63,7 +63,7 @@
 }
 
 .prism__add-panel_radio-button {
-    margin: auto ;
+    margin: auto;
 }
 
 .prism__add-panel__name-input {
@@ -111,18 +111,17 @@
 
 .prism__add-panel__add-button {
     flex: 0 0 auto;
-    align: center;
-    margin-left: 5px;
+    width: 30px;
     height: 22px;
+    background-color: #fff;
+    border: none;
 }
 
-/*.prism__add-panel__add-button {*/
-/*flex: 1 1 auto;*/
-/*margin-left: 5px;*/
-/*height: 22px;*/
-/*width: 36px;*/
-/*border: none;*/
-/*}*/
+.prism__add-panel__add-button.disabled {
+    background-color: #fff;
+    border: none;
+}
+
 .prism__add-panel__add-button > svg {
     fill: #444;
 }
@@ -139,13 +138,9 @@
     fill: #000;
 }
 
-/*.prism__add-panel__add-button.disabled {*/
-/*border: none;*/
-/*}*/
-
-/*.prism__add-panel__add-button.disabled > svg {*/
-/*fill: #ccc;*/
-/*}*/
+.prism__add-panel__add-button.disabled > svg {
+    fill: #ccc;
+}
 
 .prism__job-line {
     display: flex;
@@ -170,6 +165,7 @@
     height: 22px;
     width: 36px;
     border: none;
+    background-color: #fff;
 }
 
 .prism__job-line__remove-button > svg {

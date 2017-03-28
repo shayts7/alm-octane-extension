@@ -289,12 +289,12 @@ input {
 .view__content {
 	flex: 1 1 auto;
 	position: relative;
-	margin-top: 10px;
+	margin-top: 5px;
 	border-top: 1px solid #ddd;
 }
 
 .view__content__scroll-container {
-	margin-top: 10px;
+	margin-top: 5px;
 	position: absolute;
 	left: 0;
 	right: 0;

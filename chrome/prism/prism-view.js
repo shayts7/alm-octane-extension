@@ -11,9 +11,6 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   function loadFromStorage() {
     let data = prismManager.loadFromStorage('almOctanePrismJobs');
     $scope.model.uiJobs = data.ui || [];
-    // $scope.model.uiJobs = data.ui || [];
-    // $scope.model.jobList = data.jobList === undefined ? [] : data.jobList;
-    // $scope.model.pipeLineList = data.pipeLineList === undefined ? [] : data.pipeLineList;
   }
 
   function saveToStorage() {
@@ -24,9 +21,13 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   }
 
   function getActiveJobs() {
-    return $scope.model.jobs.filter(function(j) {
-      return j.active;
+    let activeJobs = $scope.model.uiJobs.filter(function(pipelineObject) {
+      let activeJobsInPlObject = pipelineObject.jobs.filter(function(singleJob) {
+        return singleJob.active;
+      });
+      return activeJobsInPlObject.length > 0;
     });
+    return activeJobs;
   }
 
   function loadPipelines(plList) {
@@ -53,7 +54,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
       showButtonText: 'Show',
       hideButtonText: 'Hide'
     },
-    uiJobs: [{}],
+    uiJobs: [],
     parsedCSSRules: '',
     isInProgress: false
   };
@@ -85,11 +86,9 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
       pipeline_name: $scope.model.selectedPipeline.pl_name,
       ciData: {serverType: $scope.model.ciServerType, serverUrl: $scope.model.ciServerUrl},
       jobs: [{
-        data: {
-          alias: $scope.model.addJobName,
-          jobName: $scope.model.selectedJob,
-          active: true
-        }
+        alias: $scope.model.addJobName,
+        jobName: $scope.model.selectedJob,
+        active: true
       }],
       selectedLogType: $scope.model.logType
     };
@@ -117,6 +116,9 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     for (let i = 0; i < $scope.model.uiJobs.length; i++) {
       if ($scope.model.uiJobs[i].pipeline_id === jobsArrayItem.pipeline_id) {
         $scope.model.uiJobs[i].jobs.splice(index, 1);
+        if ($scope.model.uiJobs[i].jobs.length === 0) {
+          $scope.model.uiJobs.splice(i, 1);
+        }
       }
     }
     saveToStorage();
