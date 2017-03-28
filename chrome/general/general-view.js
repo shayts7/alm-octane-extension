@@ -16,6 +16,7 @@ angular.module('mainApp').controller('generalCtrl', function generalCtrl($scope,
     authenticationStatus: '',
     usernameInput: '',
     passwordInput: '',
+    octaneURL: '',
     hpsso_cookie_csrf: '',
     authenticationData: {
       octaneData: {
@@ -33,46 +34,33 @@ angular.module('mainApp').controller('generalCtrl', function generalCtrl($scope,
   };
 
   $scope.canAuthenticate = function canAuthenticate() {
-    return $scope.model.usernameInput && $scope.model.passwordInput;
+    return $scope.model.usernameInput && $scope.model.passwordInput && $scope.model.octaneURL;
   };
 
   $scope.onLoginClick = function authenticate() {
-    let octaneUrl = '';
-    generalAuthenticate.getCurrentUrl(function(url) {
-      octaneUrl = url;
-      let SS_ID = octaneUrl.substring(octaneUrl.indexOf('?p=') + 3, octaneUrl.indexOf('?p=') + 7);
-      let WS_ID = octaneUrl.substring(octaneUrl.indexOf('?p=') + 8, octaneUrl.indexOf('?p=') + 12);
-      let index = octaneUrl.indexOf('/', octaneUrl.indexOf('/') + 2);
-      let authenticationUrl = octaneUrl.substring(0, index) + '/authentication/sign_in';
-      $scope.model.authenticationData = {
-        octaneData: {
-          authenticationUrl: authenticationUrl,
-          sharedSpaceID: SS_ID,
-          workspaceID: WS_ID
-        },
-        authenticationData: {
-          userName: $scope.model.usernameInput,
-          password: $scope.model.passwordInput,
-          headers: {
-            'Content-Type': 'application/json',
-            'HPECLIENTTYPE': 'HPE_MQM_UI'
-          },
-          cookies: {
-            HPSSO_COOKIE_CSRF: ''
-          }
-        }
-      };
-      generalStorage.save('generalAuthentication', $scope.model.authenticationData);
-      generalAuthenticate.authenticate(octaneUrl, $scope.authenticationSuccess, $scope.authenticationFailure);
-    });
+    let index = $scope.model.octaneURL.indexOf('/', $scope.model.octaneURL.indexOf('/') + 2);
+    let octaneServerURL = $scope.model.octaneURL.substring(0, index);
+    let authenticationUrl = $scope.model.octaneURL.substring(0, index) + '/authentication/sign_in';
+    $scope.model.authenticationData = {
+      octaneURL: octaneServerURL,
+      headers: {
+        'Content-Type': 'application/json',
+        'HPECLIENTTYPE': 'HPE_MQM_UI'
+      },
+      cookies: {
+        HPSSO_COOKIE_CSRF: ''
+      }
+    }
+    generalStorage.save('generalAuthentication', $scope.model.authenticationData);
+    generalAuthenticate.authenticate(authenticationUrl, $scope.model.usernameInput, $scope.model.passwordInput, $scope.model.authenticationData.headers, $scope.authenticationSuccess, $scope.authenticationFailure);
   };
 
-  $scope.authenticationSuccess = function authenticationSuccess() {
-    $scope.model.authenticationStatus = $sce.trustAsHtml('Authentication Success');
-  };
+$scope.authenticationSuccess = function authenticationSuccess() {
+  $scope.model.authenticationStatus = $sce.trustAsHtml('Authentication Success');
+};
 
-  $scope.authenticationFailure = function authenticationFailure() {
-    $scope.model.authenticationStatus = $sce.trustAsHtml('Authentication Failed');
-  }
+$scope.authenticationFailure = function authenticationFailure() {
+  $scope.model.authenticationStatus = $sce.trustAsHtml('Authentication Failed');
+}
 
 });

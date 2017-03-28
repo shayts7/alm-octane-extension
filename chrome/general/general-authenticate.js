@@ -1,28 +1,21 @@
 angular.module('mainApp').factory('generalAuthenticate', function generalAuthenticate($http, generalStorage, plList) {
-
-  function getCurrentUrl(cb) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      //TODO:check if need to save URL to localStorage
-      cb(tabs[0].url);
-    });
-  }
-
-  function authenticate(octaneUrl, onAuthenticationSuccess, onAuthenticationFailure) {
+  
+  function authenticate(octaneUrl, userName, password, headers, onAuthenticationSuccess, onAuthenticationFailure) {
     let data = generalStorage.load('generalAuthentication');
     let authenticationReq = {
       method: 'POST',
       url: octaneUrl,
-      headers: data.authenticationData.headers,
-      body: {"user": data.authenticationData.userName, "password": data.authenticationData.password}
+      headers: headers,
+      body: {"user": userName, "password": password}
     };
 
-    $http(authenticationReq).then(function onHttpSuccess(response) {
-      let cookieData = {url: authenticationReq.url, name: Object.keys(data.authenticationData.cookies)[0]};
+    $http.post(authenticationReq.url, authenticationReq.body).then(function onHttpSuccess(response) {
+      let cookieData = {url: authenticationReq.url, name: Object.keys(data.cookies)[0]};
       chrome.cookies.get(cookieData, function(cookie) {
-        data.authenticationData.cookies['HPSSO_COOKIE_CSRF'] = cookie.value;
+        data.cookies['HPSSO_COOKIE_CSRF'] = cookie.value;
         generalStorage.save('generalAuthentication', data);
-        onAuthenticationSuccess();
       });
+      onAuthenticationSuccess();
     }, function onHttpFailure(/*response*/) {
       console.log('Unable to authenticate: ' + authenticationReq.url);
       onAuthenticationFailure();
@@ -30,7 +23,6 @@ angular.module('mainApp').factory('generalAuthenticate', function generalAuthent
   }
 
   return {
-    authenticate: authenticate,
-    getCurrentUrl: getCurrentUrl
+    authenticate: authenticate
   };
 });

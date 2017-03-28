@@ -6,11 +6,11 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     let jobsList = [];
     let req = {
       method: 'GET',
-      url: data.octaneData.authenticationUrl.substring(0, data.octaneData.authenticationUrl.indexOf('/authentication')) + '/api/shared_spaces/' + data.octaneData.sharedSpaceID + '/workspaces/' + data.octaneData.workspaceID + '/' + retrievePipelinesQuery,
+      url: data.octaneURL + '/api/shared_spaces/1001/workspaces/1002/' + retrievePipelinesQuery,
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'HPECLIENTTYPE': 'HPE_MQM_UI',
-        'HPSSO-HEADER-CSRF': data.authenticationData.cookies['HPSSO-HEADER-CSRF']
+        'HPSSO-HEADER-CSRF': data.cookies['HPSSO-HEADER-CSRF']
       },
     };
 
@@ -31,7 +31,7 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     let authenticationData = generalStorage.load('generalAuthentication');
     let req = {
       method: 'GET',
-      url: authenticationData.octaneData.authenticationUrl.substring(0, authenticationData.octaneData.authenticationUrl.indexOf('/authentication')) + '/api/shared_spaces/' + authenticationData.octaneData.sharedSpaceID + '/workspaces/' + authenticationData.octaneData.workspaceID + '/pipelines',
+      url: authenticationData.octaneURL + '/api/shared_spaces/1001/workspaces/1002/pipelines'
     };
     $http(req).then(function check(response) {
       let res = response.data;
