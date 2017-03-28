@@ -61,7 +61,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
 
   $scope.onPipelineChange = function(selectedPipeline) {
     $scope.model.selectedPipeline = selectedPipeline;
-    prismManager.retrieveJobs(selectedPipeline, function(pipelineList) {
+    prismManager.loadJobs(selectedPipeline, function(pipelineList) {
       $scope.model.jobList = pipelineList.pl_jobs;
     });
   };

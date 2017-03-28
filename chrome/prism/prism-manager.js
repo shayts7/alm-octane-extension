@@ -14,12 +14,12 @@ angular.module('mainApp').factory('prismManager', function prismManager(generalS
 		});
 	}
 	
-	function retrieveJobs(pipeline, cb) {
+	function loadJobs(pipeline, cb) {
 		prismJobsRetriever.retrieveJobs(pipeline, cb);
 	}
 
 	function getDataAndColorAUT(jobList, cb) {
-		prismLogsRetriever.retrieve(jobList, onRetrieveLogsDone);
+		prismLogsRetriever.retrieveJobsLog(jobList, onRetrieveLogsDone);
 		function onRetrieveLogsDone(jobLogs) {
 			let linesData = prismParser.parseLogs(jobList, jobLogs);
 			let selectorsData = prismAggregator.aggregate(linesData);
@@ -37,7 +37,7 @@ angular.module('mainApp').factory('prismManager', function prismManager(generalS
 		loadFromStorage: loadFromStorage,
 		saveToStorage: saveToStorage,
 		loadPipelines: loadPipelines,
-		retrieveJobs: retrieveJobs,
+		loadJobs: loadJobs,
 		getDataAndColorAUT: getDataAndColorAUT,
 		removeColoringFromAUT: removeColoringFromAUT
 	};
