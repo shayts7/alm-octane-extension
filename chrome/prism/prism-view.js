@@ -9,6 +9,8 @@ angular.module('mainApp').directive('prismView', function() {
 angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $scope, prismManager) {
 
   function loadFromStorage() {
+    $scope.model.isPipelinesStillLoad = true;
+    $scope.model.isJobsStillLoad = true;
     let uiJobsData = prismManager.loadFromStorage('almOctanePrismJobs');
     let pipelinesData = prismManager.loadFromStorage('almOctanePrismPipelines');
     $scope.model.uiJobs = uiJobsData.ui || [];
@@ -34,6 +36,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   }
 
   function loadPipelines(plList) {
+    $scope.model.isPipelinesStillLoad = false;
     $scope.model.pipeLineList = plList;
   }
 
@@ -60,13 +63,16 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     pipelines: [],
     uiJobs: [],
     parsedCSSRules: '',
-    isInProgress: false
+    isInProgress: false,
+    isPipelinesStillLoad: false,
+    isJobsStillLoad: false
   };
 
   $scope.onPipelineChange = function(selectedPipeline) {
     $scope.model.selectedPipeline = selectedPipeline;
     prismManager.loadJobs(selectedPipeline, function(pipelineList) {
       $scope.model.jobList = pipelineList.pl_jobs;
+      $scope.model.isJobsStillLoad = false;
     });
   };
 
@@ -76,9 +82,13 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     $scope.model.ciServerUrl = $scope.model.selectedPipeline.pl_ciServerUrl;
   };
 
-  // $scope.canSelectJobs = function canSelectJobs() {
-  //   return $scope.model.jobs[0].jobList;
-  // }
+  $scope.canSelectPipelines = function canSelectPipelines() {
+    return $scope.model.isPipelinesStillLoad;
+  }
+
+  $scope.canSelectJobs = function canSelectJobs() {
+    return $scope.model.isPipelinesStillLoad;
+  }
 
   $scope.canAdd = function canAdd() {
     return $scope.model.addJobName && $scope.model.selectedPipeline && $scope.model.selectedJob && $scope.model.logType;

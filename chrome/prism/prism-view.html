@@ -7,22 +7,30 @@
     </div>
     <div class="prism__add-panel">
         <div class="prism__add-panel__line">
-            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
-            <input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName"
-                   placeholder="{{model.uiStrings.nameInputHint}}"/>
+            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedSharedSpace">
+                <option value="">--Select shared space--</option>
+            </select>
+            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedWorkspace">
+                <option value="">--Select Workspace--</option>
+            </select>
         </div>
         <div class="prism__add-panel__line">
-            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedPipeline"
+            <select class="prism__add-panel__jobs-dropDown" ng-disabled="canSelectPipelines()" ng-model="selectedPipeline"
                     ng-change="onPipelineChange(selectedPipeline)"
                     ng-options="pl as pl.pl_name for pl in model.pipeLineList">
                 <option value="">--Select Pipeline--</option>
             </select>
         </div>
         <div class="prism__add-panel__line">
-            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedJob" ng-change="onJobChange(selectedJob)"
+            <select class="prism__add-panel__jobs-dropDown" ng-disabled="canSelectJobs()" ng-model="selectedJob" ng-change="onJobChange(selectedJob)"
                     ng-options="job as job for job in model.jobList">
                 <option value="">--Select Job--</option>
             </select>
+        </div>
+        <div class="prism__add-panel__line">
+            <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
+            <input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName"
+                   placeholder="{{model.uiStrings.nameInputHint}}"/>
         </div>
         <div class="prism__add-panel__line">
             <div class="prism__add-panel__radio-container">
