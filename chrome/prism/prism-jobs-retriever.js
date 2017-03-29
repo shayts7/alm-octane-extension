@@ -1,6 +1,5 @@
 angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetriever($http, generalStorage) {
-
-
+  
   function retrieveSharedSpaces(cb) {
     let ssList = [];
     let authenticationData = generalStorage.load('generalAuthentication');
@@ -24,12 +23,12 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     });
   }
 
-  function retrievePipelines(cb) {
+  function retrievePipelines(ss_id, ws_id, cb) {
     let plList = [];
     let authenticationData = generalStorage.load('generalAuthentication');
     let req = {
       method: 'GET',
-      url: authenticationData.octaneURL + '/api/shared_spaces/1001/workspaces/1002/pipelines'
+      url: authenticationData.octaneURL + '/api/shared_spaces/' + ss_id + '/workspaces/' + ws_id + '/pipelines'
     };
     $http(req).then(function check(response) {
       let res = response.data;

@@ -82,6 +82,11 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     $scope.model.workspaceList = $scope.model.selectedSharedSpace.workspaces;
   };
 
+  $scope.onWorkspaceChange = function(selectedWorkspace) {
+    $scope.model.selectedWorkspace = selectedWorkspace;
+    prismManager.loadPipelines($scope.model.selectedSharedSpace.id, $scope.model.selectedWorkspace.id, loadPipelines);
+  }
+
   $scope.onPipelineChange = function(selectedPipeline) {
     $scope.model.selectedPipeline = selectedPipeline;
     prismManager.loadJobs(selectedPipeline, function(pipelineList) {
@@ -193,6 +198,4 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
 
   loadFromStorage();
   prismManager.loadSharedspaces(loadSharedspaces);
-  prismManager.loadPipelines(loadPipelines);
-
 });

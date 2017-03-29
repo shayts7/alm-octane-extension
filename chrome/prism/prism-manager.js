@@ -12,8 +12,8 @@ angular.module('mainApp').factory('prismManager', function prismManager(generalS
 		prismJobsRetriever.retrieveSharedSpaces(cb);
 	}
 	
-	function loadPipelines(cb) {
-		prismJobsRetriever.retrievePipelines(function(plList) {
+	function loadPipelines(ss_id, ws_id, cb) {
+		prismJobsRetriever.retrievePipelines(ss_id, ws_id, function(plList) {
 			cb(plList);
 		});
 	}
