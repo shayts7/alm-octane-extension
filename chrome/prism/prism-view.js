@@ -42,7 +42,6 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
 
   function loadSharedspaces(ssList) {
     $scope.model.sharedSpaceList = ssList;
-    console.log(ssList);
   }
 
   $scope.model = {

@@ -1,5 +1,5 @@
 angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetriever($http, generalStorage) {
-  
+
   function retrieveSharedSpaces(cb) {
     let ssList = [];
     let authenticationData = generalStorage.load('generalAuthentication');
@@ -69,10 +69,17 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
   }
 
   function getJobs(piObject, jobsArray) {
+    let found = false;
     piObject.forEach((pi) => {
       pi.jobs.forEach((job) => {
-        if (job.phasesInternal.length === 0) {
-          if (job.classification && job.classification.name == 'Test') {
+        if (job.phasesInternal.length === 0 && job.taxonomies.length > 0) {
+          for (let i = 0; i < job.taxonomies.length; i++) {
+            if (job.taxonomies[i].name === 'UI') {
+              found = true;
+              break;
+            }
+          }
+          if (found === true) {
             jobsArray.push(job.jobCiId);
           }
         } else {
