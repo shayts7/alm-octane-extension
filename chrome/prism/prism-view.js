@@ -40,9 +40,18 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     $scope.model.pipeLineList = plList;
   }
 
+  function loadSharedspaces(ssList) {
+    $scope.model.sharedSpaceList = ssList;
+    console.log(ssList);
+  }
+
   $scope.model = {
     jobs: [],
     addJobName: '',
+    sharedSpaceList: [],
+    selectedSharedSpace: '',
+    workspaceList: [],
+    selectedWorkspace: '',
     pipeLineList: [],
     selectedPipeline: '',
     jobList: [],
@@ -68,11 +77,20 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     isJobsStillLoad: false
   };
 
+  $scope.onSharedspaceChange = function(selectedSharedspace) {
+    $scope.model.selectedSharedSpace = selectedSharedspace;
+    $scope.model.workspaceList = $scope.model.selectedSharedSpace.workspaces;
+  };
+
   $scope.onPipelineChange = function(selectedPipeline) {
     $scope.model.selectedPipeline = selectedPipeline;
     prismManager.loadJobs(selectedPipeline, function(pipelineList) {
+      if (selectedPipeline === '--Select Pipeline--') {
+        $scope.model.isJobsStillLoad = false;
+      } else {
+        $scope.model.isJobsStillLoad = true;
+      }
       $scope.model.jobList = pipelineList.pl_jobs;
-      $scope.model.isJobsStillLoad = false;
     });
   };
 
@@ -84,11 +102,11 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
 
   $scope.canSelectPipelines = function canSelectPipelines() {
     return $scope.model.isPipelinesStillLoad;
-  }
+  };
 
   $scope.canSelectJobs = function canSelectJobs() {
     return $scope.model.isPipelinesStillLoad;
-  }
+  };
 
   $scope.canAdd = function canAdd() {
     return $scope.model.addJobName && $scope.model.selectedPipeline && $scope.model.selectedJob && $scope.model.logType;
@@ -174,6 +192,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   };
 
   loadFromStorage();
+  prismManager.loadSharedspaces(loadSharedspaces);
   prismManager.loadPipelines(loadPipelines);
 
 });

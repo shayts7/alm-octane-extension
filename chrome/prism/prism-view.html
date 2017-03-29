@@ -7,10 +7,11 @@
     </div>
     <div class="prism__add-panel">
         <div class="prism__add-panel__line">
-            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedSharedSpace">
+            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedSharedSpace" ng-change="onSharedspaceChange(selectedSharedSpace)"
+                    ng-options="ss as ss.name for ss in model.sharedSpaceList">
                 <option value="">--Select shared space--</option>
             </select>
-            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedWorkspace">
+            <select class="prism__add-panel__jobs-dropDown" ng-model="selectedWorkspace" ng-options="ws as ws.name for ws in model.workspaceList">
                 <option value="">--Select Workspace--</option>
             </select>
         </div>

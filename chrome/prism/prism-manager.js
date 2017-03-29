@@ -8,6 +8,10 @@ angular.module('mainApp').factory('prismManager', function prismManager(generalS
 		generalStorage.save(storageItem, data);
 	}
 	
+	function loadSharedspaces(cb) {
+		prismJobsRetriever.retrieveSharedSpaces(cb);
+	}
+	
 	function loadPipelines(cb) {
 		prismJobsRetriever.retrievePipelines(function(plList) {
 			cb(plList);
@@ -36,6 +40,7 @@ angular.module('mainApp').factory('prismManager', function prismManager(generalS
 	return {
 		loadFromStorage: loadFromStorage,
 		saveToStorage: saveToStorage,
+		loadSharedspaces: loadSharedspaces,
 		loadPipelines: loadPipelines,
 		loadJobs: loadJobs,
 		getDataAndColorAUT: getDataAndColorAUT,

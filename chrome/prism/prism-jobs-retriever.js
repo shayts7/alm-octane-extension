@@ -1,5 +1,48 @@
 angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetriever($http, generalStorage) {
 
+
+  function retrieveSharedSpaces(cb) {
+    let ssList = [];
+    let authenticationData = generalStorage.load('generalAuthentication');
+    let req = {
+      method: 'GET',
+      url: authenticationData.octaneURL + '/api/shared_spaces'
+    };
+    $http(req).then(function onHttpSuccess(response) {
+      let res = response.data;
+      res.data.forEach((ss) => {
+        let sharedSpaceObject = {id: '', name: '', workspaces: []};
+        sharedSpaceObject.id = ss.id;
+        sharedSpaceObject.name = ss.name;
+        getWorkspaces(sharedSpaceObject, function(wsList) {
+          sharedSpaceObject.workspaces = wsList;
+          ssList.push(sharedSpaceObject);
+        });
+      });
+      cb(ssList);
+    }, function onHttpFailure(response) {
+    });
+  }
+
+  function retrievePipelines(cb) {
+    let plList = [];
+    let authenticationData = generalStorage.load('generalAuthentication');
+    let req = {
+      method: 'GET',
+      url: authenticationData.octaneURL + '/api/shared_spaces/1001/workspaces/1002/pipelines'
+    };
+    $http(req).then(function check(response) {
+      let res = response.data;
+      res.data.forEach((pl) => {
+        let pipeLineObject = {pl_id: '', pl_name: '', pl_jobs: [], pl_ciServerType: '', pl_ciServerUrl: ''};
+        pipeLineObject.pl_id = pl.id;
+        pipeLineObject.pl_name = pl.name;
+        plList.push(pipeLineObject);
+      });
+      cb(plList);
+    });
+  }
+
   function retrieveJobs(pipeline, cb) {
     let data = generalStorage.load('generalAuthentication');
     let retrievePipelinesQuery = 'pipelines?expand=$all{fields=name},author{fields=full_name}&inflate=true&query="(id=' + pipeline.pl_id + ')"';
@@ -26,25 +69,6 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     );
   }
 
-  function retrievePipelines(cb) {
-    let plList = [];
-    let authenticationData = generalStorage.load('generalAuthentication');
-    let req = {
-      method: 'GET',
-      url: authenticationData.octaneURL + '/api/shared_spaces/1001/workspaces/1002/pipelines'
-    };
-    $http(req).then(function check(response) {
-      let res = response.data;
-      res.data.forEach((pl) => {
-        let pipeLineObject = {pl_id: '', pl_name: '', pl_jobs: [], pl_ciServerType: '', pl_ciServerUrl: ''};
-        pipeLineObject.pl_id = pl.id;
-        pipeLineObject.pl_name = pl.name;
-        plList.push(pipeLineObject);
-      });
-      cb(plList);
-    });
-  }
-
   function getJobs(piObject, jobsArray) {
     piObject.forEach((pi) => {
       pi.jobs.forEach((job) => {
@@ -59,9 +83,28 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     });
   }
 
-  return {
-    retrieveJobs: retrieveJobs,
-    retrievePipelines: retrievePipelines
-  };
+  function getWorkspaces(ssObject, cb) {
+    let wsList = [];
+    let authenticationData = generalStorage.load('generalAuthentication');
+    let req = {
+      method: 'GET',
+      url: authenticationData.octaneURL + '/api/shared_spaces/' + ssObject.id + '/workspaces'
+    };
+    $http(req).then(function onHttpSuccess(response) {
+      let res = response.data;
+      res.data.forEach((ws) => {
+        let wsObject = {id: '', name: ''};
+        wsObject.id = ws.id;
+        wsObject.name = ws.name;
+        wsList.push(wsObject);
+      });
+      cb(wsList);
+    });
+  }
 
+  return {
+    retrieveSharedSpaces: retrieveSharedSpaces,
+    retrievePipelines: retrievePipelines,
+    retrieveJobs: retrieveJobs
+  };
 });
