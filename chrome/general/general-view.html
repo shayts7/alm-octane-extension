@@ -13,8 +13,17 @@
                         <div class="login-header" translate="lg:login-page-header">Welcome</div>
                         <div>
                             <fieldset><!-- username and password authentication form -->
-                                <table><!-- username field -->
+                                <table>
                                     <tbody>
+                                    <tr class="control-group">
+                                        <td><label class="control-label" for="inputOctaneURL"> ALM Octane URL: </label></td>
+                                        <td class="controls"><input id="inputOctaneURL" class="input-large"
+                                                                    maxlength="100"
+                                                                    required="" type="text" autofocus=""
+                                                                    data-aid="login-app-input-octaneurl" ng-model="model.octaneURL"/></td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <!-- username field -->
                                     <tr class="control-group">
                                         <td><label class="control-label" for="inputUsername"> Name: </label></td>
                                         <td class="controls"><input id="inputUsername" class="input-large"
@@ -30,14 +39,6 @@
                                                                     autocomplete="off" maxlength="100" type="password"
                                                                     data-aid="login-app-input-password" ng-model="model.passwordInput"/></td>
                                         <td><span class="text-notification"> Caps Lock is on </span></td>
-                                    </tr>
-                                    <tr class="control-group">
-                                        <td><label class="control-label" for="inputOctaneURL"> Octane URL: </label></td>
-                                        <td class="controls"><input id="inputOctaneURL" class="input-large"
-                                                                    maxlength="100"
-                                                                    required="" type="text" autofocus=""
-                                                                    data-aid="login-app-input-octaneurl" ng-model="model.octaneURL"/></td>
-                                        <td>&nbsp;</td>
                                     </tr>
                                     <!-- submit button -->
                                     <tr class="control-group">
