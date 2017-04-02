@@ -69,18 +69,13 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
   }
 
   function getJobs(piObject, jobsArray) {
-    let isUIJob = false;
     piObject.forEach((pi) => {
       pi.jobs.forEach((job) => {
         if (job.phasesInternal.length === 0 && job.taxonomies.length > 0) {
           for (let i = 0; i < job.taxonomies.length; i++) {
             if (job.taxonomies[i].name === 'UI') {
-              isUIJob = true;
-              break;
+              jobsArray.push(job.jobCiId);
             }
-          }
-          if (isUIJob === true) {
-            jobsArray.push(job.jobCiId);
           }
         } else {
           getJobs(job.phasesInternal, jobsArray);
