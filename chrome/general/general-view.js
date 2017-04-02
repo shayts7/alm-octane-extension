@@ -30,7 +30,8 @@ angular.module('mainApp').controller('generalCtrl', function generalCtrl($scope,
         headers: [],
         cookies: []
       }
-    }
+    },
+    loginStatus: ''
   };
 
   $scope.canAuthenticate = function canAuthenticate() {
@@ -52,15 +53,23 @@ angular.module('mainApp').controller('generalCtrl', function generalCtrl($scope,
       }
     }
     generalStorage.save('generalAuthentication', $scope.model.authenticationData);
-    generalAuthenticate.authenticate(authenticationUrl, $scope.model.usernameInput, $scope.model.passwordInput, $scope.model.authenticationData.headers, $scope.authenticationSuccess, $scope.authenticationFailure);
+    generalAuthenticate.authenticate(authenticationUrl, $scope.model.usernameInput, $scope.model.passwordInput, $scope.model.authenticationData.headers, $scope.setStatus);
+  };
+  
+  $scope.setStatus = function setStatus(status) {
+    $scope.model.status = status;
+    $scope.authenticationNotify();
   };
 
-$scope.authenticationSuccess = function authenticationSuccess() {
-  $scope.model.authenticationStatus = $sce.trustAsHtml('Authentication Success');
-};
-
-$scope.authenticationFailure = function authenticationFailure() {
-  $scope.model.authenticationStatus = $sce.trustAsHtml('Authentication Failed');
-}
-
+  $scope.getStatus = function getStatus() {
+    if ($scope.model.status === 'Failed') {
+      return false;
+    } 
+    return true;
+  };
+  
+  $scope.authenticationNotify = function authenticationNotify() {
+    $scope.model.authenticationStatus = $sce.trustAsHtml('Authentication ' + $scope.model.status);
+  };
+  
 });

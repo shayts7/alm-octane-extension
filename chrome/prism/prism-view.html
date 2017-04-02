@@ -10,7 +10,7 @@
             <div ng-show="showSharedSpaceSelect()">
                 <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.selectSSLabel}}</label>
                 <select class="prism__add-panel__jobs-dropDown" ng-model="model.selectedSharedSpace"
-                        ng-options="ss as ss.name for ss in model.sharedSpaceList track by selectedSharedSpace.name"
+                        ng-options="ss as ss.name for ss in model.sharedSpaceList"
                         ng-change="onSharedspaceChange(model.selectedSharedSpace)">
                 </select>
             </div>

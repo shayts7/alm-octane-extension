@@ -1,6 +1,6 @@
 angular.module('mainApp').factory('generalAuthenticate', function generalAuthenticate($http, generalStorage, plList) {
   
-  function authenticate(octaneUrl, userName, password, headers, onAuthenticationSuccess, onAuthenticationFailure) {
+  function authenticate(octaneUrl, userName, password, headers, setStatus) {
     let data = generalStorage.load('generalAuthentication');
     let authenticationReq = {
       method: 'POST',
@@ -15,10 +15,10 @@ angular.module('mainApp').factory('generalAuthenticate', function generalAuthent
         data.cookies['HPSSO_COOKIE_CSRF'] = cookie.value;
         generalStorage.save('generalAuthentication', data);
       });
-      onAuthenticationSuccess();
+      setStatus('Success');
     }, function onHttpFailure(/*response*/) {
       console.log('Unable to authenticate: ' + authenticationReq.url);
-      onAuthenticationFailure();
+      setStatus('Failed');
     });
   }
 

@@ -48,9 +48,10 @@
                                             </button>
                                         </td>
                                     </tr>
-                                    <tr class="error-container">
+                                    <tr class="status-container">
                                         <td colspan="4">
-                                            <div class="error controls" ng-bind-html="model.authenticationStatus"></div>
+                                            <div class="error controls" ng-show="!getStatus()" ng-bind-html="model.authenticationStatus"></div>
+                                            <div class="success controls" ng-show="getStatus()" ng-bind-html="model.authenticationStatus"></div>
                                         </td>
                                     </tr>
                                     </tbody>

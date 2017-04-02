@@ -19,16 +19,6 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
           cb(ssList);
         });
       }
-      // res.data.forEach((ss) => {
-      //   let sharedSpaceObject = {id: '', name: '', workspaces: []};
-      //   sharedSpaceObject.id = ss.id;
-      //   sharedSpaceObject.name = ss.name;
-      //   getWorkspaces(sharedSpaceObject, function(wsList) {
-      //     sharedSpaceObject.workspaces = wsList;
-      //     ssList.push(sharedSpaceObject);
-      //     cb(ssList);
-      //   });
-      // });
     }, function onHttpFailure(response) {
     });
   }

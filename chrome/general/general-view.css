@@ -200,7 +200,7 @@ input {
 }
 
 .input-large {
-    width: 210px;
+    width: 240px;
 }
 
 input:hover {
@@ -267,7 +267,7 @@ table {
 }
 
 .alm-web-ui-login-container table {
-    margin-left: 70px;
+    margin-left: 20px;
 }
 
 .alm-web-ui-login-container .btn-primary {
@@ -319,7 +319,14 @@ table {
     margin-left: 7px;
 }
 
-.alm-web-ui-login-container .error-container {
+.alm-web-ui-login-container .success {
+    font-size: 12px;
+    color: limegreen;
+    margin-bottom: 5px;
+    margin-left: 7px;
+}
+
+.alm-web-ui-login-container .status-container {
     height: auto;
     margin-bottom: 4px;
     line-height: 12px;
