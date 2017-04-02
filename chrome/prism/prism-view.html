@@ -31,7 +31,7 @@
         <div class="prism__add-panel__line">
             <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.selectJobLabel}}</label>
             <select class="prism__add-panel__jobs-dropDown" ng-model="model.selectedJob"
-                    ng-options="job as job for job in model.jobList"
+                    ng-options="job as job.name for job in model.jobList"
                     ng-disabled="canSelectJobs()"
                     ng-change="onJobChange(model.selectedJob)">
             </select>

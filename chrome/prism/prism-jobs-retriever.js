@@ -74,7 +74,11 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
         if (job.phasesInternal.length === 0 && job.taxonomies.length > 0) {
           for (let i = 0; i < job.taxonomies.length; i++) {
             if (job.taxonomies[i].name === 'UI') {
-              jobsArray.push(job.jobCiId);
+              let uiJob = {name: '', testToolType: ''};
+              uiJob.name = job.jobCiId
+              uiJob.testToolType = job.testToolType.name;
+              jobsArray.push(uiJob);
+              break;
             }
           }
         } else {
