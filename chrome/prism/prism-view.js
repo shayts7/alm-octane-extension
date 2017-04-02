@@ -29,30 +29,43 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     prismManager.saveToStorage('almOctanePrismPipelines', pipelinesData);
   }
 
+  function loadSharedspaces(ssList) {
+    if (ssList.length === 1) {
+      $scope.model.workspaceList = ssList[0].workspaces;
+    }
+    $scope.model.sharedSpaceList = ssList;
+    $scope.model.selectedSharedSpace = ssList[0];
+    $scope.model.selectedWorkspace = ssList[0].workspaces[0];
+    prismManager.loadPipelines($scope.model.selectedSharedSpace.id, $scope.model.selectedWorkspace.id, loadPipelines);
+  }
+
+  function loadPipelines(plList) {
+    $scope.model.isPipelinesStillLoad = false;
+    $scope.model.pipeLineList = plList;
+    $scope.model.selectedPipeline = $scope.model.pipeLineList[0];
+  }
+
+  function loadJobs(pipelineObject) {
+    $scope.model.isJobsStillLoad = false;
+    $scope.model.jobList = pipelineObject.pl_jobs;
+    $scope.model.selectedJob = $scope.model.jobList[0];
+  }
+
   function getActiveJobs() {
     return $scope.model.uiJobs.filter(function(job) {
       return job.active;
     });
   }
 
-  function loadPipelines(plList) {
-    $scope.model.isPipelinesStillLoad = false;
-    $scope.model.pipeLineList = plList;
-  }
-
-  function loadSharedspaces(ssList) {
-    $scope.model.sharedSpaceList = ssList;
-  }
-
   $scope.model = {
     jobs: [],
     addJobName: '',
     sharedSpaceList: [],
-    selectedSharedSpace: '',
+    selectedSharedSpace: {id: '', name: '', workspaces: []},
     workspaceList: [],
-    selectedWorkspace: '',
+    selectedWorkspace: {id: '', name: ''},
     pipeLineList: [],
-    selectedPipeline: '',
+    selectedPipeline: {pl_id: '', pl_name: '', pl_jobs: [], pl_ciServerType: '', pl_ciServerUrl: ''},
     jobList: [],
     selectedJob: '',
     logType: 'selenium',
@@ -61,6 +74,10 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     uiStrings: {
       titlePrimary: 'Exploratory Testing',
       titleSecondary: 'UI Automation Coverage',
+      selectSSLabel: 'Sharedspace:',
+      selectWSLabel: 'Workspace:',
+      selectPipelineLabel: 'Pipeline:',
+      selectJobLabel: 'Job:',
       nameLabel: 'Name:',
       nameInputHint: 'Enter job nickname/alias...',
       activateCheckboxTooltip: 'show/hide coverage',
@@ -76,6 +93,10 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     isJobsStillLoad: false
   };
 
+  $scope.showSharedSpaceSelect = function() {
+    return $scope.model.sharedSpaceList.length > 1;
+  };
+
   $scope.onSharedspaceChange = function(selectedSharedspace) {
     $scope.model.selectedSharedSpace = selectedSharedspace;
     $scope.model.workspaceList = $scope.model.selectedSharedSpace.workspaces;
@@ -84,18 +105,11 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   $scope.onWorkspaceChange = function(selectedWorkspace) {
     $scope.model.selectedWorkspace = selectedWorkspace;
     prismManager.loadPipelines($scope.model.selectedSharedSpace.id, $scope.model.selectedWorkspace.id, loadPipelines);
-  }
+  };
 
   $scope.onPipelineChange = function(selectedPipeline) {
     $scope.model.selectedPipeline = selectedPipeline;
-    prismManager.loadJobs(selectedPipeline, function(pipelineList) {
-      if (selectedPipeline === '--Select Pipeline--') {
-        $scope.model.isJobsStillLoad = false;
-      } else {
-        $scope.model.isJobsStillLoad = true;
-      }
-      $scope.model.jobList = pipelineList.pl_jobs;
-    });
+    prismManager.loadJobs($scope.model.selectedSharedSpace.id, $scope.model.selectedWorkspace.id, $scope.model.selectedPipeline, loadJobs);
   };
 
   $scope.onJobChange = function(selectedJob) {
@@ -109,7 +123,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   };
 
   $scope.canSelectJobs = function canSelectJobs() {
-    return $scope.model.isPipelinesStillLoad;
+    return $scope.model.isJobsStillLoad;
   };
 
   $scope.canAdd = function canAdd() {
@@ -195,6 +209,6 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     prismManager.removeColoringFromAUT();
   };
 
-  loadFromStorage();
   prismManager.loadSharedspaces(loadSharedspaces);
+  loadFromStorage();
 });

@@ -16,9 +16,9 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
         getWorkspaces(sharedSpaceObject, function(wsList) {
           sharedSpaceObject.workspaces = wsList;
           ssList.push(sharedSpaceObject);
+          cb(ssList);
         });
       });
-      cb(ssList);
     }, function onHttpFailure(response) {
     });
   }
@@ -42,13 +42,13 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     });
   }
 
-  function retrieveJobs(pipeline, cb) {
+  function retrieveJobs(ss_id, ws_id, pipeline, cb) {
     let data = generalStorage.load('generalAuthentication');
     let retrievePipelinesQuery = 'pipelines?expand=$all{fields=name},author{fields=full_name}&inflate=true&query="(id=' + pipeline.pl_id + ')"';
     let jobsList = [];
     let req = {
       method: 'GET',
-      url: data.octaneURL + '/api/shared_spaces/1001/workspaces/1002/' + retrievePipelinesQuery,
+      url: data.octaneURL + '/api/shared_spaces/' + ss_id + '/workspaces/' + ws_id + '/' + retrievePipelinesQuery,
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'HPECLIENTTYPE': 'HPE_MQM_UI',
@@ -69,17 +69,17 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
   }
 
   function getJobs(piObject, jobsArray) {
-    let found = false;
+    let isUIJob = false;
     piObject.forEach((pi) => {
       pi.jobs.forEach((job) => {
         if (job.phasesInternal.length === 0 && job.taxonomies.length > 0) {
           for (let i = 0; i < job.taxonomies.length; i++) {
             if (job.taxonomies[i].name === 'UI') {
-              found = true;
+              isUIJob = true;
               break;
             }
           }
-          if (found === true) {
+          if (isUIJob === true) {
             jobsArray.push(job.jobCiId);
           }
         } else {
@@ -113,4 +113,5 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     retrievePipelines: retrievePipelines,
     retrieveJobs: retrieveJobs
   };
-});
+}
+);

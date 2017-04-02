@@ -9,7 +9,9 @@ angular.module('mainApp').factory('prismManager', function prismManager(generalS
 	}
 	
 	function loadSharedspaces(cb) {
-		prismJobsRetriever.retrieveSharedSpaces(cb);
+		prismJobsRetriever.retrieveSharedSpaces(function(ssList) {
+			cb(ssList);
+		});
 	}
 	
 	function loadPipelines(ss_id, ws_id, cb) {
@@ -18,8 +20,8 @@ angular.module('mainApp').factory('prismManager', function prismManager(generalS
 		});
 	}
 	
-	function loadJobs(pipeline, cb) {
-		prismJobsRetriever.retrieveJobs(pipeline, cb);
+	function loadJobs(ss_id, ws_id, pipeline, cb) {
+		prismJobsRetriever.retrieveJobs(ss_id, ws_id, pipeline, cb);
 	}
 
 	function getDataAndColorAUT(jobList, cb) {
