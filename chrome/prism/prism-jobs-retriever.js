@@ -9,16 +9,26 @@ angular.module('mainApp').factory('prismJobsRetriever', function prismJobsRetrie
     };
     $http(req).then(function onHttpSuccess(response) {
       let res = response.data;
-      res.data.forEach((ss) => {
+      for (let i = 0; i < res.data.length; i++) {
         let sharedSpaceObject = {id: '', name: '', workspaces: []};
-        sharedSpaceObject.id = ss.id;
-        sharedSpaceObject.name = ss.name;
+        sharedSpaceObject.id = res.data[i].id;
+        sharedSpaceObject.name = res.data[i].name;
         getWorkspaces(sharedSpaceObject, function(wsList) {
           sharedSpaceObject.workspaces = wsList;
           ssList.push(sharedSpaceObject);
           cb(ssList);
         });
-      });
+      }
+      // res.data.forEach((ss) => {
+      //   let sharedSpaceObject = {id: '', name: '', workspaces: []};
+      //   sharedSpaceObject.id = ss.id;
+      //   sharedSpaceObject.name = ss.name;
+      //   getWorkspaces(sharedSpaceObject, function(wsList) {
+      //     sharedSpaceObject.workspaces = wsList;
+      //     ssList.push(sharedSpaceObject);
+      //     cb(ssList);
+      //   });
+      // });
     }, function onHttpFailure(response) {
     });
   }
