@@ -12,7 +12,12 @@
 			</div>
 		</div>
 	</div>
-	<!-- <div class="view__footer">
-	</div> -->
+
+	<div class="view__footer">
+		<button ng-click="onShowClick()" ng-class="{disabled: !canShow()}">{{::model.uiStrings.showButtonText}}</button>
+		<!--button ng-click="onHideClick()" class="margin-r--md" ng-class="{disabled: !canHide()}">
+			{{::model.uiStrings.hideButtonText}}
+		</button-->
+	</div>
 </div>
 
