@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="general/general-view.css">
     <link rel="stylesheet" type="text/css" href="artemis/artemis-view.css">
     <link rel="stylesheet" type="text/css" href="prism/prism-view.css">
+    <link rel="stylesheet" type="text/css" href="mastercard/mastercard-view.css">
     <script src="lib/angular/angular.min.js"></script>
     <script src="main-ctrl.js"></script>
     <script src="general/general-view.js"></script>
@@ -17,6 +18,7 @@
     <script src="prism/prism-colors.js"></script>
     <script src="prism/prism-injector.js"></script>
     <script src="prism/prism-view.js"></script>
+    <script src="mastercard/mastercard-view.js"></script>
 </head>
 <body ng-controller="mainCtrl">
 <div class="height--100 flex flex-direction--column">
@@ -45,6 +47,9 @@
                         </div>
                         <div ng-if="model.activeTabId === 'prism'" class="view-container height--100">
                             <prism-view/>
+                        </div>
+                        <div ng-if="model.activeTabId === 'mastercard'" class="view-container height--100">
+                            <mastercard-view/>
                         </div>
                     </div>
                 </div>
