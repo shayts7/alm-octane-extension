@@ -6,15 +6,16 @@ angular.module('mainApp').directive('mastercardView', function () {
     };
 });
 
-angular.module('mainApp').controller('mastercardCtrl', function mastercardCtrl($scope, $http, prismAggregator, prismColors, prismInjector) {
+angular.module('mainApp').controller('mastercardCtrl', function mastercardCtrl($scope, $http, prismManager, prismAggregator, prismColors, prismInjector) {
 
 	$scope.model = {
 		uiStrings: {
 			titlePrimary: 'MasterCard',
 			titleSecondary: 'Comparing Prod App Usage vs. Test App Coverage',
-			showButtonText: 'Show'
+			showButtonText: 'Show',
+            hideButtonText: 'Hide'
 		}
-	}
+	};
 
 	$scope.onShowClick = function onShowClick() {
 		$scope.model.isInProgress = true;
@@ -25,9 +26,17 @@ angular.module('mainApp').controller('mastercardCtrl', function mastercardCtrl($
 		}
 	};
 
+    $scope.onHideClick = function onHideClick() {
+        prismManager.removeColoringFromAUT();
+    };
+
 	$scope.canShow = function canShow() {
 		return !$scope.model.isInProgress;
 	};
+
+    $scope.canHide = function canHide() {
+        return !$scope.model.isInProgress;
+    };
 
 	function getData(cb) {
 		$http.post('http://35.157.160.56:9200/poc_mastercard/_search', {
@@ -51,18 +60,18 @@ angular.module('mainApp').controller('mastercardCtrl', function mastercardCtrl($
 	}
 
 	function parseData(data) {
-		var arr = [];
+		let arr = [];
 		arr.push({
 			source: undefined,
 			lines: getLines(data)
-		})
+		});
 
 		return arr;
 	}
 
 	function getLines(data) {
 		let arr = [];
-		for (var i = 0; i < data.hits.hits.length; i++) {
+		for (let i = 0; i < data.hits.hits.length; i++) {
 			arr.push(data.hits.hits[i].fields.selector[0]);
 		}
 		return arr;
