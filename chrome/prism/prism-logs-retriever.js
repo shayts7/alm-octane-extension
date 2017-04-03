@@ -21,7 +21,7 @@ angular.module('mainApp').factory('prismLogsRetriever', function prismLogsRetrie
       pipelinesData.pipeline.forEach((pipeline) => {
         if (pipeline.id === job.parentPipelineId) {
           if (pipeline.ciData.serverType === 'jenkins') {
-            logUrl = pipeline.ciData.serverUrl + ciServersUrls.jenkins.prefix + job.name + ciServersUrls.jenkins.postfix;
+            logUrl = pipeline.ciData.serverUrl + ciServersUrls.jenkins.prefix + job.jobData.name + ciServersUrls.jenkins.postfix;
           } else if (pipeline.ciData.serverType === 'teamcity') {
             logUrl = '';
           } else if (pipeline.ciData.serverType === 'bamboo') {

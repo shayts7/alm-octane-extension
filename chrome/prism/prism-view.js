@@ -68,7 +68,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     selectedPipeline: {pl_id: '', pl_name: '', pl_jobs: [], pl_ciServerType: '', pl_ciServerUrl: ''},
     jobList: [],
     selectedJob: '',
-    logType: 'selenium',
+    // logType: 'selenium',
     ciServerType: '',
     ciServerUrl: '',
     uiStrings: {
@@ -103,8 +103,10 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   };
 
   $scope.onWorkspaceChange = function(selectedWorkspace) {
-    $scope.model.selectedWorkspace = selectedWorkspace;
-    prismManager.loadPipelines($scope.model.selectedSharedSpace.id, $scope.model.selectedWorkspace.id, loadPipelines);
+    if (selectedWorkspace !== null) {
+      $scope.model.selectedWorkspace = selectedWorkspace;
+      prismManager.loadPipelines($scope.model.selectedSharedSpace.id, $scope.model.selectedWorkspace.id, loadPipelines);
+    }
   };
 
   $scope.onPipelineChange = function(selectedPipeline) {
@@ -127,7 +129,7 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
   };
 
   $scope.canAdd = function canAdd() {
-    return $scope.model.addJobName && $scope.model.selectedPipeline && $scope.model.selectedJob && $scope.model.logType;
+    return $scope.model.addJobName && $scope.model.selectedPipeline && $scope.model.selectedJob;
   };
 
   $scope.onAddClick = function onAddClick() {
@@ -152,8 +154,10 @@ angular.module('mainApp').controller('prismCtrl', function prismCtrl($http, $sco
     let uiJobData = {
       parentPipelineId: $scope.model.selectedPipeline.pl_id,
       alias: $scope.model.addJobName,
-      name: $scope.model.selectedJob,
-      selectedLogType: $scope.model.logType,
+      jobData: {
+        name: $scope.model.selectedJob.name,
+        testToolType: $scope.model.selectedJob.testToolType
+      },
       active: true
     };
 

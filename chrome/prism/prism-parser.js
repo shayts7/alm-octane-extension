@@ -62,8 +62,9 @@ angular.module('mainApp').factory('prismParser', function prismParser() {
   }
 
   function parseLog(job, log) {
-    if (job.testToolType === 'selenium') {
-      return parseSeleniumLog(log);
+    if (job.testToolType === 'Selenium') {
+      // return parseSeleniumLog(log);
+      return parseOctaneLog(log);
     }
     else {
       return parseOctaneLog(log);

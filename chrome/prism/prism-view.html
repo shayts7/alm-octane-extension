@@ -40,28 +40,6 @@
             <label class="prism__required-field prism__add-panel__label">{{model.uiStrings.nameLabel}}</label>
             <input class="prism__add-panel__name-input" type="text" ng-model="model.addJobName"
                    placeholder="{{model.uiStrings.nameInputHint}}"/>
-        </div>
-        <div class="prism__add-panel__line">
-            <div class="prism__add-panel__radio-container">
-                <div class="prism__add-panel__radio">
-                    <label class="prism__add-panel__radio-label">
-                        <input class="prism__add-panel_radio-button" name="logType" type="radio" value="selenium"
-                               ng-model="model.logType"/>
-                        Selenium</label>
-                </div>
-                <div class="prism__add-panel__radio">
-                    <label class="prism__add-panel__radio-label">
-                        <input class="prism__add-panel_radio-button" name="logType" type="radio" value="leanFT"
-                               ng-model="model.logType"/>
-                        Lean FT</label>
-                </div>
-                <div class="prism__add-panel__radio">
-                    <label class="prism__add-panel__radio-label">
-                        <input class="prism__add-panel_radio-button" name="logType" type="radio" value="UFT"
-                               ng-model="model.logType"/>
-                        UFT</label>
-                </div>
-            </div>
             <button class="prism__add-panel__add-button" ng-class="{'disabled': !canAdd()}" ng-click="onAddClick()"
                     ng-include="'./img/job-add.svg'"></button>
         </div>
