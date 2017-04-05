@@ -39,17 +39,19 @@ angular.module('mainApp').controller('mastercardCtrl', function mastercardCtrl($
     };
 
 	function getData(cb) {
-		$http.post('http://35.157.160.56:9200/poc_mastercard/_search', {
+		$http.post('http://35.157.160.56:9200/poc_mastercard_prod/_search', {
 			"fields": [
 				"selector"
 			]
 		}).then(function onHttpSuccess(response) {
 			getDataAndColorAUT(response.data);
+			cb();
 		}, function onHttpFailure(/*response*/) {
 			console.log('Unable to retrieve data from bdi');
+			cb();
 		});
 
-		cb();
+
 	}
 	
 	function getDataAndColorAUT(data) {

@@ -30,6 +30,10 @@
     {
       "matches": ["https://mqast010pngx.saas.hpe.com/*", "http://myd-vm12624.hpeswlab.net:8081/*", "http://myd-vm12623.hpeswlab.net:8081/*", "http://localhost:8080/ui/*", "https://www.youtube.com/*", "http://www.ebay.com/"],
       "js": ["prism/prism-content-aut.js"]
+    },
+    {
+      "matches": ["https://mqast010pngx.saas.hpe.com/*", "http://myd-vm12624.hpeswlab.net:8081/*", "http://myd-vm12623.hpeswlab.net:8081/*", "http://localhost:8080/ui/*", "https://www.youtube.com/*", "http://www.ebay.com/"],
+      "js": ["mastercard/mastercard-monitor.js"]
     }
   ]
 }
